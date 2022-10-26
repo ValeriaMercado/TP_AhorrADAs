@@ -1,12 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>AhorrADAs</title>
 </head>
-<body>
+
+<body class="bg-[#f8efc7]">
+    <header class="bg-[#79b9b9] w-full flex justify-center border-b-2 border-gray-100 h-[140px]">
+        <div class="w-[100%] py-1 flex justify-between">
+            <a href="#"><img src="images/logoAhorradas.png" alt="logo AhorrADAs" class="w-[510px]"></a>
+            <nav class="flex items-center justify-between space-x-4 text-[18px] font-sans p-6 mt-[35px]">
+                <a href="" class="nav-item text-white hover:bg-blue-300 rounded-md p-2 font-monospace" id="balance">
+                    <i class="fas fa-chart-line mr-2 text-white"></i>Balance</a>
+                <a href="" class="navbar-item text-white hover:bg-blue-300 rounded-md p-2" id="ver-categorias">
+                    <i class="fa-solid fa-tag mr-2 text-white"></i>Categorías</a>
+                <a href="" class="navbar-item text-white hover:bg-blue-300 rounded-md p-2" id="ver-reportes">
+                    <i class="fas fa-chart-pie mr-2 text-white"></i>Reportes</a>
+            </nav>
+        </div>
+        <main>
+    </header>
     <script src="script.js"></script>
+
+    <div class="grid grid-rows-3 grid-flow-col ml-[150px] ">
+        <section class="balance-section  mt-[50px]">
+            <div class="col-span-3 ml-2 w-[280px] h-[310px] bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mr-[15px] mb-10"
+                id="balance">
+                <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
+                <div class="grid gap-4 grid-cols-2 m-3 flex">
+                    <div>
+                        <h3 class="space-x-10 flex mb-5 mt-3 text-[22px]">Ganancias</h3>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-green-700 ml-10 mt-3 text-[22px]">+$0</h3>
+                    </div>
+                    <div>
+                        <h3 class="space-x-10 flex mb-5 text-[22px]">Gastos</h3>
+                    </div>
+                    <div class="font-bold text-red-700 ml-11 text-[22px]">-$0</div>
+                    <div>
+                        <h1 class="font-bold text-[25px]">Total</h1>
+                    </div>
+                    <div class="font-bold ml-[48px] text-[25px]">$0</div>
+                </div>
+            </div>
+        </section>
 </body>
+
 </html>
