@@ -58,59 +58,56 @@
                 id="select-box-filtros">
                 <div class="flex items-center text-center">
                     <h1 class="font-bold text-center text-[#79b9b9] p-2 text-[24px]">Filtros</h1>
-                    <a href="" class="ml-[60px] text-blue-700">Ocultar filtros</a>
+                    <a href="#" id="toggleFilters" class="ml-[60px] text-blue-700">Ocultar filtros</a>
+                </div>
+                <div id="filterContainer">
+                    <div class="flex flex-col" id="select-box-tipo">
+                        <label for="tipo-select" class="font-bold mt-5 mb-3 text-[17px]">Tipo</label>
+                        <select name="select-tipo" class="w-45 h-[44px] 
+                            rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
+                            <option value="">Todos</option>
+                            <option value="gasto">Gasto</option>
+                            <option value="ganancia">Ganancia</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col" id="select-box-categorias">
+                        <label for="categorias-select" class="font-bold mt-5 mb-3 text-[17px]">Categorías</label>
+                        <select name="select-tipo" class="w-45 h-[44px] 
+                            rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
+                            <option value="">Todas</option>
+                            <option value="comidas">Comidas</option>
+                            <option value="servicios">Servicios</option>
+                            <option value="salidas">Salidas</option>
+                            <option value="educación">Educación</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="trabajo">Trabajo</option>
+                        </select>
+                    </div>
+                    <div class="flex flex-col" id="date-filtros">
+                        <label for="start" class="font-bold mt-5 mb-3 text-[17px]">Desde</label>
+                        <input type="date" id="date-filtros" name="date" value="2022-10-52" min="2021-01-01"
+                            max="2025-12-31">
+                    </div>
+                    <div class="flex flex-col" id="select-box-categorias">
+                        <label for="categorias-select" class="font-bold mt-5 mb-3 text-[17px]">Ordenar por</label>
+                        <select name="select-tipo" class="w-45 h-[44px] 
+                            rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
+                            <option value="Más reciente">Más reciente</option>
+                            <option value="Menos reciente">Menos reciente</option>
+                            <option value="Mayor monto">Mayor monto</option>
+                            <option value="Menor monto">Menor monto</option>
+                            <option value="A/Z">A/Z</option>
+                            <option value="Z/A">Z/A</option>
+                        </select>
+
+                    </div>
                 </div>
 
-                <div class="flex flex-col" id="select-box-tipo">
-                    <label for="tipo-select" class="font-bold mt-5 mb-3 text-[17px]">Tipo</label>
-                    <select name="select-tipo" class="w-45 h-[44px] 
-                        rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
-                        <option value="">Todos</option>
-                        <option value="gasto">Gasto</option>
-                        <option value="ganancia">Ganancia</option>
-                    </select>
-                </div>
-
-                <div class="flex flex-col" id="select-box-categorias">
-                    <label for="categorias-select" class="font-bold mt-5 mb-3 text-[17px]">Categorías</label>
-                    <select name="select-tipo" class="w-45 h-[44px] 
-                        rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
-                        <option value="">Todas</option>
-                        <option value="comidas">Comidas</option>
-                        <option value="servicios">Servicios</option>
-                        <option value="salidas">Salidas</option>
-                        <option value="educación">Educación</option>
-                        <option value="transporte">Transporte</option>
-                        <option value="trabajo">Trabajo</option>
-                    </select>
-
-                </div>
-                <div class="flex flex-col" id="date-filtros">
-                    <label for="start" class="font-bold mt-5 mb-3 text-[17px]">Desde</label>
-                    <input type="date" id="date-filtros" name="date" value="2022-10-52" min="2021-01-01"
-                        max="2025-12-31">
-                </div>
-
-                <div class="flex flex-col" id="select-box-categorias">
-                    <label for="categorias-select" class="font-bold mt-5 mb-3 text-[17px]">Ordenar por</label>
-                    <select name="select-tipo" class="w-45 h-[44px] 
-                        rounded border border-blue-300 hover:border-indigo-300 outline-blue-500" id="select-tipo">
-                        <option value="Más reciente">Más reciente</option>
-                        <option value="Menos reciente">Menos reciente</option>
-                        <option value="Mayor monto">Mayor monto</option>
-                        <option value="Menor monto">Menor monto</option>
-                        <option value="A/Z">A/Z</option>
-                        <option value="Z/A">Z/A</option>
-                    </select>
-
-                </div>
-            </div>
-
-
+        </div>
         </section>
     </div>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 
 </html>
