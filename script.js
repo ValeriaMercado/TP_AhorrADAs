@@ -139,6 +139,7 @@ const editCategory = (id) => {
     });
 };
 
+
 $("#btn-editForm").addEventListener("click", () => {
     const categoryId = $("#btn-editForm").getAttribute("data-id");
     $("#container-edit-categories").classList.add("hidden")
@@ -146,6 +147,8 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#table").innerHTML = ''
     generateTable(editCategory(categoryId))
 
+
+    
 })
 
 $("#btn-cancel").addEventListener("click", () => {
