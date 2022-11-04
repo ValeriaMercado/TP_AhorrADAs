@@ -4,7 +4,7 @@ const $$ = (selectors) => document.querySelectorAll(selectors);
 const $btnAdd = $("#btn-add");
 const $categories = $("#container-categories");
 const $newCategories = $("#categorie");
-
+const $tableCategories = $("#table-categories");
 
 let categories = [
     {
@@ -39,7 +39,7 @@ if (!localStorage.getItem('categories')) {
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
 
-// *******************************************************GENERATE TABLE & REMOVE************************************************
+// *******************************************************GENERATE TABLE & REMOVE*********************************
 const generateTable = (categories) => {
     for (const category of categories) {
         table.innerHTML += `
@@ -65,7 +65,7 @@ const generateTable = (categories) => {
 generateTable(categories);
 
 
-// ********************************************************GENERATE NEW CATEGORIES***********************************************************************
+// *******************************************************************************************************************************
 
 const categoryInfo = () => {
     
@@ -108,7 +108,7 @@ const findCategory = (id) => {
 
 };
 
-// ****************************************EDIT & CANCEL****************************************************************************
+// ************************EDIT & CANCEL****************************************************************************
 
 const categorieEdit = (id) => {
     const nombre = $("#addCategory").value;
