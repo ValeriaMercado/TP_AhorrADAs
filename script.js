@@ -68,7 +68,7 @@ generateTable(categories);
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
-    
+
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -84,10 +84,18 @@ const generateNewCategory = () => {
     $("#addCategory").value = ""
     localStorage.setItem('categories', JSON.stringify(categories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-   
+
 }
 
+
+
 $btnAdd.addEventListener("click", generateNewCategory)
+
+$("#addCategory").addEventListener("keypress", (e) => {
+    if (e.keyCode == '13') {
+        generateNewCategory();
+    }
+})
 
 const deleteCategory = (categoryId) => {
     table.innerHTML = ''
@@ -123,6 +131,8 @@ const categorieEdit = (id) => {
 
 };
 
+
+
 const saveCategoryData = (id) => {
     return {
         id,
@@ -134,9 +144,12 @@ const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
             return saveCategoryData(id);
+
         };
         return category
+    
     });
+
 };
 
 
@@ -145,14 +158,16 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
+    
     generateTable(editCategory(categoryId))
-
-
     
 })
+
+
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
     $("#container-categories").classList.remove("hidden");
 
 })
+
