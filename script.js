@@ -128,7 +128,6 @@ const saveCategoryData = (id) => {
         id,
         nombre: $("#editCategory").value,
     };
-
 };
 
 const editCategory = (id) => {
@@ -136,10 +135,7 @@ const editCategory = (id) => {
         if (category.id === parseInt(id)) {
             return saveCategoryData(id);
         };
-    
         return category
-
-        
     });
 };
 
@@ -148,12 +144,9 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-    
     generateTable(editCategory(categoryId))
-  
 
-}  )
-
+})
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
