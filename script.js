@@ -55,14 +55,17 @@ const generateTable = (categories) => {
     for (const btn of btnRemove) {
         const categoryId = btn.getAttribute("data-id")
         btn.addEventListener("click", () => {
-            deleteCategory(categoryId)
-        });
-
+           deleteCategory(categoryId)
+          
+        })
     }
+    
+}
 
-};
+generateTable(JSON.parse(localStorage.getItem('categories')))
 
-generateTable(categories);
+
+
 
 
 // *******************************************************************************************************************************
@@ -78,7 +81,11 @@ const categoryInfo = () => {
     };
 };
 
+
 const generateNewCategory = () => {
+     if ($("#addCategory").value === "") {
+        return alert("Debe ingresar un nombre para la categoría")
+    } else {
     table.innerHTML = ''
     categories.push(categoryInfo());
     $("#addCategory").value = ""
@@ -86,8 +93,9 @@ const generateNewCategory = () => {
     generateTable(JSON.parse(localStorage.getItem('categories')))
    
 }
-
+}
 $btnAdd.addEventListener("click", generateNewCategory)
+
 
 const deleteCategory = (categoryId) => {
     table.innerHTML = ''
@@ -100,7 +108,6 @@ const deleteCategory = (categoryId) => {
     categories = newCategories
     localStorage.setItem('categories', JSON.stringify(newCategories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-
 }
 
 const findCategory = (id) => {
@@ -133,11 +140,12 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-            return saveCategoryData(id);
+            return saveCategoryData(parseInt(id));
         };
         return category
     });
 };
+
 
 
 $("#btn-editForm").addEventListener("click", () => {
@@ -145,7 +153,9 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-    generateTable(editCategory(categoryId))
+    let categoryEdit = editCategory(parseInt(categoryId))
+    localStorage.setItem('categories', JSON.stringify(categoryEdit))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
 
 
     
