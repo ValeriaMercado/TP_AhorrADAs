@@ -148,15 +148,10 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-<<<<<<< HEAD
-            return saveCategoryData(parseInt(id));
-=======
-            return saveCategoryData(id);
-<<<<<<< HEAD
 
-=======
->>>>>>> main
->>>>>>> main
+            return saveCategoryData(parseInt(id));
+
+            return saveCategoryData(id);
         };
         return category
     
@@ -165,29 +160,14 @@ const editCategory = (id) => {
 };
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 $("#btn-editForm").addEventListener("click", () => {
     const categoryId = $("#btn-editForm").getAttribute("data-id");
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-<<<<<<< HEAD
-    
     generateTable(editCategory(categoryId))
-=======
-<<<<<<< HEAD
-    let categoryEdit = editCategory(parseInt(categoryId))
-    localStorage.setItem('categories', JSON.stringify(categoryEdit))
-    generateTable(JSON.parse(localStorage.getItem('categories')))
-=======
-    generateTable(editCategory(categoryId))
->>>>>>> main
 
 
->>>>>>> main
     
 })
 
@@ -199,18 +179,15 @@ $("#btn-cancel").addEventListener("click", () => {
 
 })
 
-<<<<<<< HEAD
-=======
 
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
-<<<<<<< HEAD
-=======
+
 const toggleOperation2 = $('#toggleOperation2')
->>>>>>> main
+
 
 toggleFilter.addEventListener("click", (e) => {
         e.preventDefault()
@@ -236,76 +213,10 @@ toggleOperation.addEventListener("click", (e) => {
     $('#newOperationContainer').classList.remove('hidden')
     
 })
-<<<<<<< HEAD
-=======
+
 toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
 })
->>>>>>> main
 
-// NEW OPERATION
-let operations = []
-
-const newOperation = () => {
-        const descriptionOperation = $('#description').value
-        const amountOperation = parseInt($('#amountOperation').value)
-        const operationType = $('#operationType').value
-        const selectCategoryOperation = $('#selectCategoryOperation').value
-        const dateOperation = $('#dateOperation').value
-        return{
-                descriptionOperation,
-                amountOperation,
-                operationType,
-                selectCategoryOperation,
-                dateOperation
-        }
-}
-
-const addOperation = () =>{
-        operations.map(operation =>{
-                $('#tableContainer').innerHTML += `
-                <ul class="flex justify-between  w-1/4 mt-2 mr-10 px-10">
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.descriptionOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.amountOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.operationType}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.selectCategoryOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2  text-black">${operation.dateOperation}</span>
-                </li>
-                </ul>
-                <button class="editOperation">Editar</button>
-                <button class="deleteOperation" data-id"${operation.descriptionOperation}">Eliminar</button>
-                `
-        })
-}
-
-  
-<<<<<<< HEAD
-
-
-// Reportes
-
-$("#ver-reportes").addEventListener("click", (e) =>{
-    e.preventDefault()
-    $(".balance-section").classList.add("hidden")
-    $("#select-box-filtros").classList.add("hidden")
-    $("#operationContainer").classList.add("hidden")
-    $("#newOperationContainer").classList.add("hidden")
-    $("#editOperationContainer").classList.add("hidden")
-    $("#containerCategories").classList.add("hidden")
-    $(".containerNewOp").classList.add("hidden")
-    $("#reportes").classList.remove("hidden")
-})
-=======
->>>>>>> main
->>>>>>> main
