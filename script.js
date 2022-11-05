@@ -151,11 +151,7 @@ const editCategory = (id) => {
 
             return saveCategoryData(parseInt(id));
 
-<<<<<<< HEAD
-=======
-            return saveCategoryData(id);
 
->>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
 
         };
         return category
@@ -172,25 +168,15 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
 
-<<<<<<< HEAD
+
+    
+    generateTable(editCategory(categoryId))
+
 
     let categoryEdit = editCategory(parseInt(categoryId))
     localStorage.setItem('categories', JSON.stringify(categoryEdit))
     generateTable(JSON.parse(localStorage.getItem('categories')))
 
-=======
-    
-    generateTable(editCategory(categoryId))
->>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
-
-    let categoryEdit = editCategory(parseInt(categoryId))
-    localStorage.setItem('categories', JSON.stringify(categoryEdit))
-    generateTable(JSON.parse(localStorage.getItem('categories')))
-    generateTable(editCategory(categoryId))
-
-
-
-    
 })
 
 
@@ -234,11 +220,13 @@ toggleOperation.addEventListener("click", (e) => {
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+
 toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+
 
 // NEW OPERATION
 let operations = []
@@ -287,7 +275,6 @@ const addOperation = () =>{
   
 
 
-<<<<<<< HEAD
 $("#showReports").addEventListener("click", (e) =>{
     e.preventDefault()
     $(".reports").classList.remove("hidden")
@@ -303,18 +290,15 @@ $("#showReports").addEventListener("click", (e) =>{
 $("#showCategories").addEventListener("click", (e) =>{
     e.preventDefault()
     $("#container-categories").classList.remove("hidden")
-=======
-$("#ver-reportes").addEventListener("click", (e) =>{
-    e.preventDefault()
->>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
     $(".balance-section").classList.add("hidden")
     $("#select-box-filtros").classList.add("hidden")
     $("#operationContainer").classList.add("hidden")
     $("#newOperationContainer").classList.add("hidden")
     $("#editOperationContainer").classList.add("hidden")
-<<<<<<< HEAD
     $(".containerNewOp").classList.add("hidden")
     $("operationsAndnewOperation").classList.add("hidden")
+    $("#reports").classList.add("hidden")
+
   
 })
 
@@ -332,9 +316,11 @@ $("#btnAddOperation").addEventListener("click", (e) =>{
     $("#operations").classList.add("hidden")
     addOperation()
 })
-=======
+
     $("#containerCategories").classList.add("hidden")
     $(".containerNewOp").classList.add("hidden")
-    $("#reportes").classList.remove("hidden")
-})
->>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
+    $("#reports").classList.remove("hidden")
+  
+
+
+
