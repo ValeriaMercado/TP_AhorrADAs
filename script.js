@@ -152,6 +152,7 @@ const editCategory = (id) => {
             return saveCategoryData(parseInt(id));
 
 
+
         };
         return category
     
@@ -168,16 +169,14 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#table").innerHTML = ''
 
 
+    
+    generateTable(editCategory(categoryId))
+
+
     let categoryEdit = editCategory(parseInt(categoryId))
     localStorage.setItem('categories', JSON.stringify(categoryEdit))
     generateTable(JSON.parse(localStorage.getItem('categories')))
 
-
-   
-
-
-
-    
 })
 
 
@@ -221,11 +220,13 @@ toggleOperation.addEventListener("click", (e) => {
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+
 toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+
 
 // NEW OPERATION
 let operations = []
@@ -319,4 +320,7 @@ $("#btnAddOperation").addEventListener("click", (e) =>{
     $("#containerCategories").classList.add("hidden")
     $(".containerNewOp").classList.add("hidden")
     $("#reports").classList.remove("hidden")
+  
+
+
 
