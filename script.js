@@ -163,6 +163,7 @@ const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
+const toggleOperation2 = $('#toggleOperation2')
 
 toggleFilter.addEventListener("click", (e) => {
         e.preventDefault()
@@ -184,6 +185,11 @@ btnAddOperation.addEventListener('click', (e)=>{
 })
 
 toggleOperation.addEventListener("click", (e) => {
+    e.preventDefault()
+    $('#newOperationContainer').classList.remove('hidden')
+    
+})
+toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
