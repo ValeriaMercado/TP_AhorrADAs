@@ -55,20 +55,23 @@ const generateTable = (categories) => {
     for (const btn of btnRemove) {
         const categoryId = btn.getAttribute("data-id")
         btn.addEventListener("click", () => {
-            deleteCategory(categoryId)
-        });
-
+           deleteCategory(categoryId)
+          
+        })
     }
+    
+}
 
-};
+generateTable(JSON.parse(localStorage.getItem('categories')))
 
-generateTable(categories);
+
+
 
 
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
-    
+
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -78,16 +81,27 @@ const categoryInfo = () => {
     };
 };
 
+
 const generateNewCategory = () => {
+     if ($("#addCategory").value === "") {
+        return alert("Debe ingresar un nombre para la categoría")
+    } else {
     table.innerHTML = ''
     categories.push(categoryInfo());
     $("#addCategory").value = ""
     localStorage.setItem('categories', JSON.stringify(categories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-   
-}
 
+}
+}
 $btnAdd.addEventListener("click", generateNewCategory)
+
+
+$("#addCategory").addEventListener("keypress", (e) => {
+    if (e.keyCode == '13') {
+        generateNewCategory();
+    }
+})
 
 const deleteCategory = (categoryId) => {
     table.innerHTML = ''
@@ -100,7 +114,6 @@ const deleteCategory = (categoryId) => {
     categories = newCategories
     localStorage.setItem('categories', JSON.stringify(newCategories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-
 }
 
 const findCategory = (id) => {
@@ -123,6 +136,8 @@ const categorieEdit = (id) => {
 
 };
 
+
+
 const saveCategoryData = (id) => {
     return {
         id,
@@ -133,23 +148,50 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
+<<<<<<< HEAD
+            return saveCategoryData(parseInt(id));
+=======
             return saveCategoryData(id);
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
+>>>>>>> main
         };
         return category
+    
     });
+
 };
 
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 $("#btn-editForm").addEventListener("click", () => {
     const categoryId = $("#btn-editForm").getAttribute("data-id");
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
+<<<<<<< HEAD
+    
     generateTable(editCategory(categoryId))
+=======
+<<<<<<< HEAD
+    let categoryEdit = editCategory(parseInt(categoryId))
+    localStorage.setItem('categories', JSON.stringify(categoryEdit))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
+=======
+    generateTable(editCategory(categoryId))
+>>>>>>> main
 
 
+>>>>>>> main
     
 })
+
+
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
@@ -157,13 +199,18 @@ $("#btn-cancel").addEventListener("click", () => {
 
 })
 
+<<<<<<< HEAD
+=======
 
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
+<<<<<<< HEAD
+=======
 const toggleOperation2 = $('#toggleOperation2')
+>>>>>>> main
 
 toggleFilter.addEventListener("click", (e) => {
         e.preventDefault()
@@ -189,11 +236,14 @@ toggleOperation.addEventListener("click", (e) => {
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+<<<<<<< HEAD
+=======
 toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
 })
+>>>>>>> main
 
 // NEW OPERATION
 let operations = []
@@ -240,3 +290,22 @@ const addOperation = () =>{
 }
 
   
+<<<<<<< HEAD
+
+
+// Reportes
+
+$("#ver-reportes").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $(".balance-section").classList.add("hidden")
+    $("#select-box-filtros").classList.add("hidden")
+    $("#operationContainer").classList.add("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#editOperationContainer").classList.add("hidden")
+    $("#containerCategories").classList.add("hidden")
+    $(".containerNewOp").classList.add("hidden")
+    $("#reportes").classList.remove("hidden")
+})
+=======
+>>>>>>> main
+>>>>>>> main
