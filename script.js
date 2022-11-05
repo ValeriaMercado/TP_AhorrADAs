@@ -234,3 +234,18 @@ const addOperation = () =>{
 }
 
   
+
+
+// Reportes
+
+$("#ver-reportes").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $(".balance-section").classList.add("hidden")
+    $("#select-box-filtros").classList.add("hidden")
+    $("#operationContainer").classList.add("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#editOperationContainer").classList.add("hidden")
+    $("#containerCategories").classList.add("hidden")
+    $(".containerNewOp").classList.add("hidden")
+    $("#reportes").classList.remove("hidden")
+})
