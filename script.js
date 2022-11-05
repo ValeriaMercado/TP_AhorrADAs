@@ -55,7 +55,6 @@ const generateTable = (categories) => {
     for (const btn of btnRemove) {
         const categoryId = btn.getAttribute("data-id")
         btn.addEventListener("click", () => {
-<<<<<<< HEAD
            deleteCategory(categoryId)
           
         })
@@ -67,22 +66,12 @@ generateTable(JSON.parse(localStorage.getItem('categories')))
 
 
 
-=======
-            deleteCategory(categoryId)
-        });
-
-    }
-
-};
-
-generateTable(categories);
->>>>>>> main
 
 
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
-    
+
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -92,30 +81,27 @@ const categoryInfo = () => {
     };
 };
 
-<<<<<<< HEAD
 
 const generateNewCategory = () => {
      if ($("#addCategory").value === "") {
         return alert("Debe ingresar un nombre para la categoría")
     } else {
-=======
-const generateNewCategory = () => {
->>>>>>> main
     table.innerHTML = ''
     categories.push(categoryInfo());
     $("#addCategory").value = ""
     localStorage.setItem('categories', JSON.stringify(categories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-   
+
 }
-<<<<<<< HEAD
 }
 $btnAdd.addEventListener("click", generateNewCategory)
 
-=======
 
-$btnAdd.addEventListener("click", generateNewCategory)
->>>>>>> main
+$("#addCategory").addEventListener("keypress", (e) => {
+    if (e.keyCode == '13') {
+        generateNewCategory();
+    }
+})
 
 const deleteCategory = (categoryId) => {
     table.innerHTML = ''
@@ -128,10 +114,6 @@ const deleteCategory = (categoryId) => {
     categories = newCategories
     localStorage.setItem('categories', JSON.stringify(newCategories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 }
 
 const findCategory = (id) => {
@@ -154,6 +136,8 @@ const categorieEdit = (id) => {
 
 };
 
+
+
 const saveCategoryData = (id) => {
     return {
         id,
@@ -168,10 +152,16 @@ const editCategory = (id) => {
             return saveCategoryData(parseInt(id));
 =======
             return saveCategoryData(id);
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 >>>>>>> main
         };
         return category
+    
     });
+
 };
 
 
@@ -185,6 +175,10 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
 <<<<<<< HEAD
+    
+    generateTable(editCategory(categoryId))
+=======
+<<<<<<< HEAD
     let categoryEdit = editCategory(parseInt(categoryId))
     localStorage.setItem('categories', JSON.stringify(categoryEdit))
     generateTable(JSON.parse(localStorage.getItem('categories')))
@@ -193,8 +187,11 @@ $("#btn-editForm").addEventListener("click", () => {
 >>>>>>> main
 
 
+>>>>>>> main
     
 })
+
+
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
@@ -202,6 +199,8 @@ $("#btn-cancel").addEventListener("click", () => {
 
 })
 
+<<<<<<< HEAD
+=======
 
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
@@ -308,4 +307,5 @@ $("#ver-reportes").addEventListener("click", (e) =>{
     $("#reportes").classList.remove("hidden")
 })
 =======
+>>>>>>> main
 >>>>>>> main
