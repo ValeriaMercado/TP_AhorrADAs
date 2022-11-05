@@ -129,7 +129,7 @@
         id="operationContainer">
         <h2 class="text-2xl font-bold mt-4">Operaciones</h2>
         <div class="container mt-4 p-2 w-full columns-1">
-            <button class="bg-[#79b9b9] border black w-1/3 rounded-lg p-1" id="toggleOperation">+ Nueva
+            <button class="bg-[#79b9b9] border black w-1/3 rounded-lg p-1" id="toggleOperation2">+ Nueva
                 Operación</button>
         </div>
         <div id="tableContainer">
@@ -155,7 +155,7 @@
     <!------------------------- NEW OPERATION ------------------------------->
 
     </div>
-    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 hidden"
+    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 hidden "
         id="newOperationContainer">
         <h2 class="text-2xl font-bold">Nueva Operación</h2>
         <form>
@@ -201,7 +201,7 @@
         </form>
     </div>
     <!------------------------- EDIT OPERATION ------------------------------->
-    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 "
+    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 hidden"
         id="editOperationContainer">
         <h2 class="text-2xl font-bold">Editar Operación</h2>
         <form>
@@ -311,126 +311,7 @@
             </div>
         </div>
     </div>
-    <!------------------------- NEW OPERATION ------------------------------->
-    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 ">
-        <h2 class="text-2xl font-bold">Nueva Operación</h2>
-        <form>
-            <div class="container mx-auto p-2 w-full columns-1">
-                <label class="text-xl">Descripción
-                    <input type="text" name="description" id="description" class="border black w-full rounded"></label>
-            </div>
-            <div class="container mx-auto p-2 w-full columns-1">
-                <label class="text-xl grid grid-rows-2">Monto
-                    <input type="number" class="border black w-full rounded" name="amount" id="amount"
-                        value="0"></label>
-            </div>
-            <div class="container mx-auto p-2 w-full columns-1 ">
-                <label class="text-xl grid grid-rows-2">Tipo
-                    <select class="my-1 w-2/2 border black w-full rounded">
-                        <option>Gasto</option>
-                        <option>Ganancia</option>
-                    </select>
-                </label>
-            </div>
-            <div class="container mx-auto p-2 w-full columns-1">
-                <label class="text-xl grid grid-rows-2">Categoría
-                    <select class="my-1 w-2/2 border black w-full rounded">
-                        <option>Comida</option>
-                        <option>Servicios</option>
-                        <option>Salidas</option>
-                        <option>Educación</option>
-                        <option>Transporte</option>
-                        <option>Trabajo</option>
-                    </select>
-                </label>
-            </div>
-            <div class="container mx-auto p-2 w-full columns-1">
-                <label class="text-xl grid grid-rows-2">Fecha
-                    <input type="date" class="border black w-full rounded">
-                </label>
-            </div>
-            <div class="flex flex-row-reverse space-x-4 space-x-reverse">
-                <button>Cancelar</button>
-                <button
-                    class="w-28 my-4 h-8 bg-green text-black bg-[#79b9b9] hover:bg-[#ffe1a8] rounded-lg m-auto">Agregar</button>
-            </div>
-        </form>
-    </div>
 
-    <!------------------------- CATEGORIES ------------------------------->
-    
-    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 mb-10 p-5"
-        id="container-categories">
-        <h2 class="text-2xl font-bold text-center">Categorías</h2>
-        <div class="flex flex-col w-full">
-            <div class="w-3/4 m-auto" id="table-categories">
-                <label for="name" class="font-bold p-2 text-[20px] ml-2">Nombre</label>
-                <div class="flex items-center">
-                    <input type="text"
-                        class="form-control w-3/4 ml-3 h-[40px] rounded border-solid border-2 border-indigo-200"
-                        id="addCategory" placeholder="Escriba su categoría aquí" />
-                    <button class="bg-green-200 w-[120px] h-[40px] rounded ml-[2%]" id="btn-add">
-                        Agregar
-                    </button>
-                </div>
-
-                <div>
-                    <table class="table flex justify-between h-10 w-full mt-2">
-                        <thead id="table"></thead>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 mb-10 hidden"
-    id="container-edit-categories">
-    <h2 class="text-2xl font-bold text-center">Editar categoría</h2>
-    <div class="flex flex-col w-full">
-        <div class="w-3/4 m-auto" id="table-categories">
-            <label for="fullname" class="font-bold p-2 text-[20px] ml-2">Nombre</label>
-            <div class="flex items-center">
-                <input type="text"
-                    class="form-control w-[85%] ml-3 h-[40px] rounded border-solid border-2 border-indigo-200"
-                    id="editCategory" placeholder="" />
-            </div>
-            <div class="ml-[60%] mt-5">
-                <button class="w-[120px] border-solid border-2 border-gray-700 h-[40px] rounded ml-[2%]" id="btn-cancel" i>
-                    Cancelar
-                </button>
-                <button class="bg-green-200 w-[120px] h-[40px] rounded ml-[2%]" id="btn-editForm">
-                    Editar
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!------------------------- OPERATIONS ------------------------------->
-    <div
-        class="container bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] m-auto px-10 flex flex-col justify-between hidden">
-        <h2 class="text-2xl font-bold mt-4">Operaciones</h2>
-        <div class="container mt-4 p-2 w-full columns-1">
-            <button class="bg-[#79b9b9] border black w-1/3 rounded-lg p-1">+ Nueva Operación</button>
-        </div>
-        <ul class="flex justify-between  w-1/4 mt-2 mr-10 px-10">
-            <li class="m-auto">
-                <span class="mr-10 text-black">Descripción</span>
-            </li>
-            <li>
-                <span class="ml-2 mr-10 text-black">Categoría</span>
-            </li>
-            <li>
-                <span class="ml-2 mr-10 text-black">Fecha</span>
-            </li>
-            <li>
-                <span class="ml-2 mr-10 text-black">Monto</span>
-            </li>
-            <li>
-                <span class="mx-2 text-black">Acciones</span>
-            </li>
-        </ul>
-    </div>
     <script src="script.js"></script>
 </body>
 
