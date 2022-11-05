@@ -151,8 +151,11 @@ const editCategory = (id) => {
 
             return saveCategoryData(parseInt(id));
 
+<<<<<<< HEAD
+=======
             return saveCategoryData(id);
 
+>>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
 
         };
         return category
@@ -169,8 +172,16 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
 
+<<<<<<< HEAD
+
+    let categoryEdit = editCategory(parseInt(categoryId))
+    localStorage.setItem('categories', JSON.stringify(categoryEdit))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
+
+=======
     
     generateTable(editCategory(categoryId))
+>>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
 
     let categoryEdit = editCategory(parseInt(categoryId))
     localStorage.setItem('categories', JSON.stringify(categoryEdit))
@@ -276,14 +287,54 @@ const addOperation = () =>{
   
 
 
+<<<<<<< HEAD
+$("#showReports").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $(".reports").classList.remove("hidden")
+    $("#tablesAndForms").classList.add("hidden")
+    $("#select-box-filtros").classList.add("hidden")
+    $("#operationContainer").classList.add("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#editOperationContainer").classList.add("hidden")
+    $("#container-categories").classList.add("hidden")
+    $(".containerNewOp").classList.add("hidden")
+})
+
+$("#showCategories").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $("#container-categories").classList.remove("hidden")
+=======
 $("#ver-reportes").addEventListener("click", (e) =>{
     e.preventDefault()
+>>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
     $(".balance-section").classList.add("hidden")
     $("#select-box-filtros").classList.add("hidden")
     $("#operationContainer").classList.add("hidden")
     $("#newOperationContainer").classList.add("hidden")
     $("#editOperationContainer").classList.add("hidden")
+<<<<<<< HEAD
+    $(".containerNewOp").classList.add("hidden")
+    $("operationsAndnewOperation").classList.add("hidden")
+  
+})
+
+$("#toggleOperation").addEventListener("click",(e) =>{
+    $("#tablesAndForms").classList.add("hidden")
+    $("#newOperationContainer").classList.remove("hidden")
+    newOperation()
+   
+})
+
+$("#btnAddOperation").addEventListener("click", (e) =>{
+    $("#tablesAndForms").classList.remove("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#operationContainer").classList.remove("hidden")
+    $("#operations").classList.add("hidden")
+    addOperation()
+})
+=======
     $("#containerCategories").classList.add("hidden")
     $(".containerNewOp").classList.add("hidden")
     $("#reportes").classList.remove("hidden")
 })
+>>>>>>> 6cf8373dec4c4699289345d74922b62205f39042
