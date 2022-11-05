@@ -148,15 +148,11 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-<<<<<<< HEAD
-            return saveCategoryData(parseInt(id));
-=======
-            return saveCategoryData(id);
-<<<<<<< HEAD
 
-=======
->>>>>>> main
->>>>>>> main
+            return saveCategoryData(parseInt(id));
+
+            return saveCategoryData(id);
+
         };
         return category
     
@@ -165,30 +161,21 @@ const editCategory = (id) => {
 };
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> main
 $("#btn-editForm").addEventListener("click", () => {
     const categoryId = $("#btn-editForm").getAttribute("data-id");
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-<<<<<<< HEAD
+
     
     generateTable(editCategory(categoryId))
-=======
-<<<<<<< HEAD
+
     let categoryEdit = editCategory(parseInt(categoryId))
     localStorage.setItem('categories', JSON.stringify(categoryEdit))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-=======
     generateTable(editCategory(categoryId))
->>>>>>> main
 
-
->>>>>>> main
-    
 })
 
 
@@ -199,18 +186,15 @@ $("#btn-cancel").addEventListener("click", () => {
 
 })
 
-<<<<<<< HEAD
-=======
+
 
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
-<<<<<<< HEAD
-=======
+
 const toggleOperation2 = $('#toggleOperation2')
->>>>>>> main
 
 toggleFilter.addEventListener("click", (e) => {
         e.preventDefault()
@@ -236,14 +220,13 @@ toggleOperation.addEventListener("click", (e) => {
     $('#newOperationContainer').classList.remove('hidden')
     
 })
-<<<<<<< HEAD
-=======
+
 toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
 })
->>>>>>> main
+
 
 // NEW OPERATION
 let operations = []
@@ -289,9 +272,6 @@ const addOperation = () =>{
         })
 }
 
-  
-<<<<<<< HEAD
-
 
 // Reportes
 
@@ -306,6 +286,4 @@ $("#ver-reportes").addEventListener("click", (e) =>{
     $(".containerNewOp").classList.add("hidden")
     $("#reportes").classList.remove("hidden")
 })
-=======
->>>>>>> main
->>>>>>> main
+
