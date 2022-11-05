@@ -68,6 +68,7 @@ generateTable(categories);
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
+    
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -78,15 +79,12 @@ const categoryInfo = () => {
 };
 
 const generateNewCategory = () => {
-    if ($("#addCategory").value === "") {
-        return alert("Debe ingresar un nombre para la categoría")
-    } else {
-        table.innerHTML = ''
-        categories.push(categoryInfo());
-        $("#addCategory").value = ""
-        localStorage.setItem('categories', JSON.stringify(categories))
-        generateTable(JSON.parse(localStorage.getItem('categories')))
-    }
+    table.innerHTML = ''
+    categories.push(categoryInfo());
+    $("#addCategory").value = ""
+    localStorage.setItem('categories', JSON.stringify(categories))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
+   
 }
 
 $btnAdd.addEventListener("click", generateNewCategory)
@@ -117,7 +115,7 @@ const categorieEdit = (id) => {
     $("#container-categories").classList.add("hidden");
     $("#container-edit-categories").classList.remove("hidden");
     const selectCategory = findCategory(id);
-    $("#editCategory").value = `${selectCategory.nombre}`;
+    $("#editCategory").value = `  ${selectCategory.nombre}`;
     $("#btn-editForm").setAttribute("data-id", id);
     $("#btn-cancel").setAttribute("data-id", id);
     $$(".btn-edit").setAttribute("data-id", id)
@@ -135,27 +133,119 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-            return saveCategoryData(parseInt(id));
+            return saveCategoryData(id);
         };
-        console.log(category.id)
         return category
     });
 };
+
 
 $("#btn-editForm").addEventListener("click", () => {
     const categoryId = $("#btn-editForm").getAttribute("data-id");
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-    const categoryEdit = editCategory(categoryId)
-    localStorage.setItem('categories', JSON.stringify(categoryEdit))
-    generateTable(JSON.parse(localStorage.getItem('categories')))
+    generateTable(editCategory(categoryId))
 
 
+    
 })
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
     $("#container-categories").classList.remove("hidden");
 
+})
+
+
+//DOM EVENTS
+const toggleFilter = $('#toggleFilters')
+const containerFilter = $('#filterContainer')
+const btnAddOperation = $('#btnAddOperation')
+const toggleOperation = $('#toggleOperation')
+
+toggleFilter.addEventListener("click", (e) => {
+        e.preventDefault()
+       if (toggleFilter.innerText === 'Ocultar filtros'){
+        containerFilter.classList.add('hidden')
+        toggleFilter.innerText = 'Mostrar filtros'
+       }
+       else {
+        containerFilter.classList.remove('hidden')
+        toggleFilter.innerText = 'Ocultar filtros'
+       }
+    })
+
+btnAddOperation.addEventListener('click', (e)=>{
+        e.preventDefault()
+        operations.push(newOperation())
+        addOperation()
+        console.log(operations)
+})
+
+toggleOperation.addEventListener("click", (e) => {
+    e.preventDefault()
+    $('#newOperationContainer').classList.remove('hidden')
+    
+})
+
+// NEW OPERATION
+let operations = []
+
+const newOperation = () => {
+        const descriptionOperation = $('#description').value
+        const amountOperation = parseInt($('#amountOperation').value)
+        const operationType = $('#operationType').value
+        const selectCategoryOperation = $('#selectCategoryOperation').value
+        const dateOperation = $('#dateOperation').value
+        return{
+                descriptionOperation,
+                amountOperation,
+                operationType,
+                selectCategoryOperation,
+                dateOperation
+        }
+}
+
+const addOperation = () =>{
+        operations.map(operation =>{
+                $('#tableContainer').innerHTML += `
+                <ul class="flex justify-between  w-1/4 mt-2 mr-10 px-10">
+                <li "m-auto">
+                    <span class="ml-2 mr-10 text-black">${operation.descriptionOperation}</span>
+                </li>
+                <li "m-auto">
+                    <span class="ml-2 mr-10 text-black">${operation.amountOperation}</span>
+                </li>
+                <li "m-auto">
+                    <span class="ml-2 mr-10 text-black">${operation.operationType}</span>
+                </li>
+                <li "m-auto">
+                    <span class="ml-2 mr-10 text-black">${operation.selectCategoryOperation}</span>
+                </li>
+                <li "m-auto">
+                    <span class="ml-2  text-black">${operation.dateOperation}</span>
+                </li>
+                </ul>
+                <button class="editOperation">Editar</button>
+                <button class="deleteOperation" data-id"${operation.descriptionOperation}">Eliminar</button>
+                `
+        })
+}
+
+  
+
+
+// Reportes
+
+$("#ver-reportes").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $(".balance-section").classList.add("hidden")
+    $("#select-box-filtros").classList.add("hidden")
+    $("#operationContainer").classList.add("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#editOperationContainer").classList.add("hidden")
+    $("#containerCategories").classList.add("hidden")
+    $(".containerNewOp").classList.add("hidden")
+    $("#reportes").classList.remove("hidden")
 })
