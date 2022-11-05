@@ -68,7 +68,6 @@ generateTable(categories);
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
-    
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -79,12 +78,15 @@ const categoryInfo = () => {
 };
 
 const generateNewCategory = () => {
-    table.innerHTML = ''
-    categories.push(categoryInfo());
-    $("#addCategory").value = ""
-    localStorage.setItem('categories', JSON.stringify(categories))
-    generateTable(JSON.parse(localStorage.getItem('categories')))
-   
+    if ($("#addCategory").value === "") {
+        return alert("Debe ingresar un nombre para la categoría")
+    } else {
+        table.innerHTML = ''
+        categories.push(categoryInfo());
+        $("#addCategory").value = ""
+        localStorage.setItem('categories', JSON.stringify(categories))
+        generateTable(JSON.parse(localStorage.getItem('categories')))
+    }
 }
 
 $btnAdd.addEventListener("click", generateNewCategory)
@@ -115,7 +117,7 @@ const categorieEdit = (id) => {
     $("#container-categories").classList.add("hidden");
     $("#container-edit-categories").classList.remove("hidden");
     const selectCategory = findCategory(id);
-    $("#editCategory").value = `  ${selectCategory.nombre}`;
+    $("#editCategory").value = `${selectCategory.nombre}`;
     $("#btn-editForm").setAttribute("data-id", id);
     $("#btn-cancel").setAttribute("data-id", id);
     $$(".btn-edit").setAttribute("data-id", id)
@@ -133,8 +135,9 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-            return saveCategoryData(id);
+            return saveCategoryData(parseInt(id));
         };
+        console.log(category.id)
         return category
     });
 };
@@ -144,7 +147,10 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-    generateTable(editCategory(categoryId))
+    const categoryEdit = editCategory(categoryId)
+    localStorage.setItem('categories', JSON.stringify(categoryEdit))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
+
 
 })
 
