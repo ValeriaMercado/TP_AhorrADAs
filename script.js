@@ -55,20 +55,23 @@ const generateTable = (categories) => {
     for (const btn of btnRemove) {
         const categoryId = btn.getAttribute("data-id")
         btn.addEventListener("click", () => {
-            deleteCategory(categoryId)
-        });
-
+           deleteCategory(categoryId)
+          
+        })
     }
+    
+}
 
-};
+generateTable(JSON.parse(localStorage.getItem('categories')))
 
-generateTable(categories);
+
+
 
 
 // *******************************************************************************************************************************
 
 const categoryInfo = () => {
-    
+
     const nombre = $("#addCategory").value;
     let id = categories.length + 1
 
@@ -78,16 +81,27 @@ const categoryInfo = () => {
     };
 };
 
+
 const generateNewCategory = () => {
+     if ($("#addCategory").value === "") {
+        return alert("Debe ingresar un nombre para la categoría")
+    } else {
     table.innerHTML = ''
     categories.push(categoryInfo());
     $("#addCategory").value = ""
     localStorage.setItem('categories', JSON.stringify(categories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-   
-}
 
+}
+}
 $btnAdd.addEventListener("click", generateNewCategory)
+
+
+$("#addCategory").addEventListener("keypress", (e) => {
+    if (e.keyCode == '13') {
+        generateNewCategory();
+    }
+})
 
 const deleteCategory = (categoryId) => {
     table.innerHTML = ''
@@ -100,7 +114,6 @@ const deleteCategory = (categoryId) => {
     categories = newCategories
     localStorage.setItem('categories', JSON.stringify(newCategories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-
 }
 
 const findCategory = (id) => {
@@ -123,6 +136,8 @@ const categorieEdit = (id) => {
 
 };
 
+
+
 const saveCategoryData = (id) => {
     return {
         id,
@@ -133,11 +148,17 @@ const saveCategoryData = (id) => {
 const editCategory = (id) => {
     return categories.map((category) => {
         if (category.id === parseInt(id)) {
-            return saveCategoryData(id);
+
+            return saveCategoryData(parseInt(id));
+
+
         };
         return category
+    
     });
+
 };
+
 
 
 $("#btn-editForm").addEventListener("click", () => {
@@ -145,11 +166,18 @@ $("#btn-editForm").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden")
     $("#container-categories").classList.remove("hidden");
     $("#table").innerHTML = ''
-    generateTable(editCategory(categoryId))
+
+
+    let categoryEdit = editCategory(parseInt(categoryId))
+    localStorage.setItem('categories', JSON.stringify(categoryEdit))
+    generateTable(JSON.parse(localStorage.getItem('categories')))
+
 
 
     
 })
+
+
 
 $("#btn-cancel").addEventListener("click", () => {
     $("#container-edit-categories").classList.add("hidden");
@@ -158,11 +186,13 @@ $("#btn-cancel").addEventListener("click", () => {
 })
 
 
+
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
+const toggleOperation2 = $('#toggleOperation2')
 
 toggleFilter.addEventListener("click", (e) => {
         e.preventDefault()
@@ -184,6 +214,11 @@ btnAddOperation.addEventListener('click', (e)=>{
 })
 
 toggleOperation.addEventListener("click", (e) => {
+    e.preventDefault()
+    $('#newOperationContainer').classList.remove('hidden')
+    
+})
+toggleOperation2.addEventListener("click", (e) => {
     e.preventDefault()
     $('#newOperationContainer').classList.remove('hidden')
     
@@ -236,16 +271,42 @@ const addOperation = () =>{
   
 
 
-// Reportes
-
-$("#ver-reportes").addEventListener("click", (e) =>{
+$("#showReports").addEventListener("click", (e) =>{
     e.preventDefault()
+    $(".reports").classList.remove("hidden")
+    $("#tablesAndForms").classList.add("hidden")
+    $("#select-box-filtros").classList.add("hidden")
+    $("#operationContainer").classList.add("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#editOperationContainer").classList.add("hidden")
+    $("#container-categories").classList.add("hidden")
+    $(".containerNewOp").classList.add("hidden")
+})
+
+$("#showCategories").addEventListener("click", (e) =>{
+    e.preventDefault()
+    $("#container-categories").classList.remove("hidden")
     $(".balance-section").classList.add("hidden")
     $("#select-box-filtros").classList.add("hidden")
     $("#operationContainer").classList.add("hidden")
     $("#newOperationContainer").classList.add("hidden")
     $("#editOperationContainer").classList.add("hidden")
-    $("#containerCategories").classList.add("hidden")
     $(".containerNewOp").classList.add("hidden")
-    $("#reportes").classList.remove("hidden")
+    $("operationsAndnewOperation").classList.add("hidden")
+  
+})
+
+$("#toggleOperation").addEventListener("click",(e) =>{
+    $("#tablesAndForms").classList.add("hidden")
+    $("#newOperationContainer").classList.remove("hidden")
+    newOperation()
+   
+})
+
+$("#btnAddOperation").addEventListener("click", (e) =>{
+    $("#tablesAndForms").classList.remove("hidden")
+    $("#newOperationContainer").classList.add("hidden")
+    $("#operationContainer").classList.remove("hidden")
+    $("#operations").classList.add("hidden")
+    addOperation()
 })
