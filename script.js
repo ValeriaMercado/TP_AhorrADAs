@@ -247,6 +247,7 @@ const newOperation = () => {
 }
 
 const addOperation = () =>{
+        $('#tableContainer').innerHTML = ''    
         operations.map(operation =>{
                 $('#tableContainer').innerHTML += `
                 <ul class="flex justify-between  w-1/4 mt-2 mr-10 px-10">
