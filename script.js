@@ -212,7 +212,7 @@ btnAddOperation.addEventListener('click', (e)=>{
         e.preventDefault()
         operations.push(newOperation())
         addOperation()
-        console.log(operations)
+        
 })
 
 toggleOperation.addEventListener("click", (e) => {
@@ -229,9 +229,13 @@ toggleOperation2.addEventListener("click", (e) => {
 
 
 // NEW OPERATION
-let operations = []
 
-const newOperation = () => {
+let operations = []
+if(!localStorage.getItem('operations')){
+    localStorage.setItem('operations', JSON.stringify([]))
+}
+
+let newOperation = () => {
         const descriptionOperation = $('#description').value
         const amountOperation = parseInt($('#amountOperation').value)
         const operationType = $('#operationType').value
@@ -248,35 +252,31 @@ const newOperation = () => {
 
 const addOperation = () =>{
         $('#tableContainer').innerHTML = ''    
-        operations.map(operation =>{
+        let operation = operations.map(operation =>{
+            localStorage.setItem('operations', JSON.stringify(operations))
                 $('#tableContainer').innerHTML += `
-                <ul class="flex justify-between  w-1/4 mt-2 mr-10 px-10">
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.descriptionOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.amountOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.operationType}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2 mr-10 text-black">${operation.selectCategoryOperation}</span>
-                </li>
-                <li "m-auto">
-                    <span class="ml-2  text-black">${operation.dateOperation}</span>
-                </li>
-                </ul>
-                <button class="editOperation">Editar</button>
-                <button class="deleteOperation" data-id"${operation.descriptionOperation}">Eliminar</button>
-                `
+                <table class=" w-full">
+                <thead>
+                <tr class="w-full font-light text-center mb-10">
+                    <td class=" w-1/5">${operation.descriptionOperation}</td>
+                    <td class="w-1/5">${operation.selectCategoryOperation}</td>
+                    <td class="w-1/5">${operation.dateOperation}</td>
+                    <td class="w-1/5">${operation.amountOperation}</td>
+                    <td class="w-1/5 space-y-1 flex flex-col items-center text-blue-700 ml-[40%]"> <button class="editOperation">Editar</button>
+                    <button data-id"${operation.descriptionOperation}">Eliminar</button></td>
+                </tr>
+                </thead>
+                </table>
+            `
         })
+        let operationsFromLS = JSON.parse(localStorage.getItem('operations'))
+        localStorage.setItem('operations', JSON.stringify(operationsFromLS))
+        operationsFromLS.push(operation)
+        
 }
+    
 
-  
-
-
-$("#showReports").addEventListener("click", (e) =>{
+    $("#showReports").addEventListener("click", (e) =>{
     e.preventDefault()
     $(".reports").classList.remove("hidden")
     $("#tablesAndForms").classList.add("hidden")
