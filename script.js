@@ -211,8 +211,8 @@ toggleFilter.addEventListener("click", (e) => {
 btnAddOperation.addEventListener('click', (e)=>{
         e.preventDefault()
         operations.push(newOperation())
-        addOperation()
-        
+        addOperation('operationsFromLS')
+       
 })
 
 toggleOperation.addEventListener("click", (e) => {
@@ -252,13 +252,12 @@ let newOperation = () => {
 
 const addOperation = () =>{
         $('#tableContainer').innerHTML = ''    
-        let operation = operations.map(operation =>{
-            localStorage.setItem('operations', JSON.stringify(operations))
+        operations.map(operation =>{
                 $('#tableContainer').innerHTML += `
                 <table class=" w-full">
                 <thead>
                 <tr class="w-full font-light text-center mb-10">
-                    <td class=" w-1/5">${operation.descriptionOperation}</td>
+                    <td class="w-1/5">${operation.descriptionOperation}</td>
                     <td class="w-1/5">${operation.selectCategoryOperation}</td>
                     <td class="w-1/5">${operation.dateOperation}</td>
                     <td class="w-1/5">${operation.amountOperation}</td>
@@ -270,11 +269,11 @@ const addOperation = () =>{
             `
         })
         let operationsFromLS = JSON.parse(localStorage.getItem('operations'))
+        operationsFromLS.push(newOperation())  
         localStorage.setItem('operations', JSON.stringify(operationsFromLS))
-        operationsFromLS.push(operation)
         
 }
-    
+
 
     $("#showReports").addEventListener("click", (e) =>{
     e.preventDefault()
@@ -318,8 +317,8 @@ $("#btnAddOperation").addEventListener("click", (e) =>{
     addOperation()
 })
 
-    $("#containerCategories").classList.add("hidden")
-    $(".containerNewOp").classList.add("hidden")
+    $("#container-categories").classList.add("hidden")
+    $(".containerNewOp").classList.remove("hidden")
     $("#reports").classList.remove("hidden")
   
 
