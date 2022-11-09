@@ -274,7 +274,7 @@ const generateOperationTable = (operations) => {
                     <td class="w-1/5">${operation.dateOperation}</td>
                     <td class="w-1/5"><p>${operation.amountOperation}</p></td>
                     <td class="w-1/5 space-y-1 flex flex-col items-center text-blue-700 ml-[40%]"> <button class="editOperation">Editar</button>
-                    <button data-id"${operation.descriptionOperation}">Eliminar</button></td>
+                    <button data-id="${operation.descriptionOperation}">Eliminar</button></td>
                 </tr>
                 </table>
             `
@@ -307,15 +307,12 @@ $("#showCategories").addEventListener("click", (e) => {
   $("operationsAndnewOperation").classList.add("hidden")
   $("operations").classList.add("hidden")
   $("#reports").classList.add("hidden")
-
-
 })
 
 $("#toggleOperation").addEventListener("click", (e) => {
   $("#tablesAndForms").classList.add("hidden")
   $("#newOperationContainer").classList.remove("hidden")
   newOperation()
-
 })
 
 $("#btnAddOperation").addEventListener("click", (e) => {
