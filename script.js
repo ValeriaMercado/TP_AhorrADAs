@@ -333,4 +333,3 @@ window.addEventListener("load", () =>{
   generateOperationTable(getDataFromLocalStorage("operations"))
 })
 
-
