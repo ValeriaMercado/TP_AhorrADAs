@@ -6,6 +6,15 @@ const $categories = $("#container-categories");
 const $newCategories = $("#categorie");
 const $tableCategories = $("#table-categories");
 
+<<<<<<< HEAD
+
+let defaultCategories = [
+  {id: 1, nombre: "Comida",},
+  {id: 2, nombre: "Servicios",},
+  {id: 3, nombre: "Salidas",},
+  {id: 4, nombre: "Educacion",},
+  {id: 5, nombre: "Trabajo",}
+=======
 let categories = [
   {
     id: 1,
@@ -31,9 +40,18 @@ let categories = [
     id: 5,
     nombre: "Trabajo",
   },
+>>>>>>> main
 ];
 
+
+  let categories = localStorage.getItem('categories')? JSON.parse(localStorage.getItem('categories')): defaultCategories;
+
 if (!localStorage.getItem('categories')) {
+<<<<<<< HEAD
+ localStorage.setItem('categories', JSON.stringify(categories))
+}
+
+=======
   localStorage.setItem('categories', JSON.stringify(categories))
 }
 
@@ -44,6 +62,7 @@ const getDataFromLocalStorage = (key) => {
 const sendDataFromLocalStorage = (key, array) => {
   return localStorage.setItem(key, JSON.stringify(array))
 }
+>>>>>>> main
 
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
@@ -54,7 +73,7 @@ const generateTable = (categories) => {
     table.innerHTML += `
     <tr class="w-[20%] h-10 mb-5 categoryColumn"  >
                         <th class="w-[80%] text-start mb-3">${category.id, category.nombre}</th>
-                        <th scope="col"><button class= "mr-3 btn-edit text-green-500" data-id="${category.id}" onclick="categorieEdit(${category.id})">Editar</button></th>
+                        <th scope="col"><button class= "mr-3 btn-edit text-green-500" data-id="${category.id}" onclick="categoriesEdit(${category.id})">Editar</button></th>
                         <th scope="col"> <button class= "btnRemove text-red-500" data-id="${category.id}">Eliminar</button></th>
             </tr>
                `
@@ -72,9 +91,6 @@ const generateTable = (categories) => {
 }
 
 generateTable(JSON.parse(localStorage.getItem('categories')))
-
-
-
 
 
 // *******************************************************************************************************************************
@@ -132,6 +148,17 @@ const findCategory = (id) => {
 
 // ************************EDIT & CANCEL****************************************************************************
 
+<<<<<<< HEAD
+const categoriesEdit = (id) => {
+
+  $("#container-categories").classList.add("hidden");
+  $("#container-edit-categories").classList.remove("hidden");
+  const selectCategory = findCategory(id);
+  $("#editName").value = `  ${selectCategory.nombre}`;
+  $("#btn-editForm").setAttribute("data-id", id);
+  $("#btn-cancel").setAttribute("data-id", id);
+
+=======
 const categorieEdit = (id) => {
   const nombre = $("#addCategory").value;
   $("#container-categories").classList.add("hidden");
@@ -142,21 +169,30 @@ const categorieEdit = (id) => {
   $("#btn-cancel").setAttribute("data-id", id);
   $$(".btn-edit").setAttribute("data-id", id)
   $$(".btn-delete").setAttribute("data-id", id)
+>>>>>>> main
 
 };
-
-
 
 const saveCategoryData = (id) => {
   return {
     id,
+<<<<<<< HEAD
+    nombre: $("#editName").value,
+=======
     nombre: $("#editCategory").value,
+>>>>>>> main
   };
 };
 
 const editCategory = (id) => {
   return categories.map((category) => {
     if (category.id === parseInt(id)) {
+<<<<<<< HEAD
+      return saveCategoryData(parseInt(id));
+    };
+    return category
+
+=======
 
       return saveCategoryData(parseInt(id));
 
@@ -165,28 +201,38 @@ const editCategory = (id) => {
     };
     return category
 
+>>>>>>> main
   });
 
 };
 
+<<<<<<< HEAD
+$("#btn-editForm").addEventListener("click", () => {
+  const categoriesId = $("#btn-editForm").getAttribute("data-id");
+=======
 
 
 $("#btn-editForm").addEventListener("click", () => {
   const categoryId = $("#btn-editForm").getAttribute("data-id");
+>>>>>>> main
   $("#container-edit-categories").classList.add("hidden")
   $("#container-categories").classList.remove("hidden");
   $("#table").innerHTML = ''
 
 
+<<<<<<< HEAD
+  let categoriesEdit = editCategory(parseInt(categoriesId))
+  localStorage.setItem('categories', JSON.stringify(categoriesEdit))
+  categories = categoriesEdit;
+=======
   let categoryEdit = editCategory(parseInt(categoryId))
   localStorage.setItem('categories', JSON.stringify(categoryEdit))
 
+>>>>>>> main
 
   generateTable(JSON.parse(localStorage.getItem('categories')))
 
 })
-
-
 
 $("#btn-cancel").addEventListener("click", () => {
   $("#container-edit-categories").classList.add("hidden");
@@ -195,13 +241,36 @@ $("#btn-cancel").addEventListener("click", () => {
 })
 
 
+<<<<<<< HEAD
+$("#showCategories").addEventListener("click", (e) => {
+  e.preventDefault()
+  $("#container-categories").classList.remove("hidden")
+  $(".balance-section").classList.add("hidden")
+  $("#select-box-filtros").classList.add("hidden")
+  $("#operationContainer").classList.add("hidden")
+  $("#newOperationContainer").classList.add("hidden")
+  $("#editOperationContainer").classList.add("hidden")
+  $("operations").classList.add("hidden")
+  $("#reports").classList.add("hidden")
+
+})
+
+
+=======
+>>>>>>> main
 
 //DOM EVENTS
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
+<<<<<<< HEAD
+
 const toggleOperation2 = $('#toggleOperation2')
+
+=======
+const toggleOperation2 = $('#toggleOperation2')
+>>>>>>> main
 
 toggleFilter.addEventListener("click", (e) => {
   e.preventDefault()
@@ -236,6 +305,9 @@ toggleOperation2.addEventListener("click", (e) => {
   $('#newOperationContainer').classList.remove('hidden')
 
 })
+<<<<<<< HEAD
+
+=======
 
 
 // NEW OPERATION
@@ -333,3 +405,4 @@ window.addEventListener("load", () =>{
   generateOperationTable(getDataFromLocalStorage("operations"))
 })
 
+>>>>>>> main
