@@ -1,3 +1,4 @@
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selectors) => document.querySelectorAll(selectors);
 
@@ -8,25 +9,32 @@ const $tableCategories = $("#table-categories");
 
 
 let defaultCategories = [
-  {id: 1, nombre: "Comida",},
-  {id: 2, nombre: "Servicios",},
-  {id: 3, nombre: "Salidas",},
-  {id: 4, nombre: "Educacion",},
-  {id: 5, nombre: "Trabajo",}
+  { id: 1, nombre: "Comida", },
+  { id: 2, nombre: "Servicios", },
+  { id: 3, nombre: "Salidas", },
+  { id: 4, nombre: "Educacion", },
+  { id: 5, nombre: "Trabajo", }
 ];
 
 
-  let categories = localStorage.getItem('categories')? JSON.parse(localStorage.getItem('categories')): defaultCategories;
+let categories = localStorage.getItem('categories') ? JSON.parse(localStorage.getItem('categories')) : defaultCategories;
 
 if (!localStorage.getItem('categories')) {
- localStorage.setItem('categories', JSON.stringify(categories))
+  localStorage.setItem('categories', JSON.stringify(categories))
 }
 
+const getDataFromLocalStorage = (key) => {
+  return JSON.parse(localStorage.getItem(key))
+}
+
+const sendDataFromLocalStorage = (key, array) => {
+  return localStorage.setItem(key, JSON.stringify(array))
+}
 
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
 
-// *******************************************************GENERATE TABLE & REMOVE*********************************
+// *******************************************************GENERATE TABLE & REMOVE***********************************************
 const generateTable = (categories) => {
   for (const category of categories) {
     table.innerHTML += `
@@ -52,13 +60,16 @@ const generateTable = (categories) => {
 generateTable(JSON.parse(localStorage.getItem('categories')))
 
 
-// *******************************************************************************************************************************
+// ********************************************************GENERATE NEW CATEGORY*************************************************
 
+
+
+const random = (start, end) => {
+  return Math.floor(Math.random() * (end - start + 1)) + start;
+}
 const categoryInfo = () => {
-
   const nombre = $("#addCategory").value;
-  let id = categories.length + 1
-
+  let id = random(6, 999)
   return {
     id,
     nombre
@@ -87,6 +98,8 @@ $("#addCategory").addEventListener("keypress", (e) => {
   }
 })
 
+// ********************************************************DELETE CATEGORY*******************************************************
+
 const deleteCategory = (categoryId) => {
   table.innerHTML = ''
   let categoriesLocal = JSON.parse(localStorage.getItem('categories'))
@@ -105,7 +118,7 @@ const findCategory = (id) => {
 
 };
 
-// ************************EDIT & CANCEL****************************************************************************
+// **********************************************************EDIT & CANCEL************************************************
 
 const categoriesEdit = (id) => {
 
@@ -152,6 +165,9 @@ $("#btn-editForm").addEventListener("click", () => {
 
 })
 
+
+// ********************************************BUTTONS EVENTS********************************************************************
+
 $("#btn-cancel").addEventListener("click", () => {
   $("#container-edit-categories").classList.add("hidden");
   $("#container-categories").classList.remove("hidden");
@@ -171,6 +187,52 @@ $("#showCategories").addEventListener("click", (e) => {
   $("#reports").classList.add("hidden")
 
 })
+
+// ***************************************************************DOM EVENTS*****************************************************
+const toggleFilter = $('#toggleFilters')
+const containerFilter = $('#filterContainer')
+const btnAddOperation = $('#btnAddOperation')
+const toggleOperation = $('#toggleOperation')
+const toggleOperation2 = $('#toggleOperation2')
+
+
+toggleFilter.addEventListener("click", (e) => {
+  e.preventDefault()
+  if (toggleFilter.innerText === 'Ocultar filtros') {
+    containerFilter.classList.add('hidden')
+    toggleFilter.innerText = 'Mostrar filtros'
+  }
+  else {
+    containerFilter.classList.remove('hidden')
+    toggleFilter.innerText = 'Ocultar filtros'
+  }
+})
+
+btnAddOperation.addEventListener('click', (e) => {
+  $("#operations").classList.add("hidden")
+  e.preventDefault()
+  $('#newOperationContainer').classList.add('hidden')
+  $('#balance').classList.remove("hidden")
+  $('#select-box-filtros').classList.remove("hidden")
+  $('#operationContainer').classList.remove("hidden")
+
+})
+
+toggleOperation.addEventListener("click", (e) => {
+  e.preventDefault()
+  $('#newOperationContainer').classList.remove('hidden')
+
+})
+
+toggleOperation2.addEventListener("click", (e) => {
+  e.preventDefault()
+  $('#newOperationContainer').classList.remove('hidden')
+  $('#balance').classList.add("hidden")
+  $('#select-box-filtros').classList.add("hidden")
+  $('#container-categories').classList.add("hidden")
+  $('#operationContainer').classList.add("hidden")
+})
+
 
 
 // *********************************************************OPERATIONS**************************************************************
@@ -342,4 +404,6 @@ $("#cancelAddOperation").addEventListener("click", () => {
   $('#select-box-filtros').classList.remove("hidden")
   $('#operationContainer').classList.remove("hidden")
 })
+
+
 
