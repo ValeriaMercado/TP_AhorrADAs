@@ -1,3 +1,4 @@
+
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selectors) => document.querySelectorAll(selectors);
 
@@ -6,52 +7,19 @@ const $categories = $("#container-categories");
 const $newCategories = $("#categorie");
 const $tableCategories = $("#table-categories");
 
-<<<<<<< HEAD
 
 let defaultCategories = [
-  {id: 1, nombre: "Comida",},
-  {id: 2, nombre: "Servicios",},
-  {id: 3, nombre: "Salidas",},
-  {id: 4, nombre: "Educacion",},
-  {id: 5, nombre: "Trabajo",}
-=======
-let categories = [
-  {
-    id: 1,
-    nombre: "Comida",
-  },
-
-  {
-    id: 2,
-    nombre: "Servicios",
-  },
-
-  {
-    id: 3,
-    nombre: "Salidas",
-  },
-
-  {
-    id: 4,
-    nombre: "Educacion",
-  },
-
-  {
-    id: 5,
-    nombre: "Trabajo",
-  },
->>>>>>> main
+  { id: 1, nombre: "Comida", },
+  { id: 2, nombre: "Servicios", },
+  { id: 3, nombre: "Salidas", },
+  { id: 4, nombre: "Educacion", },
+  { id: 5, nombre: "Trabajo", }
 ];
 
 
-  let categories = localStorage.getItem('categories')? JSON.parse(localStorage.getItem('categories')): defaultCategories;
+let categories = localStorage.getItem('categories') ? JSON.parse(localStorage.getItem('categories')) : defaultCategories;
 
 if (!localStorage.getItem('categories')) {
-<<<<<<< HEAD
- localStorage.setItem('categories', JSON.stringify(categories))
-}
-
-=======
   localStorage.setItem('categories', JSON.stringify(categories))
 }
 
@@ -62,12 +30,11 @@ const getDataFromLocalStorage = (key) => {
 const sendDataFromLocalStorage = (key, array) => {
   return localStorage.setItem(key, JSON.stringify(array))
 }
->>>>>>> main
 
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
 
-// *******************************************************GENERATE TABLE & REMOVE*********************************
+// *******************************************************GENERATE TABLE & REMOVE***********************************************
 const generateTable = (categories) => {
   for (const category of categories) {
     table.innerHTML += `
@@ -93,13 +60,16 @@ const generateTable = (categories) => {
 generateTable(JSON.parse(localStorage.getItem('categories')))
 
 
-// *******************************************************************************************************************************
+// ********************************************************GENERATE NEW CATEGORY*************************************************
 
+
+
+const random = (start, end) => {
+  return Math.floor(Math.random() * (end - start + 1)) + start;
+}
 const categoryInfo = () => {
-
   const nombre = $("#addCategory").value;
-  let id = categories.length + 1
-
+  let id = random(6, 999)
   return {
     id,
     nombre
@@ -128,6 +98,8 @@ $("#addCategory").addEventListener("keypress", (e) => {
   }
 })
 
+// ********************************************************DELETE CATEGORY*******************************************************
+
 const deleteCategory = (categoryId) => {
   table.innerHTML = ''
   let categoriesLocal = JSON.parse(localStorage.getItem('categories'))
@@ -146,9 +118,8 @@ const findCategory = (id) => {
 
 };
 
-// ************************EDIT & CANCEL****************************************************************************
+// **********************************************************EDIT & CANCEL************************************************
 
-<<<<<<< HEAD
 const categoriesEdit = (id) => {
 
   $("#container-categories").classList.add("hidden");
@@ -158,81 +129,44 @@ const categoriesEdit = (id) => {
   $("#btn-editForm").setAttribute("data-id", id);
   $("#btn-cancel").setAttribute("data-id", id);
 
-=======
-const categorieEdit = (id) => {
-  const nombre = $("#addCategory").value;
-  $("#container-categories").classList.add("hidden");
-  $("#container-edit-categories").classList.remove("hidden");
-  const selectCategory = findCategory(id);
-  $("#editCategory").value = `  ${selectCategory.nombre}`;
-  $("#btn-editForm").setAttribute("data-id", id);
-  $("#btn-cancel").setAttribute("data-id", id);
-  $$(".btn-edit").setAttribute("data-id", id)
-  $$(".btn-delete").setAttribute("data-id", id)
->>>>>>> main
 
 };
 
 const saveCategoryData = (id) => {
   return {
     id,
-<<<<<<< HEAD
     nombre: $("#editName").value,
-=======
-    nombre: $("#editCategory").value,
->>>>>>> main
   };
 };
 
 const editCategory = (id) => {
   return categories.map((category) => {
     if (category.id === parseInt(id)) {
-<<<<<<< HEAD
       return saveCategoryData(parseInt(id));
     };
     return category
 
-=======
-
-      return saveCategoryData(parseInt(id));
-
-
-
-    };
-    return category
-
->>>>>>> main
   });
 
 };
 
-<<<<<<< HEAD
 $("#btn-editForm").addEventListener("click", () => {
   const categoriesId = $("#btn-editForm").getAttribute("data-id");
-=======
-
-
-$("#btn-editForm").addEventListener("click", () => {
-  const categoryId = $("#btn-editForm").getAttribute("data-id");
->>>>>>> main
   $("#container-edit-categories").classList.add("hidden")
   $("#container-categories").classList.remove("hidden");
   $("#table").innerHTML = ''
 
 
-<<<<<<< HEAD
   let categoriesEdit = editCategory(parseInt(categoriesId))
   localStorage.setItem('categories', JSON.stringify(categoriesEdit))
   categories = categoriesEdit;
-=======
-  let categoryEdit = editCategory(parseInt(categoryId))
-  localStorage.setItem('categories', JSON.stringify(categoryEdit))
-
->>>>>>> main
 
   generateTable(JSON.parse(localStorage.getItem('categories')))
 
 })
+
+
+// ********************************************BUTTONS EVENTS********************************************************************
 
 $("#btn-cancel").addEventListener("click", () => {
   $("#container-edit-categories").classList.add("hidden");
@@ -241,7 +175,6 @@ $("#btn-cancel").addEventListener("click", () => {
 })
 
 
-<<<<<<< HEAD
 $("#showCategories").addEventListener("click", (e) => {
   e.preventDefault()
   $("#container-categories").classList.remove("hidden")
@@ -255,22 +188,13 @@ $("#showCategories").addEventListener("click", (e) => {
 
 })
 
-
-=======
->>>>>>> main
-
-//DOM EVENTS
+// ***************************************************************DOM EVENTS*****************************************************
 const toggleFilter = $('#toggleFilters')
 const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
-<<<<<<< HEAD
-
 const toggleOperation2 = $('#toggleOperation2')
 
-=======
-const toggleOperation2 = $('#toggleOperation2')
->>>>>>> main
 
 toggleFilter.addEventListener("click", (e) => {
   e.preventDefault()
@@ -287,10 +211,10 @@ toggleFilter.addEventListener("click", (e) => {
 btnAddOperation.addEventListener('click', (e) => {
   $("#operations").classList.add("hidden")
   e.preventDefault()
-  let operationFromLocal = getDataFromLocalStorage("operations")
-  operationFromLocal.push(newOperation())
-  sendDataFromLocalStorage("operations", operationFromLocal)
-  generateOperationTable(getDataFromLocalStorage("operations"))
+  $('#newOperationContainer').classList.add('hidden')
+  $('#balance').classList.remove("hidden")
+  $('#select-box-filtros').classList.remove("hidden")
+  $('#operationContainer').classList.remove("hidden")
 
 })
 
@@ -303,22 +227,61 @@ toggleOperation.addEventListener("click", (e) => {
 toggleOperation2.addEventListener("click", (e) => {
   e.preventDefault()
   $('#newOperationContainer').classList.remove('hidden')
-
+  $('#balance').classList.add("hidden")
+  $('#select-box-filtros').classList.add("hidden")
+  $('#container-categories').classList.add("hidden")
+  $('#operationContainer').classList.add("hidden")
 })
-<<<<<<< HEAD
-
-=======
 
 
-// NEW OPERATION
 
-// let operations = []
+// *********************************************************OPERATIONS**************************************************************
+
+let operationsDefault = []
+
+let operations = localStorage.getItem('operations') ? JSON.parse(localStorage.getItem('operations')) : operationsDefault;
+
 if (!localStorage.getItem('operations')) {
-  localStorage.setItem('operations', JSON.stringify([]))
+  localStorage.setItem('operations', JSON.stringify(operations))
 }
 
 
-let newOperation = () => {
+const btnEditOp = $$(".editOperation")
+
+const generateOperationTable = (operations) => {
+  $('#tableContainer').innerHTML = ''
+  operations.map(operation => {
+    $('#tableContainer').innerHTML += `
+                <table class=" w-full">
+                <tr class="w-full font-bold text-center">
+                <td class="w-1/5 font-bold"> ${operation.descriptionOperation}</td>
+                <td class="w-1/5 font-bold hidden"> ${operation.ids}</td>
+                    <td class="w-1/5 mr-3 btn-edit text-green-500">${operation.selectCategoryOperation}</td>
+                    <td class="w-1/5">${operation.dateOperation}</td>
+                    <td class="w-1/5"><p>${operation.amountOperation}</p></td>
+                    <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids}" onclick="operationsEdit(${operation.ids})"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btnDeleted text-red-500" data-id="${operation.ids}"><i class="fa-solid fa-trash"></i></button></td>
+                </tr>
+                </table>
+            `
+  })
+
+  const btnDeleted = $$(".btnDeleted")
+  for (const btn of btnDeleted) {
+    const operationId = btn.getAttribute("data-id")
+    btn.addEventListener("click", () => {
+      deleteOperation(operationId)
+
+    })
+  }
+
+
+}
+generateOperationTable(JSON.parse(localStorage.getItem('operations')))
+
+
+const operationInfo = () => {
+  const ids = random(6, 999)
   const descriptionOperation = $('#description').value
   const amountOperation = parseInt($('#amountOperation').value)
   const operationType = $('#operationType').value
@@ -329,80 +292,118 @@ let newOperation = () => {
     amountOperation,
     operationType,
     selectCategoryOperation,
-    dateOperation
+    dateOperation,
+    ids
+
   }
 }
+// *********************************************************NEW OPERATION********************************************************
 
-
-
-const generateOperationTable = (operations) => {
+const generateNewOperation = () => {
   $('#tableContainer').innerHTML = ''
-  operations.map(operation => {
-    $('#tableContainer').innerHTML += `
-                <table class=" w-full">
-                <tr class="w-full font-light text-center mb-8">
-                    <td class="w-1/5 font-bold">${operation.descriptionOperation}</td>
-                    <td class="w-1/5 mr-3 btn-edit text-green-500">${operation.selectCategoryOperation}</td>
-                    <td class="w-1/5">${operation.dateOperation}</td>
-                    <td class="w-1/5"><p>${operation.amountOperation}</p></td>
-                    <td class="w-1/5 space-y-1 flex flex-col items-center text-blue-700 ml-[40%]"> <button class="editOperation">Editar</button>
-                    <button data-id"${operation.descriptionOperation}">Eliminar</button></td>
-                </tr>
-                </table>
-            `
-  })
+  operations.push(operationInfo());
+  $("#descriptionEdit").value = ""
+  localStorage.setItem('operations', JSON.stringify(operations))
+  generateOperationTable(JSON.parse(localStorage.getItem('operations')))
 
 }
 
+$("#btnAddOperation").addEventListener("click", generateNewOperation)
 
-$("#showReports").addEventListener("click", (e) => {
-  e.preventDefault()
-  $(".reports").classList.remove("hidden")
-  $("#tablesAndForms").classList.add("hidden")
-  $("#select-box-filtros").classList.add("hidden")
-  $("#operationContainer").classList.add("hidden")
-  $("#newOperationContainer").classList.add("hidden")
+
+$("#descriptionEdit").addEventListener("keypress", (e) => {
+  if (e.keyCode == '13') {
+    generateNewOperation();
+  }
+})
+
+// ********************************************************DELETE OPERATION******************************************************
+
+const deleteOperation = (operationId) => {
+  $('#tableContainer').innerHTML = ''
+  let operationsLocal = JSON.parse(localStorage.getItem('operations'))
+  let newOperations = operationsLocal.filter((operation) => {
+    return operation.ids !== parseInt(operationId)
+
+  })
+
+  operations = newOperations
+  localStorage.setItem('operations', JSON.stringify(operations))
+  generateOperationTable(JSON.parse(localStorage.getItem('operations')))
+}
+
+
+
+const findOperation = (ids) => {
+  return operations.find((operations) => operations.ids === ids);
+
+};
+
+// **************************************EDIT & CANCEL****************************************************************************
+
+const operationsEdit = (ids) => {
+  $("#btnEditOperation").setAttribute("data-id", ids);
+  $("#editOperationContainer").classList.remove("hidden");
+  $('#balance').classList.add("hidden")
+  $('#select-box-filtros').classList.add("hidden")
+  $('#container-categories').classList.add("hidden")
+  $('#operationContainer').classList.add("hidden")
+  const chosenOp = findOp(ids);
+  $("#description").value = chosenOp.descriptionOperation
+  $("#amount").value = chosenOp.amountOperation
+
+};
+
+const saveOperationData = (ids) => {
+  return {
+    descriptionOperation: $("#descriptionEdit").value,
+    amountOperation: $("#amountOperationEdit").value,
+    selectCategoryOperation: $("#selectCategoryOperationEdit").value,
+    operationType: $("#operationTypeEdit").value,
+    dateOperation: $("#dateOperationEdit").value,
+    ids,
+  };
+};
+
+
+const editOperations= (ids) => {
+  return operations.map((operation) => {
+    if (operation.ids === parseInt(ids)) {
+      return saveOperationData(parseInt(ids));
+    };
+    return operation
+
+  });
+
+};
+
+$("#btnEditOperation").addEventListener("click", () => {
+  const operationsId = $("#btnEditOperation").getAttribute("data-id");
   $("#editOperationContainer").classList.add("hidden")
-  $("#container-categories").classList.add("hidden")
-  $(".containerNewOp").classList.add("hidden")
+  $('#tableContainer').innerHTML  = ''
+
+
+  let operationsEdit = editOperations(parseInt(operationsId))
+  localStorage.setItem('operations', JSON.stringify(operationsEdit))
+  operations = operationsEdit;
+
+  generateOperationTable(JSON.parse(localStorage.getItem('operations')))
+
 })
 
-$("#showCategories").addEventListener("click", (e) => {
-  e.preventDefault()
-  $("#container-categories").classList.remove("hidden")
-  $(".balance-section").classList.add("hidden")
-  $("#select-box-filtros").classList.add("hidden")
-  $("#operationContainer").classList.add("hidden")
-  $("#newOperationContainer").classList.add("hidden")
+$("#cancelEditOp").addEventListener("click", () => {
   $("#editOperationContainer").classList.add("hidden")
-  $(".containerNewOp").classList.add("hidden")
-  $("operationsAndnewOperation").classList.add("hidden")
-  $("operations").classList.add("hidden")
-  $("#reports").classList.add("hidden")
-
-
+  $('#balance').classList.remove("hidden")
+  $('#select-box-filtros').classList.remove("hidden")
+  $('#operationContainer').classList.remove("hidden")
 })
 
-$("#toggleOperation").addEventListener("click", (e) => {
-  $("#tablesAndForms").classList.add("hidden")
-  $("#newOperationContainer").classList.remove("hidden")
-  newOperation()
-
-})
-
-$("#btnAddOperation").addEventListener("click", (e) => {
-  $("#tablesAndForms").classList.remove("hidden")
+$("#cancelAddOperation").addEventListener("click", () => {
   $("#newOperationContainer").classList.add("hidden")
-  $("#operationContainer").classList.remove("hidden")
-  $("#operations").classList.add("hidden")
-  generateOperationTable(getDataFromLocalStorage("operations"))
+  $('#balance').classList.remove("hidden")
+  $('#select-box-filtros').classList.remove("hidden")
+  $('#operationContainer').classList.remove("hidden")
 })
 
-$("#container-categories").classList.add("hidden")
-$("#reports").classList.remove("hidden")
 
-window.addEventListener("load", () =>{
-  generateOperationTable(getDataFromLocalStorage("operations"))
-})
 
->>>>>>> main
