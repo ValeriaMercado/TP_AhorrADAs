@@ -109,13 +109,13 @@
                                         <select id="filter-categories"
                                             class="w-[100%] h-[44px] 
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8">
-                                            <option value="todos">Todas</option>
-                                            <option value="todos">Comidas</option>
-                                            <option value="gasto">Servicios</option>
-                                            <option value="ganancia">Salidas</option>
-                                            <option value="todos">Educación</option>
-                                            <option value="gasto">Transporte</option>
-                                            <option value="ganancia">Trabajo</option>
+                                            <option value="todas">Todas</option>
+                                            <option value="comidas">Comidas</option>
+                                            <option value="servicios">Servicios</option>
+                                            <option value="salidas">Salidas</option>
+                                            <option value="educación">Educación</option>
+                                            <option value="transporte">Transporte</option>
+                                            <option value="trabajo">Trabajo</option>
                                         </select>
                                     </div>
                                 </div>
@@ -245,7 +245,7 @@
             <div class="flex flex-row-reverse space-x-4 space-x-reverse">
                 <button type="reset" id="cancelAddOperation">Cancelar</button>
                 <button class="w-28 my-4 h-8 bg-green text-black bg-[#79b9b9] hover:bg-[#ffe1a8] rounded-lg m-auto"
-                    id="btnAddOperation">Agregar</button>
+                    id="btnAddOperation" onclick="location.reload()">Agregar</button>
             </div>
         </form>
     </div>

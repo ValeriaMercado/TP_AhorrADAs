@@ -260,7 +260,7 @@ const generateOperationTable = (operations) => {
                     <td class="w-1/5">${operation.dateOperation}</td>
                     <td class="w-1/5"><p>${operation.amountOperation}</p></td>
                     <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids}" onclick="operationsEdit(${operation.ids})"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btnDeleted text-red-500" data-id="${operation.ids}"><i class="fa-solid fa-trash"></i></button></td>
+                    <button class="btnDeleted text-red-500" data-id="${operation.ids}" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `
@@ -405,5 +405,59 @@ $("#cancelAddOperation").addEventListener("click", () => {
   $('#operationContainer').classList.remove("hidden")
 })
 
+// *********************************************************************BALANCE****************************************************
 
+const gainBalance = $("#gananciasBalance");
+const spendingBalance = $("#gastosBalance")
+let balanceTotal = ("#balance-total");
+
+const generateTableBalance = () => {
+getDataFromLocalStorage("operations");
+let gainBalance  = 0
+let spendingBalance = 0
+
+for (const operation of operations) {
+  if (operation.operationType === "spending"){
+    spendingBalance += operation.amountOperation
+
+  } else if 
+    (operation.operationType === "gain"){
+      gainBalance += operation.amountOperation
+    }
+  }
+
+  balanceTotal = gainBalance - spendingBalance
+
+  $("#balance").innerHTML = `
+  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
+  <div class="grid gap-4 grid-cols-2 m-3 flex">
+      <div>
+          <h3 class="flex mb-5 mt-3 text-[22px]">Ganancias</h3>
+      </div>
+      <div>
+          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[22px]">+${gainBalance}</h3>
+      </div>
+      <div>
+          <h3 id="gastosBalance" class="flex mb-5 text-[22px]">Gastos</h3>
+      </div>
+      <div class="font-bold text-red-700 ml-4 text-[22px]">
+          <p>-${spendingBalance}</p>
+      </div>
+      <div>
+          <h1 class="font-bold text-[25px]">Total</h1>
+      </div> 
+      <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
+
+	`;
+
+}
+generateTableBalance();
+
+btnAddOperation.addEventListener("click", () => {
+  generateTableBalance()
+})
+
+btnEdit.addEventListener("click", () => {
+  generateTableBalance()
+})
 
