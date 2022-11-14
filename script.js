@@ -461,3 +461,47 @@ btnEdit.addEventListener("click", () => {
   generateTableBalance()
 })
 
+// FILTERS
+
+const filterOperationsType = (array, type) => {
+  const operations = array.filter((curr) => {
+    return curr.type === type;
+  })
+  return operations;
+}
+
+const applyFilters = () => {
+  const type = $('#type-filter').value;
+  const filterForType = getDataFromLocalStorage('operations').filter(
+    (operation) => {
+      if (type === "todos") {
+        return operation
+      }
+      return operation.operationType === type
+    }
+  )
+  const category = $('#filter-categories').value
+
+  const finalFilter = filterForType.filter((operation) => {
+    if (category === "todos") {
+      return operation
+    }
+    return operation.selectCategoryOperation === category
+  })
+
+  return finalFilter
+}
+
+
+//FILTER FOR TYPE
+$('#type-filter').onchange = () => {
+  const arrayFilterType = applyFilters()
+  generateOperationTable(arrayFilterType)
+}
+
+//FILTER FOR CATEGORY
+$('#filter-categories').onchange = () => {
+  const arrayFilterFinal = applyFilters()
+  generateOperationTable(arrayFilterFinal)
+}
+
