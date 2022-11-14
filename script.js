@@ -457,12 +457,12 @@ btnAddOperation.addEventListener("click", () => {
   generateTableBalance()
 })
 
-btnEdit.addEventListener("click", () => {
-  generateTableBalance()
-})
+//ERROR? -->
+// btnEdit.addEventListener("click", () => {
+//   generateTableBalance()
+// })
 
 // FILTERS
-
 const filterOperationsType = (array, type) => {
   const operations = array.filter((curr) => {
     return curr.type === type;
@@ -505,3 +505,31 @@ $('#filter-categories').onchange = () => {
   generateOperationTable(arrayFilterFinal)
 }
 
+// DATES
+const orderDates = (arr) => {
+  const orderedDates = arr.sort((a, b) => {
+    return new Date(b.dateOperation) - new Date(a.dateOperation)
+  })
+
+  const finalDate = orderedDates.map((operation) => {
+    new Date(operation.dateOperation).toLocaleDateString();
+    return operation
+  })
+  return finalDate
+}
+
+const newDates = (operations) => {
+  const selectedDates = [];
+  for (let i = 0; i < operations.length; i++) {
+    if (new Date($('#date-filter').value) <= new Date(operations[i].dateOperation)) {
+      selectedDates.push(operations[i]);
+    }
+  }
+  return selectedDates
+}
+
+//FILTER FOR DATE
+$('#date-filter').onchange = () => {
+  const filterDates = newDates(getDataFromLocalStorage('operations'))
+  generateOperationTable(orderDates(filterDates))
+}
