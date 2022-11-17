@@ -258,7 +258,7 @@ const generateOperationTable = (operations) => {
                 <td class="w-1/5 font-bold hidden"> ${operation.ids}</td>
                     <td class="w-1/5 mr-3 btn-edit text-green-500">${operation.selectCategoryOperation}</td>
                     <td class="w-1/5">${operation.dateOperation}</td>
-                    <td class="w-1/5"><p>${operation.amountOperation}</p></td>
+                    <td class="w-1/5  ${operation.operationType === "gain" ? "text-green-600" : "text-red-600"}">${operation.operationType === "spending" ? "-" : "+"}$${operation.amountOperation}</td>
                     <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids}" onclick="operationsEdit(${operation.ids})"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${operation.ids}" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
