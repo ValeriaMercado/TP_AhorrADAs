@@ -349,104 +349,45 @@
     </div>
 
     <!-- ------------------------------------------REPORTES-------------------------------------------------------------------->
-    <div id="reports"
-        class="bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] m-auto px-10 flex flex-col justify-between w-3/4 mb-10 mt-10">
-        <section class="reports hidden">
-            <h2 class="text-3xl text-[#79b9b9] font-bold mt-3 font-sans text-center">Reportes</h2>
-            <section class=" py-5 flex flex-col items-center">
-                <img src="images/reportsimage.png" id="imgReportes" alt="reportsImage" class=" mt-8 w-[40%] ">
-                <p class="text-center mb-2 text-xl font-semibold">Operaciones insuficientes</p>
-                <p class="text-center">Prueba agregando más operaciones</p>
-            </section>
 
-            <section id="totalCategories" class="mb-7 hidden">
-                <h3 class="mb-3 text-xl text-[#79b9b9] font-bold">Totales
-                    por categorías</h3>
-                <div>
-                    <table class="w-full">
-                        <thead>
-                            <tr class="flex justify-between mb-3">
-                                <th>Categoria</th>
-                                <th class="ml-8 font-medium">Ganancias</th>
-                                <th class="ml-8 font-medium">Gastos</th>
-                                <th class="ml-8 font-medium">Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                        <tbody>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                        <tbody>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                    </table>
-                </div>
-            </section>
-
-            <section id="" class="mb-10 hidden">
-                <h3 class="mb-3 text-xl text-[#79b9b9] font-bold ">Totales
-                    por categorías</h3>
-                <div>
-                    <table class="w-full">
-                        <thead>
-                            <tr class="flex justify-between mb-3">
-                                <th>Categoria</th>
-                                <th class="ml-8 font-medium">Ganancias</th>
-                                <th class="ml-8 font-medium">Gastos</th>
-                                <th class="ml-8 font-medium">Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                        <tbody>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                        <tbody>
-                        <tbody>
-                            <tr class="flex justify-between">
-                                <th>text</th>
-                                <th class="ml-8">text</th>
-                                <th class="ml-8">text</th>
-                            </tr>
-                            </thead>
-                    </table>
-                </div>
-            </section>
+    <div id="reportsTableContainer"
+        class=" hidden bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mb-10 m-auto px-10 flex flex-col justify-between w-3/4 mt-10 space-y-10">
+        <h2 class="text-3xl text-[#79b9b9] font-bold mt-3 font-sans text-center ">Reportes</h2>
+        <section id="ImgReports" class=" py-5 flex flex-col ">
+            <img src="images/reportsimage.png" id="imgReports" class=" ml-[40%] mt-8 w-[40%] ">
+            <p class="text-center mb-2 text-xl font-semibold">Operaciones insuficientes</p>
+            <p class="text-center">Prueba agregando más operaciones</p>
         </section>
 
-        <script src="script.js"></script>
+        <table id="reportsTable" class="hidden">
+
+        </table>
+
+        <table id="totalCategoriesReports" class="justify-items-center hidden">
+            <tr class="text-xl text-[#79b9b9] font-bold">
+                <td class="">Totales por categorías</td>
+            </tr>
+
+            <tr>
+                <th class="">Categoría</th>
+                <th>Ganancias</th>
+                <th>Gastos</th>
+                <th>Balance</th>
+        </table>
+
+        <table id="totalMonths" class="justify-items-center hidden">
+            <tr class="text-xl text-[#79b9b9] font-bold justify-between">
+                <td>Totales por mes</td>
+            </tr>
+            <tr>
+                <th>Mes</th>
+                <th>Ganancias</th>
+                <th>Gastos</th>
+                <th>Balance</th>
+        </table>
     </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>
