@@ -533,3 +533,207 @@ $('#date-filter').onchange = () => {
   const filterDates = newDates(getDataFromLocalStorage('operations'))
   generateOperationTable(orderDates(filterDates))
 }
+
+// **************************************************************REPORTS*************************************************************
+
+$("#showReports").addEventListener("click", (e) => {
+  e.preventDefault()
+  $("#reportsTableContainer").classList.remove("hidden")
+  $("#container-categories").classList.add("hidden")
+  $(".balance-section").classList.add("hidden")
+  $("#select-box-filtros").classList.add("hidden")
+  $("#operationContainer").classList.add("hidden")
+  $("#newOperationContainer").classList.add("hidden")
+  $("#editOperationContainer").classList.add("hidden")
+  $("operations").classList.add("hidden")
+  $("#reports").classList.remove("hidden")
+
+})
+
+const operations2 = getDataFromLocalStorage("operations")
+
+// SEPARATE BY TYPE OF OPERATION
+
+const operationsGain = []
+const operationSpending = []
+
+for (const operation of operations2) {
+  if (operation.operationType === "spending") {
+    operationSpending.push(operation)
+
+  } else {
+    operationsGain.push(operation)
+
+  }
+}
+
+// higher gain
+const arrayOpGain = Math.max(...operationsGain.map(operation => operation.amountOperation));
+const arrayOpGain2 = operationsGain.filter(operationsGain => operationsGain.amountOperation === arrayOpGain)
+const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
+
+console.log(operationObtainedGain)
+
+// higher spending
+
+const arrayOpSpending = Math.max(...operationSpending.map(operation => operation.amountOperation));
+const arrayOpSpending2 = operationSpending.filter(operationSpending => operationSpending.amountOperation === arrayOpSpending)
+const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1]
+
+console.log(operationObtainedSpending)
+
+
+// category more spending
+const nameOpSpending = operationObtainedSpending.selectCategoryOperation
+console.log(nameOpSpending)
+
+// category more gain
+const nameOpGain = operationObtainedGain.selectCategoryOperation
+console.log(nameOpGain)
+
+// month more gain
+
+const monthGain = operationObtainedGain.dateOperation
+console.log(monthGain)
+
+// month more spending
+
+const monthSpending = operationObtainedSpending.dateOperation
+
+console.log(monthSpending)
+
+// separate by category
+
+
+let categoriesSpending = 0
+let categoriesGain = 0
+
+const filterSpendingAndGain = Object.values(operations2.reduce((acc, operation) => {
+  acc[operation.selectCategoryOperation] = acc[operation.selectCategoryOperation] || {
+    category: operation.selectCategoryOperation,
+    spending: 0,
+    gain: 0,
+    balance: 0,
+    date: operation.dateOperation
+
+  };
+  if (operation.operationType === "spending") {
+    acc[operation.selectCategoryOperation].spending += operation.amountOperation
+  } else {
+    acc[operation.selectCategoryOperation].gain += operation.amountOperation
+  }
+  acc[operation.selectCategoryOperation].balance = acc[operation.selectCategoryOperation].gain - acc[operation.selectCategoryOperation].spending
+  return acc;
+}, {}));
+
+console.log(filterSpendingAndGain)
+
+// total for categories
+
+//name 
+let nameOfFilterCategories = ''
+for (const operation of filterSpendingAndGain) {
+  nameOfFilterCategories = operation.category
+  console.log(nameOfFilterCategories)
+}
+
+
+//gain
+
+let GainOfFilterCategories = ''
+for (const operation of filterSpendingAndGain) {
+  GainOfFilterCategories = operation.gain
+  console.log(GainOfFilterCategories)
+}
+
+// spend
+
+let SpendOfFilterCategories = ''
+for (const operation of filterSpendingAndGain) {
+  SpendOfFilterCategories = operation.spending
+  console.log(SpendOfFilterCategories)
+}
+
+
+//more balance
+
+const moreBalance = []
+const moreBalanceCategory = ''
+for (const operation of filterSpendingAndGain) {
+  moreBalance.push(operation.balance)
+  console.log(moreBalance)
+
+}
+
+const generateReportsTable = () => {
+  $("#reportsTable").innerHTML += `
+    <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
+      <table class="w-full">
+              <tr class= "flex justify-between mt-4 font-bold">
+                  <td>Categoria con mayor ganancia</td>
+                  <td>${nameOpGain}</td>
+                  <td class=" text-green-600">+$${operationObtainedGain.amountOperation}</td>
+              </tr>
+            
+            <tr class="flex justify-between mt-4 font-bold">
+              <td>Categoria con mayor gasto</td>
+              <td>${nameOpSpending}</td>
+              <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
+            </tr>
+
+            <tr class="flex justify-between mt-4 font-bold">
+              <td>Categoria con mayor balance</td>
+              <td>${"completar"}</td>
+              <td class=" text-red-600">-$${Math.max(...moreBalance)}</td>
+            </tr>
+
+            <tr class="flex justify-between mt-4 font-bold">
+              <td>Mes con mayor ganancia</td>
+              <td>${monthGain}</td>
+              <td class="text-green-600">+$${operationObtainedGain.amountOperation}</td>
+            </tr>
+
+            <tr class="flex justify-between mt-4 mb-[15%] font-bold">
+              <td>Mes con mayor gasto</td>
+              <td>${monthSpending}</td>
+              <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
+            </tr>
+
+            
+        </table>
+  
+  `
+  for (const item of filterSpendingAndGain) {
+    $("#totalCategoriesReports").innerHTML += `
+
+                    <tr class="font-bold">
+                      <td class="text-center  mb-10">${item.category}</td>
+                      <td class="text-green-600 text-center ml-10">+${item.gain}</td>
+                      <td class="text-red-600 text-center">-$${item.spending}</td>
+                      <td class="text-center mr-10 ${item.balance > 0 ? "text-green-600" : "text-red-600"}">$${item.balance}</td>
+                    </tr>`
+
+  }
+
+  for (const item of filterSpendingAndGain) {
+    $("#totalMonths").innerHTML += `
+
+                    <tr class="font-bold space-y-4">
+                        <td class="text-center ml-10 mb-10">${item.date}</td>
+                        <td class="text-green-600 text-center ml-10">+${item.gain}</td>
+                        <td class="text-red-600 text-center">-$${item.spending}</td>
+                        <td class="text-center mr-10 ${item.balance > 0 ? "text-green-600" : "text-red-600"}">$${item.balance}</td>
+                      </tr>`
+  }
+
+}
+
+
+if (operations.length > 3) {
+  $("#ImgReports").classList.add("hidden")
+  $("#reportsTable").classList.remove("hidden")
+  $("#totalMonths").classList.remove("hidden")
+  $("#totalCategoriesReports").classList.remove("hidden")
+ generateReportsTable()
+
+}
