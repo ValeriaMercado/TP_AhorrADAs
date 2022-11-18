@@ -1,4 +1,3 @@
-
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selectors) => document.querySelectorAll(selectors);
 
@@ -14,23 +13,19 @@ let defaultCategories = [
   { id: 3, nombre: "Salidas", },
   { id: 4, nombre: "Educacion", },
   { id: 5, nombre: "Trabajo", }
-];
-
+]
 
 let categories = localStorage.getItem('categories') ? JSON.parse(localStorage.getItem('categories')) : defaultCategories;
 
 if (!localStorage.getItem('categories')) {
   localStorage.setItem('categories', JSON.stringify(categories))
 }
-
 const getDataFromLocalStorage = (key) => {
   return JSON.parse(localStorage.getItem(key))
 }
-
 const sendDataFromLocalStorage = (key, array) => {
   return localStorage.setItem(key, JSON.stringify(array))
 }
-
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
 
@@ -51,18 +46,13 @@ const generateTable = (categories) => {
     const categoryId = btn.getAttribute("data-id")
     btn.addEventListener("click", () => {
       deleteCategory(categoryId)
-
     })
   }
-
 }
-
 generateTable(JSON.parse(localStorage.getItem('categories')))
 
 
 // ********************************************************GENERATE NEW CATEGORY*************************************************
-
-
 
 const random = (start, end) => {
   return Math.floor(Math.random() * (end - start + 1)) + start;
@@ -73,9 +63,8 @@ const categoryInfo = () => {
   return {
     id,
     nombre
-  };
-};
-
+  }
+}
 
 const generateNewCategory = () => {
   if ($("#addCategory").value === "") {
@@ -86,7 +75,6 @@ const generateNewCategory = () => {
     $("#addCategory").value = ""
     localStorage.setItem('categories', JSON.stringify(categories))
     generateTable(JSON.parse(localStorage.getItem('categories')))
-
   }
 }
 $btnAdd.addEventListener("click", generateNewCategory)
@@ -105,7 +93,6 @@ const deleteCategory = (categoryId) => {
   let categoriesLocal = JSON.parse(localStorage.getItem('categories'))
   let newCategories = categoriesLocal.filter((category) => {
     return category.id !== parseInt(categoryId)
-
   })
 
   categories = newCategories
@@ -115,65 +102,52 @@ const deleteCategory = (categoryId) => {
 
 const findCategory = (id) => {
   return categories.find((category) => category.id === id);
-
-};
+}
 
 // **********************************************************EDIT & CANCEL************************************************
 
 const categoriesEdit = (id) => {
-
-  $("#container-categories").classList.add("hidden");
-  $("#container-edit-categories").classList.remove("hidden");
-  const selectCategory = findCategory(id);
-  $("#editName").value = `  ${selectCategory.nombre}`;
-  $("#btn-editForm").setAttribute("data-id", id);
-  $("#btn-cancel").setAttribute("data-id", id);
-
-
-};
+  $("#container-categories").classList.add("hidden")
+  $("#container-edit-categories").classList.remove("hidden")
+  const selectCategory = findCategory(id)
+  $("#editName").value = `  ${selectCategory.nombre}`
+  $("#btn-editForm").setAttribute("data-id", id)
+  $("#btn-cancel").setAttribute("data-id", id)
+}
 
 const saveCategoryData = (id) => {
   return {
     id,
     nombre: $("#editName").value,
-  };
-};
+  }
+}
 
 const editCategory = (id) => {
   return categories.map((category) => {
     if (category.id === parseInt(id)) {
       return saveCategoryData(parseInt(id));
-    };
+    }
     return category
-
-  });
-
-};
+  })
+}
 
 $("#btn-editForm").addEventListener("click", () => {
   const categoriesId = $("#btn-editForm").getAttribute("data-id");
   $("#container-edit-categories").classList.add("hidden")
   $("#container-categories").classList.remove("hidden");
   $("#table").innerHTML = ''
-
-
   let categoriesEdit = editCategory(parseInt(categoriesId))
   localStorage.setItem('categories', JSON.stringify(categoriesEdit))
-  categories = categoriesEdit;
-
+  categories = categoriesEdit
   generateTable(JSON.parse(localStorage.getItem('categories')))
-
 })
 
 
 // ********************************************BUTTONS EVENTS********************************************************************
-
 $("#btn-cancel").addEventListener("click", () => {
   $("#container-edit-categories").classList.add("hidden");
   $("#container-categories").classList.remove("hidden");
-
 })
-
 
 $("#showCategories").addEventListener("click", (e) => {
   e.preventDefault()
@@ -185,7 +159,6 @@ $("#showCategories").addEventListener("click", (e) => {
   $("#editOperationContainer").classList.add("hidden")
   $("operations").classList.add("hidden")
   $("#reports").classList.add("hidden")
-
 })
 
 // ***************************************************************DOM EVENTS*****************************************************
@@ -194,7 +167,6 @@ const containerFilter = $('#filterContainer')
 const btnAddOperation = $('#btnAddOperation')
 const toggleOperation = $('#toggleOperation')
 const toggleOperation2 = $('#toggleOperation2')
-
 
 toggleFilter.addEventListener("click", (e) => {
   e.preventDefault()
@@ -215,13 +187,11 @@ btnAddOperation.addEventListener('click', (e) => {
   $('#balance').classList.remove("hidden")
   $('#select-box-filtros').classList.remove("hidden")
   $('#operationContainer').classList.remove("hidden")
-
 })
 
 toggleOperation.addEventListener("click", (e) => {
   e.preventDefault()
   $('#newOperationContainer').classList.remove('hidden')
-
 })
 
 toggleOperation2.addEventListener("click", (e) => {
@@ -234,20 +204,17 @@ toggleOperation2.addEventListener("click", (e) => {
 })
 
 
-
 // *********************************************************OPERATIONS**************************************************************
 
 let operationsDefault = []
 
-let operations = localStorage.getItem('operations') ? JSON.parse(localStorage.getItem('operations')) : operationsDefault;
+let operations = localStorage.getItem('operations') ? JSON.parse(localStorage.getItem('operations')) : operationsDefault
 
 if (!localStorage.getItem('operations')) {
   localStorage.setItem('operations', JSON.stringify(operations))
 }
 
-
 const btnEditOp = $$(".editOperation")
-
 const generateOperationTable = (operations) => {
   $('#tableContainer').innerHTML = ''
   operations.map(operation => {
@@ -271,14 +238,10 @@ const generateOperationTable = (operations) => {
     const operationId = btn.getAttribute("data-id")
     btn.addEventListener("click", () => {
       deleteOperation(operationId)
-
     })
   }
-
-
 }
 generateOperationTable(JSON.parse(localStorage.getItem('operations')))
-
 
 const operationInfo = () => {
   const ids = random(6, 999)
@@ -294,7 +257,6 @@ const operationInfo = () => {
     selectCategoryOperation,
     dateOperation,
     ids
-
   }
 }
 // *********************************************************NEW OPERATION********************************************************
@@ -305,11 +267,9 @@ const generateNewOperation = () => {
   $("#descriptionEdit").value = ""
   localStorage.setItem('operations', JSON.stringify(operations))
   generateOperationTable(JSON.parse(localStorage.getItem('operations')))
-
 }
 
 $("#btnAddOperation").addEventListener("click", generateNewOperation)
-
 
 $("#descriptionEdit").addEventListener("keypress", (e) => {
   if (e.keyCode == '13') {
@@ -324,23 +284,18 @@ const deleteOperation = (operationId) => {
   let operationsLocal = JSON.parse(localStorage.getItem('operations'))
   let newOperations = operationsLocal.filter((operation) => {
     return operation.ids !== parseInt(operationId)
-
   })
-
   operations = newOperations
   localStorage.setItem('operations', JSON.stringify(operations))
   generateOperationTable(JSON.parse(localStorage.getItem('operations')))
 }
 
-
-
 const findOperation = (ids) => {
   return operations.find((operations) => operations.ids === ids);
 
-};
+}
 
 // **************************************EDIT & CANCEL****************************************************************************
-
 const operationsEdit = (ids) => {
   $("#btnEditOperation").setAttribute("data-id", ids);
   $("#editOperationContainer").classList.remove("hidden");
@@ -351,8 +306,7 @@ const operationsEdit = (ids) => {
   const chosenOp = findOp(ids);
   $("#description").value = chosenOp.descriptionOperation
   $("#amount").value = chosenOp.amountOperation
-
-};
+}
 
 const saveOperationData = (ids) => {
   return {
@@ -362,33 +316,26 @@ const saveOperationData = (ids) => {
     operationType: $("#operationTypeEdit").value,
     dateOperation: $("#dateOperationEdit").value,
     ids,
-  };
-};
-
+  }
+}
 
 const editOperations= (ids) => {
   return operations.map((operation) => {
     if (operation.ids === parseInt(ids)) {
       return saveOperationData(parseInt(ids));
-    };
+    }
     return operation
-
-  });
-
-};
+  })
+}
 
 $("#btnEditOperation").addEventListener("click", () => {
   const operationsId = $("#btnEditOperation").getAttribute("data-id");
   $("#editOperationContainer").classList.add("hidden")
   $('#tableContainer').innerHTML  = ''
-
-
   let operationsEdit = editOperations(parseInt(operationsId))
   localStorage.setItem('operations', JSON.stringify(operationsEdit))
   operations = operationsEdit;
-
   generateOperationTable(JSON.parse(localStorage.getItem('operations')))
-
 })
 
 $("#cancelEditOp").addEventListener("click", () => {
@@ -405,69 +352,12 @@ $("#cancelAddOperation").addEventListener("click", () => {
   $('#operationContainer').classList.remove("hidden")
 })
 
-// *********************************************************************BALANCE****************************************************
-
-const gainBalance = $("#gananciasBalance");
-const spendingBalance = $("#gastosBalance")
-let balanceTotal = ("#balance-total");
-
-const generateTableBalance = () => {
-getDataFromLocalStorage("operations");
-let gainBalance  = 0
-let spendingBalance = 0
-
-for (const operation of operations) {
-  if (operation.operationType === "spending"){
-    spendingBalance += operation.amountOperation
-
-  } else if 
-    (operation.operationType === "gain"){
-      gainBalance += operation.amountOperation
-    }
-  }
-
-  balanceTotal = gainBalance - spendingBalance
-
-  $("#balance").innerHTML = `
-  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
-  <div class="grid gap-4 grid-cols-2 m-3 flex">
-      <div>
-          <h3 class="flex mb-5 mt-3 text-[22px]">Ganancias</h3>
-      </div>
-      <div>
-          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[22px]">+${gainBalance}</h3>
-      </div>
-      <div>
-          <h3 id="gastosBalance" class="flex mb-5 text-[22px]">Gastos</h3>
-      </div>
-      <div class="font-bold text-red-700 ml-4 text-[22px]">
-          <p>-${spendingBalance}</p>
-      </div>
-      <div>
-          <h1 class="font-bold text-[25px]">Total</h1>
-      </div> 
-      <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
-
-	`;
-
-}
-generateTableBalance();
-
-btnAddOperation.addEventListener("click", () => {
-  generateTableBalance()
-})
-
-//ERROR? -->
-// btnEdit.addEventListener("click", () => {
-//   generateTableBalance()
-// })
-
 // FILTERS
 const filterOperationsType = (array, type) => {
   const operations = array.filter((curr) => {
-    return curr.type === type;
+    return curr.type === type
   })
-  return operations;
+  return operations
 }
 
 const applyFilters = () => {
@@ -481,17 +371,14 @@ const applyFilters = () => {
     }
   )
   const category = $('#filter-categories').value
-
   const finalFilter = filterForType.filter((operation) => {
     if (category === "todas") {
       return operation
     }
     return operation.selectCategoryOperation === category
   })
-
   return finalFilter
 }
-
 
 //FILTER FOR TYPE
 $('#type-filter').onchange = () => {
@@ -534,7 +421,7 @@ $('#date-filter').onchange = () => {
   generateOperationTable(orderDates(filterDates))
 }
 
-// //ORDER
+// FILTER BY ORDER
 let selectSort = $('#order-filter')
 selectSort.onchange = () => {
   const sortedArray = sortBy()
@@ -571,6 +458,53 @@ const sortBy = () => {
   }
   return operations
 }
+
+// *********************************************************************BALANCE****************************************************
+
+const gainBalance = $("#gananciasBalance");
+const spendingBalance = $("#gastosBalance")
+let balanceTotal = ("#balance-total");
+
+const generateTableBalance = () => {
+getDataFromLocalStorage("operations");
+let gainBalance  = 0
+let spendingBalance = 0
+
+for (const operation of operations) {
+  if (operation.operationType === "spending"){
+    spendingBalance += operation.amountOperation
+  } else if 
+    (operation.operationType === "gain"){
+      gainBalance += operation.amountOperation
+    }
+  }
+  balanceTotal = gainBalance - spendingBalance
+  $("#balance").innerHTML = `
+  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
+  <div class="grid gap-4 grid-cols-2 m-3 flex">
+      <div>
+          <h3 class="flex mb-5 mt-3 text-[22px]">Ganancias</h3>
+      </div>
+      <div>
+          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[22px]">+${gainBalance}</h3>
+      </div>
+      <div>
+          <h3 id="gastosBalance" class="flex mb-5 text-[22px]">Gastos</h3>
+      </div>
+      <div class="font-bold text-red-700 ml-4 text-[22px]">
+          <p>-${spendingBalance}</p>
+      </div>
+      <div>
+          <h1 class="font-bold text-[25px]">Total</h1>
+      </div> 
+      <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
+	      `
+}
+generateTableBalance();
+
+btnAddOperation.addEventListener("click", () => {
+  generateTableBalance()
+})
 
 // **************************************************************REPORTS*************************************************************
 
@@ -612,7 +546,6 @@ const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1]
 
 // category more spending
 const nameOpSpending = operationObtainedSpending.selectCategoryOperation
-
 // category more gain
 const nameOpGain = operationObtainedGain.selectCategoryOperation
 
@@ -730,4 +663,9 @@ if (operations.length > 3) {
   $("#totalCategoriesReports").classList.remove("hidden")
  generateReportsTable()
 }
+
+//ERROR? -->
+// btnEdit.addEventListener("click", () => {
+//   generateTableBalance()
+// })
 
