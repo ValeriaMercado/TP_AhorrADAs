@@ -483,7 +483,7 @@ const applyFilters = () => {
   const category = $('#filter-categories').value
 
   const finalFilter = filterForType.filter((operation) => {
-    if (category === "todos") {
+    if (category === "todas") {
       return operation
     }
     return operation.selectCategoryOperation === category
@@ -534,6 +534,44 @@ $('#date-filter').onchange = () => {
   generateOperationTable(orderDates(filterDates))
 }
 
+// //ORDER
+let selectSort = $('#order-filter')
+selectSort.onchange = () => {
+  const sortedArray = sortBy()
+  generateOperationTable(sortedArray)
+}
+
+const sortBy = () => {
+  let sort = selectSort.value
+  let operations = applyFilters()
+  if (sort === "a-z") {
+    operations = operations.sort((a, b) => {
+      return a.descriptionOperation.localeCompare(b.descriptionOperation)
+    })
+  } else if (sort === "z-a") {
+    operations = operations.sort((a, b) => {
+      return b.descriptionOperation.localeCompare(a.descriptionOperation)
+    })
+  } else if (sort === "mayor-monto") {
+    operations = operations.sort((a, b) => {
+      return b.amountOperation - a.amountOperation
+    })
+  } else if (sort === "menor-monto") {
+    operations = operations.sort((a, b) => {
+      return a.amountOperation - b.amountOperation
+    })
+  } else if (sort === "mas-recientes") {
+    operations = operations.sort((a, b) => {
+      return new Date(b.dateOperation) - new Date(a.dateOperation)
+    })
+  } else if (sort === "menos-recientes") {
+    operations = operations.sort((a, b) => {
+      return new Date(a.dateOperation) - new Date(b.dateOperation)
+    })
+  }
+  return operations
+}
+
 // **************************************************************REPORTS*************************************************************
 
 $("#showReports").addEventListener("click", (e) => {
@@ -547,13 +585,10 @@ $("#showReports").addEventListener("click", (e) => {
   $("#editOperationContainer").classList.add("hidden")
   $("operations").classList.add("hidden")
   $("#reports").classList.remove("hidden")
-
 })
-
 const operations2 = getDataFromLocalStorage("operations")
 
 // SEPARATE BY TYPE OF OPERATION
-
 const operationsGain = []
 const operationSpending = []
 
@@ -645,13 +680,11 @@ const generateReportsTable = () => {
                   <td>${nameOpGain}</td>
                   <td class=" text-green-600">+$${operationObtainedGain.amountOperation}</td>
               </tr>
-            
             <tr class="flex justify-between mt-4 font-bold">
               <td>Categoria con mayor gasto</td>
               <td>${nameOpSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
             </tr>
-
             <tr class="flex justify-between mt-4 font-bold">
               <td>Categoria con mayor balance</td>
               <td>${"completar"}</td>
@@ -671,19 +704,16 @@ const generateReportsTable = () => {
   `
   for (const item of filterSpendingAndGain) {
     $("#totalCategoriesReports").innerHTML += `
-
                     <tr class="font-bold">
                       <td class="text-center  mb-10">${item.category}</td>
                       <td class="text-green-600 text-center ml-10">+${item.gain}</td>
                       <td class="text-red-600 text-center">-$${item.spending}</td>
                       <td class="text-center mr-10 ${item.balance > 0 ? "text-green-600" : "text-red-600"}">$${item.balance}</td>
                     </tr>`
-
   }
 
   for (const item of filterSpendingAndGain) {
     $("#totalMonths").innerHTML += `
-
                     <tr class="font-bold space-y-4">
                         <td class="text-center ml-10 mb-10">${item.date}</td>
                         <td class="text-green-600 text-center ml-10">+${item.gain}</td>
@@ -699,5 +729,5 @@ if (operations.length > 3) {
   $("#totalMonths").classList.remove("hidden")
   $("#totalCategoriesReports").classList.remove("hidden")
  generateReportsTable()
-
 }
+
