@@ -560,10 +560,8 @@ const operationSpending = []
 for (const operation of operations2) {
   if (operation.operationType === "spending") {
     operationSpending.push(operation)
-
   } else {
     operationsGain.push(operation)
-
   }
 }
 
@@ -572,39 +570,24 @@ const arrayOpGain = Math.max(...operationsGain.map(operation => operation.amount
 const arrayOpGain2 = operationsGain.filter(operationsGain => operationsGain.amountOperation === arrayOpGain)
 const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
 
-console.log(operationObtainedGain)
-
 // higher spending
-
 const arrayOpSpending = Math.max(...operationSpending.map(operation => operation.amountOperation));
 const arrayOpSpending2 = operationSpending.filter(operationSpending => operationSpending.amountOperation === arrayOpSpending)
 const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1]
 
-console.log(operationObtainedSpending)
-
-
 // category more spending
 const nameOpSpending = operationObtainedSpending.selectCategoryOperation
-console.log(nameOpSpending)
 
 // category more gain
 const nameOpGain = operationObtainedGain.selectCategoryOperation
-console.log(nameOpGain)
 
 // month more gain
-
 const monthGain = operationObtainedGain.dateOperation
-console.log(monthGain)
 
 // month more spending
-
 const monthSpending = operationObtainedSpending.dateOperation
 
-console.log(monthSpending)
-
 // separate by category
-
-
 let categoriesSpending = 0
 let categoriesGain = 0
 
@@ -626,43 +609,31 @@ const filterSpendingAndGain = Object.values(operations2.reduce((acc, operation) 
   return acc;
 }, {}));
 
-console.log(filterSpendingAndGain)
 
 // total for categories
-
 //name 
 let nameOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   nameOfFilterCategories = operation.category
-  console.log(nameOfFilterCategories)
 }
 
-
 //gain
-
 let GainOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   GainOfFilterCategories = operation.gain
-  console.log(GainOfFilterCategories)
 }
 
 // spend
-
 let SpendOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   SpendOfFilterCategories = operation.spending
-  console.log(SpendOfFilterCategories)
 }
 
-
 //more balance
-
 const moreBalance = []
 const moreBalanceCategory = ''
 for (const operation of filterSpendingAndGain) {
   moreBalance.push(operation.balance)
-  console.log(moreBalance)
-
 }
 
 const generateReportsTable = () => {
@@ -686,22 +657,17 @@ const generateReportsTable = () => {
               <td>${"completar"}</td>
               <td class=" text-red-600">-$${Math.max(...moreBalance)}</td>
             </tr>
-
             <tr class="flex justify-between mt-4 font-bold">
               <td>Mes con mayor ganancia</td>
               <td>${monthGain}</td>
               <td class="text-green-600">+$${operationObtainedGain.amountOperation}</td>
             </tr>
-
             <tr class="flex justify-between mt-4 mb-[15%] font-bold">
               <td>Mes con mayor gasto</td>
               <td>${monthSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
-            </tr>
-
-            
+            </tr>           
         </table>
-  
   `
   for (const item of filterSpendingAndGain) {
     $("#totalCategoriesReports").innerHTML += `
@@ -725,9 +691,7 @@ const generateReportsTable = () => {
                         <td class="text-center mr-10 ${item.balance > 0 ? "text-green-600" : "text-red-600"}">$${item.balance}</td>
                       </tr>`
   }
-
 }
-
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden")
