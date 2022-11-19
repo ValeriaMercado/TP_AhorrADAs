@@ -624,6 +624,7 @@ for (const operations of moreBalanceCategory){
 }
 
 
+
 const generateReportsTable = () => {
   $("#reportsTable").innerHTML += `
     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
