@@ -666,36 +666,50 @@ for (const operation of filterSpendingAndGain) {
 
 //more balance
 const moreBalance = []
-const moreBalanceCategory = ''
+const moreBalanceCategory = []
 for (const operation of filterSpendingAndGain) {
   moreBalance.push(operation.balance)
 }
+moreBalanceCategory.push(filterSpendingAndGain.sort((a, b) => b.balance - a.balance))
+
+
+const moreBalanceCategoryName  = []
+for (const operations of moreBalanceCategory){
+   for (const operation of operations){
+    moreBalanceCategoryName.push(operation.category)
+   }
+}
+
 
 const generateReportsTable = () => {
   $("#reportsTable").innerHTML += `
     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
       <table class="w-full">
-              <tr class= "flex justify-between mt-4 font-bold">
+              <tr class= "font-bold">
                   <td>Categoria con mayor ganancia</td>
                   <td>${nameOpGain}</td>
                   <td class=" text-green-600">+$${operationObtainedGain.amountOperation}</td>
               </tr>
-            <tr class="flex justify-between mt-4 font-bold">
+            
+            <tr class="font-bold">
               <td>Categoria con mayor gasto</td>
               <td>${nameOpSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
             </tr>
-            <tr class="flex justify-between mt-4 font-bold">
+
+            <tr class="font-bold">
               <td>Categoria con mayor balance</td>
-              <td>${"completar"}</td>
-              <td class=" text-red-600">-$${Math.max(...moreBalance)}</td>
+              <td>${moreBalanceCategoryName.slice(0,1)}</td>
+              <td class= "${moreBalance.balance > 0 ? "text-red-600" : "text-green-600"}">$${Math.max(...moreBalance)}</td>
             </tr>
-            <tr class="flex justify-between mt-4 font-bold">
+
+            <tr class="font-bold">
               <td>Mes con mayor ganancia</td>
               <td>${monthGain}</td>
               <td class="text-green-600">+$${operationObtainedGain.amountOperation}</td>
             </tr>
-            <tr class="flex justify-between mt-4 mb-[15%] font-bold">
+
+            <tr class="font-bold">
               <td>Mes con mayor gasto</td>
               <td>${monthSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
