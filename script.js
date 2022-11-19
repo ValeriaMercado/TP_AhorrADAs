@@ -623,6 +623,58 @@ for (const operations of moreBalanceCategory){
    }
 }
 
+// total months 
+
+
+for (const item of operations2) {
+  if (item.dateOperation.includes("01-2022")) {
+    item.dateOperation = "Enero"
+  } else if (item.dateOperation.includes("02-2022")) {
+    item.dateOperation = "Febrero"
+  } else if (item.dateOperation.includes("03-2022")) {
+    item.dateOperation = "Marzo"
+  } else if (item.dateOperation.includes("04-2022")) {
+    item.dateOperation = "Abril"
+  } else if (item.dateOperation.includes("05-2022")) {
+    item.dateOperation = "Mayo"
+  } else if (item.dateOperation.includes("06-2022")) {
+    item.dateOperation = "Junio"
+  } else if (item.dateOperation.includes("07-2022")) {
+    item.dateOperation = "Julio"
+  } else if (item.dateOperation.includes("08-2022")) {
+    item.dateOperation = "Agosto"
+  } else if (item.dateOperation.includes("09-2022")) {
+    item.dateOperation = "Septiembre"
+  } else if (item.dateOperation.includes("10-2022")) {
+    item.dateOperation = "Octubre"
+  } else if (item.dateOperation.includes("11-2022")) {
+    item.dateOperation = "Noviembre"
+  } else if (item.dateOperation.includes("12-2022")) {
+    item.dateOperation = "Diciembre"
+
+  }
+}
+
+
+const filterSpendingAndGainMonth = Object.values(operations2.reduce((acc, operation) => {
+  acc[operation.dateOperation] = acc[operation.dateOperation] || {
+    spending: 0,
+    gain: 0,
+    balance: 0,
+    date: operation.dateOperation
+
+  };
+  if (operation.operationType === "gain") {
+    acc[operation.dateOperation].gain += operation.amountOperation
+  } else {
+
+    acc[operation.dateOperation].spending += operation.amountOperation
+  }
+  acc[operation.dateOperation].balance = acc[operation.dateOperation].gain - acc[operation.dateOperation].spending
+  return acc;
+}, {}));
+
+
 
 
 const generateReportsTable = () => {
@@ -670,16 +722,19 @@ const generateReportsTable = () => {
                     </tr>`
   }
 
-  for (const item of filterSpendingAndGain) {
+  for (const operation of filterSpendingAndGainMonth) {
     $("#totalMonths").innerHTML += `
-                    <tr class="font-bold space-y-4">
-                        <td class="text-center ml-10 mb-10">${item.date}</td>
-                        <td class="text-green-600 text-center ml-10">+${item.gain}</td>
-                        <td class="text-red-600 text-center">-$${item.spending}</td>
-                        <td class="text-center mr-10 ${item.balance > 0 ? "text-green-600" : "text-red-600"}">$${item.balance}</td>
+                  <tr class="font-bold space-y-4">
+                      <td class="text-center ml-10 mb-10">${operation.date}</td>
+                      <td class="text-green-600 text-center ml-10">+${operation.gain}</td>
+                      <td class="text-red-600 text-center">-$${operation.spending}</td>
+                      <td class="text-center mr-10 ${operation.balance > 0 ? "text-green-600" : "text-red-600"}">$${operation.balance}</td>
+ 
                       </tr>`
   }
 }
+
+
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden")
