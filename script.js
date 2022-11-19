@@ -580,27 +580,23 @@ const arrayOpSpending = Math.max(...operationSpending.map(operation => operation
 const arrayOpSpending2 = operationSpending.filter(operationSpending => operationSpending.amountOperation === arrayOpSpending)
 const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1]
 
-console.log(operationObtainedSpending)
-
 
 // category more spending
 const nameOpSpending = operationObtainedSpending.selectCategoryOperation
-console.log(nameOpSpending)
 
 // category more gain
 const nameOpGain = operationObtainedGain.selectCategoryOperation
-console.log(nameOpGain)
+
 
 // month more gain
 
 const monthGain = operationObtainedGain.dateOperation
-console.log(monthGain)
+
 
 // month more spending
 
 const monthSpending = operationObtainedSpending.dateOperation
 
-console.log(monthSpending)
 
 // separate by category
 
@@ -626,7 +622,7 @@ const filterSpendingAndGain = Object.values(operations2.reduce((acc, operation) 
   return acc;
 }, {}));
 
-console.log(filterSpendingAndGain)
+
 
 // total for categories
 
@@ -634,7 +630,6 @@ console.log(filterSpendingAndGain)
 let nameOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   nameOfFilterCategories = operation.category
-  console.log(nameOfFilterCategories)
 }
 
 
@@ -643,7 +638,6 @@ for (const operation of filterSpendingAndGain) {
 let GainOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   GainOfFilterCategories = operation.gain
-  console.log(GainOfFilterCategories)
 }
 
 // spend
@@ -651,49 +645,57 @@ for (const operation of filterSpendingAndGain) {
 let SpendOfFilterCategories = ''
 for (const operation of filterSpendingAndGain) {
   SpendOfFilterCategories = operation.spending
-  console.log(SpendOfFilterCategories)
 }
 
 
 //more balance
 
 const moreBalance = []
-const moreBalanceCategory = ''
+const moreBalanceCategory = []
 for (const operation of filterSpendingAndGain) {
   moreBalance.push(operation.balance)
-  console.log(moreBalance)
 
 }
+moreBalanceCategory.push(filterSpendingAndGain.sort((a, b) => b.balance - a.balance))
+
+
+const moreBalanceCategoryName  = []
+for (const operations of moreBalanceCategory){
+   for (const operation of operations){
+    moreBalanceCategoryName.push(operation.category)
+   }
+}
+
 
 const generateReportsTable = () => {
   $("#reportsTable").innerHTML += `
     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
       <table class="w-full">
-              <tr class= "flex justify-between mt-4 font-bold">
+              <tr class= "font-bold">
                   <td>Categoria con mayor ganancia</td>
                   <td>${nameOpGain}</td>
                   <td class=" text-green-600">+$${operationObtainedGain.amountOperation}</td>
               </tr>
             
-            <tr class="flex justify-between mt-4 font-bold">
+            <tr class="font-bold">
               <td>Categoria con mayor gasto</td>
               <td>${nameOpSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
             </tr>
 
-            <tr class="flex justify-between mt-4 font-bold">
+            <tr class="font-bold">
               <td>Categoria con mayor balance</td>
-              <td>${"completar"}</td>
-              <td class=" text-red-600">-$${Math.max(...moreBalance)}</td>
+              <td>${moreBalanceCategoryName.slice(0,1)}</td>
+              <td class= "${moreBalance.balance > 0 ? "text-red-600" : "text-green-600"}">$${Math.max(...moreBalance)}</td>
             </tr>
 
-            <tr class="flex justify-between mt-4 font-bold">
+            <tr class="font-bold">
               <td>Mes con mayor ganancia</td>
               <td>${monthGain}</td>
               <td class="text-green-600">+$${operationObtainedGain.amountOperation}</td>
             </tr>
 
-            <tr class="flex justify-between mt-4 mb-[15%] font-bold">
+            <tr class="font-bold">
               <td>Mes con mayor gasto</td>
               <td>${monthSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
@@ -737,3 +739,5 @@ if (operations.length > 3) {
  generateReportsTable()
 
 }
+
+
