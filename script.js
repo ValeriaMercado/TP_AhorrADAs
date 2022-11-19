@@ -627,29 +627,29 @@ for (const operations of moreBalanceCategory){
 
 
 for (const item of operations2) {
-  if (item.dateOperation.includes("01-2022")) {
+  if (item.dateOperation.includes("2022-01")) {
     item.dateOperation = "Enero"
-  } else if (item.dateOperation.includes("02-2022")) {
+  } else if (item.dateOperation.includes("2022-02")) {
     item.dateOperation = "Febrero"
-  } else if (item.dateOperation.includes("03-2022")) {
+  } else if (item.dateOperation.includes("2022-03")) {
     item.dateOperation = "Marzo"
-  } else if (item.dateOperation.includes("04-2022")) {
+  } else if (item.dateOperation.includes("2022-04")) {
     item.dateOperation = "Abril"
-  } else if (item.dateOperation.includes("05-2022")) {
+  } else if (item.dateOperation.includes("2022-05")) {
     item.dateOperation = "Mayo"
-  } else if (item.dateOperation.includes("06-2022")) {
+  } else if (item.dateOperation.includes("2022-06")) {
     item.dateOperation = "Junio"
-  } else if (item.dateOperation.includes("07-2022")) {
+  } else if (item.dateOperation.includes("2022-07")) {
     item.dateOperation = "Julio"
-  } else if (item.dateOperation.includes("08-2022")) {
+  } else if (item.dateOperation.includes("2022-08")) {
     item.dateOperation = "Agosto"
-  } else if (item.dateOperation.includes("09-2022")) {
+  } else if (item.dateOperation.includes("2022-09")) {
     item.dateOperation = "Septiembre"
-  } else if (item.dateOperation.includes("10-2022")) {
+  } else if (item.dateOperation.includes("2022-10")) {
     item.dateOperation = "Octubre"
-  } else if (item.dateOperation.includes("11-2022")) {
+  } else if (item.dateOperation.includes("2022-11")) {
     item.dateOperation = "Noviembre"
-  } else if (item.dateOperation.includes("12-2022")) {
+  } else if (item.dateOperation.includes("2022-02")) {
     item.dateOperation = "Diciembre"
 
   }
@@ -674,6 +674,9 @@ const filterSpendingAndGainMonth = Object.values(operations2.reduce((acc, operat
   return acc;
 }, {}));
 
+console.log(filterSpendingAndGainMonth)
+
+
 
 
 const generateReportsTable = () => {
@@ -691,19 +694,16 @@ const generateReportsTable = () => {
               <td>${nameOpSpending}</td>
               <td class="text-red-600">-$${operationObtainedSpending.amountOperation}</td>
             </tr>
-
             <tr class="font-bold">
               <td>Categoria con mayor balance</td>
-              <td>${moreBalanceCategoryName.slice(0,1)}</td>
+              <td>${moreBalanceCategoryName.slice(0, 1)}</td>
               <td class= "${moreBalance.balance > 0 ? "text-red-600" : "text-green-600"}">$${Math.max(...moreBalance)}</td>
             </tr>
-
             <tr class="font-bold">
               <td>Mes con mayor ganancia</td>
               <td>${monthGain}</td>
               <td class="text-green-600">+$${operationObtainedGain.amountOperation}</td>
             </tr>
-
             <tr class="font-bold">
               <td>Mes con mayor gasto</td>
               <td>${monthSpending}</td>
@@ -721,30 +721,31 @@ const generateReportsTable = () => {
                     </tr>`
   }
 
-  for (const operation of filterSpendingAndGainMonth) {
+    for (const {date, balance, spending, gain} of filterSpendingAndGainMonth){
     $("#totalMonths").innerHTML += `
-                  <tr class="font-bold space-y-4">
-                      <td class="text-center ml-10 mb-10">${operation.date}</td>
-                      <td class="text-green-600 text-center ml-10">+${operation.gain}</td>
-                      <td class="text-red-600 text-center">-$${operation.spending}</td>
-                      <td class="text-center mr-10 ${operation.balance > 0 ? "text-green-600" : "text-red-600"}">$${operation.balance}</td>
- 
-                      </tr>`
+                    <tr class="font-bold space-y-4">
+                        <td class="text-center ml-10 mb-10">${date}</td>
+                        <td class="text-green-600 text-center ml-10">+${gain}</td>
+                        <td class="text-red-600 text-center">-$${spending}</td>
+                        <td class="text-center mr-10 ${balance > 0 ? "text-green-600" : "text-red-600"}">$${balance}</td>
+   
+                        </tr>`
   }
 }
-
-
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden")
   $("#reportsTable").classList.remove("hidden")
   $("#totalMonths").classList.remove("hidden")
   $("#totalCategoriesReports").classList.remove("hidden")
- generateReportsTable()
+  generateReportsTable()
 }
+<<<<<<< HEAD
+=======
 
 //ERROR? -->
 // btnEdit.addEventListener("click", () => {
 //   generateTableBalance()
 // })
 
+>>>>>>> main
