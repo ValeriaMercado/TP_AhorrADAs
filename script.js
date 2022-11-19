@@ -29,6 +29,15 @@ const sendDataFromLocalStorage = (key, array) => {
 const btnEdit = $$(".btn-edit")
 const btnDelete = $$(".btn-delete")
 
+//FORMAT DATE
+
+let day = new Date()
+$('#dateOperation').value = day.getFullYear() + '-' + ('0' + (day.getMonth() + 1)).slice(-2) + '-' + ('0' + day.getDate()).slice(-2)
+
+const formatDate = (day) => {
+  const newDate = day.split('-').reverse()
+  return newDate.join('-')
+}
 // *******************************************************GENERATE TABLE & REMOVE***********************************************
 const generateTable = (categories) => {
   for (const category of categories) {
@@ -224,7 +233,8 @@ const generateOperationTable = (operations) => {
                 <td class="w-1/5 font-bold"> ${operation.descriptionOperation}</td>
                 <td class="w-1/5 font-bold hidden"> ${operation.ids}</td>
                     <td class="w-1/5 mr-3 btn-edit text-green-500">${operation.selectCategoryOperation}</td>
-                    <td class="w-1/5">${operation.dateOperation}</td>
+                    <td class="w-1/5">${formatDate(operation.dateOperation)}
+                    </td>
                     <td class="w-1/5  ${operation.operationType === "gain" ? "text-green-600" : "text-red-600"}">${operation.operationType === "spending" ? "-" : "+"}$${operation.amountOperation}</td>
                     <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids}" onclick="operationsEdit(${operation.ids})"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${operation.ids}" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
