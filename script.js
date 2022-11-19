@@ -680,6 +680,11 @@ for (const operations of moreBalanceCategory){
    }
 }
 
+// total months 
+
+
+
+
 
 const generateReportsTable = () => {
   $("#reportsTable").innerHTML += `
