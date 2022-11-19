@@ -560,10 +560,10 @@ const nameOpSpending = operationObtainedSpending.selectCategoryOperation
 const nameOpGain = operationObtainedGain.selectCategoryOperation
 
 // month more gain
-const monthGain = operationObtainedGain.dateOperation
+const monthGain = formatDate(operationObtainedGain.dateOperation)
 
 // month more spending
-const monthSpending = operationObtainedSpending.dateOperation
+const monthSpending = formatDate(operationObtainedSpending.dateOperation)
 
 // separate by category
 let categoriesSpending = 0
@@ -575,7 +575,7 @@ const filterSpendingAndGain = Object.values(operations2.reduce((acc, operation) 
     spending: 0,
     gain: 0,
     balance: 0,
-    date: operation.dateOperation
+    date: formatDate(operation.dateOperation)
 
   };
   if (operation.operationType === "spending") {
