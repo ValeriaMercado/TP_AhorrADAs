@@ -361,9 +361,12 @@ const operationsEdit = (ids) => {
   $("#select-box-filtros").classList.add("hidden");
   $("#container-categories").classList.add("hidden");
   $("#operationContainer").classList.add("hidden");
-  const chosenOp = findOp(ids);
-  $("#description").value = chosenOp.descriptionOperation;
-  $("#amount").value = chosenOp.amountOperation;
+  const chosenOp = findOperation(ids);
+  $("#descriptionEdit").value = chosenOp.descriptionOperation;
+  $("#amountOperationEdit").value = chosenOp.amountOperation;
+  $("#operationTypeEdit").value = chosenOp.operationType;
+  $("#selectCategoryOperationEdit").value = chosenOp.selectCategoryOperation
+  $("#dateOperationEdit").value = chosenOp.dateOperation;
 };
 
 const saveOperationData = (ids) => {
@@ -411,9 +414,6 @@ $("#cancelAddOperation").addEventListener("click", () => {
 });
 
 
-
-
-
 //ADD CATEGORY SELECT
 
 const categorySelect = (inputID) =>{
@@ -441,6 +441,15 @@ window.addEventListener("load", () =>{
   option.appendChild(value)
 
   $("#selectCategoryOperation").append(option)
+})
+
+window.addEventListener("load", () => {
+  categorySelect($("#selectCategoryOperationEdit"))
+  const option = document.createElement("option")
+  const value = document.createTextNode("Todas")
+  option.appendChild(value)
+
+  $("#selectCategoryOperationEdit").append(option)
 })
 
 
