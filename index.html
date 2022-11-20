@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antic&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="./images/favicon.ico"/>
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -157,7 +158,7 @@
         </div>
 
         <div id="operationsAndnewOperation" class="w-full">
-            <div class=" hidden flex flex-col ml-[5%] w-[90%] h-[600px] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
+            <div class="flex flex-col ml-[5%] w-[90%] h-[600px] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
                 id="operations">
                 <div class="flex flex-row items-start justify-between">
                     <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 ml-4 text-[27px]">Operaciones</h2>
@@ -166,13 +167,13 @@
                 </div>
                 <img src="images/wallet.png" class="w-[60%] h-[50%] mx-auto mt-[10%]">
                 <div class="text-center mt-4">
-                    <h2 class="font-bold text-gray-500 text-[32px]">Sin resultados</h2>
-                    <p class="text-gray-500 text-[22px]">Cambia los filtros o agrega operaciones</p>
+                    <button class="bg-[#79b9b9] h-10 border black w-1/3 rounded-lg mt-5 mr-3 justify-between"
+                        id="showOperations">VER OPERACIONES</button>
                 </div>
             </div>
 
             <!------------------------- OPERATIONS ------------------------------->
-            <div class=" flex flex-col ml-[5%] w-[90%] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
+            <div class="hidden flex flex-col ml-[5%] w-[90%] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
                 id="operationContainer">
                 <div class="flex flex-row items-start justify-between">
                     <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 ml-4 text-[27px]">Operaciones</h2>
@@ -244,7 +245,7 @@
             <div class="flex flex-row-reverse space-x-4 space-x-reverse">
                 <button type="reset" id="cancelAddOperation">Cancelar</button>
                 <button class="w-28 my-4 h-8 bg-green text-black bg-[#79b9b9] hover:bg-[#ffe1a8] rounded-lg m-auto"
-                    id="btnAddOperation" onclick="location.reload()">Agregar</button>
+                    id="btnAddOperation" >Agregar</button>
             </div>
         </form>
     </div>
