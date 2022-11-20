@@ -740,12 +740,3 @@ if (operations.length > 3) {
   $("#totalCategoriesReports").classList.remove("hidden")
   generateReportsTable()
 }
-<<<<<<< HEAD
-=======
-
-//ERROR? -->
-// btnEdit.addEventListener("click", () => {
-//   generateTableBalance()
-// })
-
->>>>>>> main
