@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antic&display=swap" rel="stylesheet">
@@ -17,38 +18,36 @@
 </head>
 
 
-<body class="bg-[#f8efc7] font-[Antic] max-sm:w-full">
-    <div class="bg-[#79b9b9] text-xl max-sm:w-full h-1/4">
-        <div class="flex justify-between items-center p-6 px-6 lg:px-0 container mx-auto">
-            <div>
-                <a href="#"><img src="images/logoAhorradas.png" alt="logo AhorrADAs"
-                        class="w-[65%] py-1 flex justify-between mt-4"></a>
-            </div>
-
-            <input class="peer hidden" type="checkbox" name="hamburger" id="hamburger" />
-            <label
-                class="peer-checked:hamburger block relative cursor-pointer lg:hidden border-2 border-black-300 peer-checked:border-2 peer-checked:border-white p-3 rounded-md transition-all"
-                for="hamburger">
-                <div class="m-auto w-6 h-0.5 rounded bg-gray-300 transition-all duration-300"></div>
-                <div class="m-auto mt-2 w-6 h-0.5 rounded bg-gray-300 transition-all duration-300"></div>
-            </label>
-
-            <div
-                class="translate-y-full peer-checked:translate-y-0 lg:translate-y-0 inset-0 fixed lg:static pt-20 lg:pt-0 bg-white lg:bg-[#79b9b9] z-0 lg:z-10 lg:h-auto lg:w-auto transition-all duration-300 ease-in-out">
-                <div
-                    class="bg-[#79b9b9] shadow-md lg:bg-[#79b9b9] lg:shadow-none py-10 lg:py-0 flex-col lg:items center lg:flex-row px-6 space-y-4 lg:space-y-0 lg:space-x-12 ">
-                    <a href="" class="text-black lg:text-white hover:text-gray"><i
-                            class="fas fa-chart-line mr-2 text-white"></i>Balance</a></a>
-                    <a href="" id="showCategories" class="text-black lg:text-white hover:text-gray"><i
-                            class="fa-solid fa-tag mr-2 text-white"></i>Categorias</a></a>
-                    <a href="" id="showReports" class="text-black lg:text-white hover:text-gray"><i
-                            class="fas fa-chart-pie mr-2 text-white"></i>Reportes</a></a>
-                </div>
-            </div>
-
-
+<body class="bg-[#f8efc7] font-[Antic]">
+    <header class="bg-[#79b9b9] flex flex-wrap items-center shadow-md ">
+        <div class="flex-1 flex justify-between items-center">
+            <a href=" "><img src="images/logoAhorradas.png" alt="logo AhorrADAs"
+                    class="w-[65%] mt-10 ml-10 flex justify-between"></a>
         </div>
-    </div>
+
+        <label for="menu-toggle" class="pointer-cursor md:hidden block">
+            <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                viewBox="0 0 20 20">
+                <title>menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+            </svg>
+        </label>
+        <input class="hidden" type="checkbox" id="menu-toggle" />
+
+        <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
+            <nav class="">
+                <ul class="md:flex items-center justify-between text-white text-xl pt-4  mr-10">
+                    <li><a class="md:p-4 py-3 px-0 block" href=" "><i
+                        class="fas fa-chart-line mr-2 text-white"></i>Balance</a></li>
+                    <li><a id="showCategories" class="md:p-4 py-3 px-0 block" href=" "><i
+                        class="fa-solid fa-tag mr-2 text-white" ></i>Categorias</a></li>
+                    <li><a id="showReports"  class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href=" " ><i
+                        class="fas fa-chart-pie mr-2 text-white"></i>Reportes</a></li>
+                  </ul>
+            </nav>
+        </div>
+    </header>
+
     <!----------------------------------------------- BALANCE--------------------------------------------------------->
     <div class="flex flex-row mb-20 max-sm:flex-col" id="tablesAndForms">
         <div class="flex flex-col ml-[10%] ">

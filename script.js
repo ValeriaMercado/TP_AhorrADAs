@@ -200,8 +200,7 @@ $("#showCategories").addEventListener("click", (e) => {
   $("#operationContainer").classList.add("hidden");
   $("#newOperationContainer").classList.add("hidden");
   $("#editOperationContainer").classList.add("hidden");
-  $("operations").classList.add("hidden");
-  $("#reports").classList.add("hidden");
+  $("#reportsTableContainer").classList.add("hidden");
 });
 
 // ***************************************************************DOM EVENTS*****************************************************
