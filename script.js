@@ -482,6 +482,7 @@ $("#date-filter").onchange = () => {
   generateOperationTable(orderDates(filterDates));
 };
 
+<<<<<<< HEAD
 // FILTER BY ORDER
 let selectSort = $("#order-filter");
 selectSort.onchange = () => {
@@ -522,6 +523,10 @@ const sortBy = () => {
 
 //ADD CATEGORY SELECT
 
+=======
+//ADD CATEGORY SELECT
+
+>>>>>>> main
 const categorySelect = (inputID) =>{
   let categories = getDataFromLocalStorage("categories")
   inputID.innerHTML = ''
@@ -536,6 +541,7 @@ window.addEventListener("load", () =>{
   const option = document.createElement("option")
   const value = document.createTextNode ("Todas")
   option.appendChild(value)
+<<<<<<< HEAD
 
   $("#filter-categories").append(option)
 })
@@ -594,9 +600,19 @@ generateTableBalance();
 btnAddOperation.addEventListener("click", () => {
   generateTableBalance();
 });
+=======
 
-// **************************************************************REPORTS*************************************************************
+  $("#filter-categories").append(option)
+})
+>>>>>>> main
 
+window.addEventListener("load", () =>{
+  categorySelect($("#selectCategoryOperation"))
+  const option = document.createElement("option")
+  const value = document.createTextNode ("Todas")
+  option.appendChild(value)
+
+<<<<<<< HEAD
 $("#showReports").addEventListener("click", (e) => {
   e.preventDefault();
   $("#reportsTableContainer").classList.remove("hidden");
@@ -610,6 +626,13 @@ $("#showReports").addEventListener("click", (e) => {
   $("#reports").classList.remove("hidden");
 });
 const operations2 = getDataFromLocalStorage("operations");
+=======
+  $("#selectCategoryOperation").append(option)
+})
+<<<<<<< HEAD
+=======
+const operations2 = getDataFromLocalStorage("operations")
+>>>>>>> main
 
 // SEPARATE BY TYPE OF OPERATION
 const operationsGain = [];
@@ -846,3 +869,16 @@ if (operations.length > 3) {
   $("#totalCategoriesReports").classList.remove("hidden");
   generateReportsTable();
 }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+
+//ERROR? -->
+// btnEdit.addEventListener("click", () => {
+//   generateTableBalance()
+// })
+
+>>>>>>> main
+>>>>>>> main
+>>>>>>> main
