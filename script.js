@@ -5,6 +5,8 @@ const $btnAdd = $("#btn-add");
 const $categories = $("#container-categories");
 const $newCategories = $("#categorie");
 const $tableCategories = $("#table-categories");
+const btnEdit = $$(".btn-edit");
+const btnDelete = $$(".btn-delete");
 
 let defaultCategories = [
   { id: 1, nombre: "Comida" },
@@ -14,6 +16,7 @@ let defaultCategories = [
   { id: 5, nombre: "Trabajo" },
 ];
 
+//FUNCTONS LOCALSTORAGE
 let categories = localStorage.getItem("categories")
   ? JSON.parse(localStorage.getItem("categories"))
   : defaultCategories;
@@ -27,11 +30,8 @@ const getDataFromLocalStorage = (key) => {
 const sendDataFromLocalStorage = (key, array) => {
   return localStorage.setItem(key, JSON.stringify(array));
 };
-const btnEdit = $$(".btn-edit");
-const btnDelete = $$(".btn-delete");
 
-//FORMAT DATE
-
+// DATE FUNCTIONS
 let day = new Date();
 $("#dateOperation").value =
   day.getFullYear() +
@@ -44,6 +44,7 @@ const formatDate = (day) => {
   const newDate = day.split("-").reverse();
   return newDate.join("-");
 };
+
 // *******************************************************GENERATE TABLE & REMOVE***********************************************
 const generateTable = (categories) => {
   for (const category of categories) {
@@ -182,73 +183,6 @@ inputID.innerHTML = ''
     $("#filter-categories").append(option)
   })
 }
-
-
-
-
-// ********************************************BUTTONS EVENTS********************************************************************
-$("#btn-cancel").addEventListener("click", () => {
-  $("#container-edit-categories").classList.add("hidden");
-  $("#container-categories").classList.remove("hidden");
-});
-
-$("#showCategories").addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#container-categories").classList.remove("hidden");
-  $(".balance-section").classList.add("hidden");
-  $("#select-box-filtros").classList.add("hidden");
-  $("#operationContainer").classList.add("hidden");
-  $("#newOperationContainer").classList.add("hidden");
-  $("#editOperationContainer").classList.add("hidden");
-  $("#reportsTableContainer").classList.add("hidden");
-});
-
-// ***************************************************************DOM EVENTS*****************************************************
-const toggleFilter = $("#toggleFilters");
-const containerFilter = $("#filterContainer");
-const btnAddOperation = $("#btnAddOperation");
-const toggleOperation = $("#toggleOperation");
-const toggleOperation2 = $("#toggleOperation2");
-
-toggleFilter.addEventListener("click", (e) => {
-  e.preventDefault();
-  if (toggleFilter.innerText === "Ocultar filtros") {
-    containerFilter.classList.add("hidden");
-    toggleFilter.innerText = "Mostrar filtros";
-  } else {
-    containerFilter.classList.remove("hidden");
-    toggleFilter.innerText = "Ocultar filtros";
-  }
-});
-
-btnAddOperation.addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#newOperationContainer").classList.add("hidden");
-  $("#balance").classList.remove("hidden");
-  $("#select-box-filtros").classList.remove("hidden");
-  $("#operationContainer").classList.remove("hidden");
-  $("#operations").classList.add("hidden");
-});
-
-toggleOperation.addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#newOperationContainer").classList.remove("hidden");
-});
-
-$("#showOperations").addEventListener("click", (e)=>{
-  e.preventDefault();
-  $("#operations").classList.add("hidden");
-  $("#operationContainer").classList.remove("hidden");
-})
-
-toggleOperation2.addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#newOperationContainer").classList.remove("hidden");
-  $("#balance").classList.add("hidden");
-  $("#select-box-filtros").classList.add("hidden");
-  $("#container-categories").classList.add("hidden");
-  $("#operationContainer").classList.add("hidden");
-});
 
 // *********************************************************OPERATIONS**************************************************************
 
@@ -421,7 +355,6 @@ $("#cancelAddOperation").addEventListener("click", () => {
 
 
 //ADD CATEGORY SELECT
-
 const categorySelect = (inputID) =>{
   let categories = getDataFromLocalStorage("categories")
   inputID.innerHTML = ''
@@ -459,7 +392,7 @@ window.addEventListener("load", () => {
 })
 
 
-// FILTERS
+// ****FILTERS****
 const filterOperationsType = (array, type) => {
   const operations = array.filter((curr) => {
     return curr.type === type;
@@ -499,7 +432,7 @@ $("#filter-categories").onchange = () => {
   generateOperationTable(arrayFilterFinal);
 };
 
-// DATES
+//FILTER FOR DATE
 const orderDates = (arr) => {
   const orderedDates = arr.sort((a, b) => {
     return new Date(b.dateOperation) - new Date(a.dateOperation);
@@ -524,7 +457,6 @@ const newDates = (operations) => {
   return selectedDates;
 };
 
-//FILTER FOR DATE
 $("#date-filter").onchange = () => {
   const filterDates = newDates(getDataFromLocalStorage("operations"));
   generateOperationTable(orderDates(filterDates));
@@ -568,10 +500,7 @@ const sortBy = () => {
   return operations;
 };
 
-
-
-// *********************************************************************BALANCE****************************************************
-
+// ***BALANCE***
 const gainBalance = $("#gananciasBalance");
 const spendingBalance = $("#gastosBalance");
 let balanceTotal = "#balance-total";
@@ -612,29 +541,13 @@ const generateTableBalance = () => {
 };
 generateTableBalance();
 
-btnAddOperation.addEventListener("click", () => {
-  generateTableBalance();
-});
 
-// **************************************************************REPORTS*************************************************************
-
-$("#showReports").addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#reportsTableContainer").classList.remove("hidden");
-  $("#container-categories").classList.add("hidden");
-  $(".balance-section").classList.add("hidden");
-  $("#select-box-filtros").classList.add("hidden");
-  $("#operationContainer").classList.add("hidden");
-  $("#newOperationContainer").classList.add("hidden");
-  $("#editOperationContainer").classList.add("hidden");
-  $("operations").classList.add("hidden");
-  $("#reports").classList.remove("hidden");
-});
-const operations2 = getDataFromLocalStorage("operations");
+// *****REPORTS******
 
 // SEPARATE BY TYPE OF OPERATION
 const operationsGain = [];
 const operationSpending = [];
+const operations2 = getDataFromLocalStorage("operations");
 
 for (const operation of operations2) {
   if (operation.operationType === "spending") {
@@ -786,8 +699,6 @@ const filterSpendingAndGainMonth = Object.values(
   }, {})
 );
 
-console.log(filterSpendingAndGainMonth);
-
 const generateReportsTable = () => {
   $("#reportsTable").innerHTML += `
     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
@@ -849,7 +760,7 @@ const generateReportsTable = () => {
   for (const { date, balance, spending, gain } of filterSpendingAndGainMonth) {
     $("#totalMonths").innerHTML += `
                     <tr class="font-bold space-y-4">
-                        <td class="text-center ml-10 mb-10">${date}</td>
+                        <td class="text-center ml-10 mb-10">${formatDate(date)}</td>
                         <td class="text-green-600 text-center ml-10">+${gain}</td>
                         <td class="text-red-600 text-center">-$${spending}</td>
                         <td class="text-center mr-10 ${
@@ -859,6 +770,96 @@ const generateReportsTable = () => {
                         </tr>`;
   }
 };
+
+// ********* DOM FUNCTIONS **********
+const toggleFilter = $("#toggleFilters");
+const containerFilter = $("#filterContainer");
+const btnAddOperation = $("#btnAddOperation");
+const toggleOperation = $("#toggleOperation");
+const toggleOperation2 = $("#toggleOperation2");
+const sectionsWithoutOperations = () =>{
+  $("#balance").classList.add("hidden");
+  $("#select-box-filtros").classList.add("hidden");
+  $("#container-categories").classList.add("hidden");
+  $("#operationContainer").classList.add("hidden");
+}
+
+//FILTER EVENT
+toggleFilter.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (toggleFilter.innerText === "Ocultar filtros") {
+    containerFilter.classList.add("hidden");
+    toggleFilter.innerText = "Mostrar filtros";
+  } else {
+    containerFilter.classList.remove("hidden");
+    toggleFilter.innerText = "Ocultar filtros";
+  }
+});
+
+// OPERATION EVENTS
+btnAddOperation.addEventListener("click", (e) => {
+  e.preventDefault();
+  $("#newOperationContainer").classList.add("hidden");
+  $("#balance").classList.remove("hidden");
+  $("#select-box-filtros").classList.remove("hidden");
+  $("#operationContainer").classList.remove("hidden");
+  $("#operations").classList.add("hidden");
+});
+
+btnAddOperation.addEventListener("click", () => {
+  generateTableBalance();
+});
+
+toggleOperation.addEventListener("click", (e) => {
+  e.preventDefault();
+  $("#newOperationContainer").classList.remove("hidden");
+  $("#operations").classList.add("hidden");
+  sectionsWithoutOperations()
+});
+
+toggleOperation2.addEventListener("click", (e) => {
+  e.preventDefault();
+  $("#newOperationContainer").classList.remove("hidden");
+  sectionsWithoutOperations()
+});
+
+$("#showOperations").addEventListener("click", (e)=>{
+  e.preventDefault();
+  $("#operations").classList.add("hidden");
+  $("#operationContainer").classList.remove("hidden");
+})
+
+//CATEGORIES EVENTS
+$("#showCategories").addEventListener("click", (e) => {
+  e.preventDefault();
+  $("#container-categories").classList.remove("hidden");
+  $(".balance-section").classList.add("hidden");
+  $("#select-box-filtros").classList.add("hidden");
+  $("#operationContainer").classList.add("hidden");
+  $("#newOperationContainer").classList.add("hidden");
+  $("#editOperationContainer").classList.add("hidden");
+  $("#reportsTableContainer").classList.add("hidden");
+  $("#operations").classList.add("hidden");
+});
+
+$("#btn-cancel").addEventListener("click", () => {
+  $("#container-edit-categories").classList.add("hidden");
+  $("#container-categories").classList.remove("hidden");
+});
+
+// REPORTS EVENTS
+$("#showReports").addEventListener("click", (e) => {
+  e.preventDefault();
+  $("#reportsTableContainer").classList.remove("hidden");
+  $("#container-categories").classList.add("hidden");
+  $(".balance-section").classList.add("hidden");
+  $("#select-box-filtros").classList.add("hidden");
+  $("#operationContainer").classList.add("hidden");
+  $("#newOperationContainer").classList.add("hidden");
+  $("#editOperationContainer").classList.add("hidden");
+  $("#operations").classList.add("hidden");
+  $("#reportsTable").classList.remove("hidden");
+});
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden");
