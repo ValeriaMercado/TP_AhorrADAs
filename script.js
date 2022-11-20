@@ -533,3 +533,32 @@ $('#date-filter').onchange = () => {
   const filterDates = newDates(getDataFromLocalStorage('operations'))
   generateOperationTable(orderDates(filterDates))
 }
+
+//ADD CATEGORY SELECT
+
+const categorySelect = (inputID) =>{
+  let categories = getDataFromLocalStorage("categories")
+  inputID.innerHTML = ''
+  for (const category of categories){
+     const {id, nombre} = category 
+     inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
+  }
+}
+
+window.addEventListener("load", () =>{
+  categorySelect($("#filter-categories"))
+  const option = document.createElement("option")
+  const value = document.createTextNode ("Todas")
+  option.appendChild(value)
+
+  $("#filter-categories").append(option)
+})
+
+window.addEventListener("load", () =>{
+  categorySelect($("#selectCategoryOperation"))
+  const option = document.createElement("option")
+  const value = document.createTextNode ("Todas")
+  option.appendChild(value)
+
+  $("#selectCategoryOperation").append(option)
+})
