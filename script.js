@@ -222,18 +222,24 @@ toggleFilter.addEventListener("click", (e) => {
 });
 
 btnAddOperation.addEventListener("click", (e) => {
-  $("#operations").classList.add("hidden");
   e.preventDefault();
   $("#newOperationContainer").classList.add("hidden");
   $("#balance").classList.remove("hidden");
   $("#select-box-filtros").classList.remove("hidden");
   $("#operationContainer").classList.remove("hidden");
+  $("#operations").classList.add("hidden");
 });
 
 toggleOperation.addEventListener("click", (e) => {
   e.preventDefault();
   $("#newOperationContainer").classList.remove("hidden");
 });
+
+$("#showOperations").addEventListener("click", (e)=>{
+  e.preventDefault();
+  $("#operations").classList.add("hidden");
+  $("#operationContainer").classList.remove("hidden");
+})
 
 toggleOperation2.addEventListener("click", (e) => {
   e.preventDefault();
@@ -286,7 +292,7 @@ const generateOperationTable = (operations) => {
     })"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${
                       operation.ids
-                    }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
+                    }" onclick="location.load()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `;
