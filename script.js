@@ -431,105 +431,36 @@ $('#date-filter').onchange = () => {
   generateOperationTable(orderDates(filterDates))
 }
 
-// FILTER BY ORDER
-let selectSort = $('#order-filter')
-selectSort.onchange = () => {
-  const sortedArray = sortBy()
-  generateOperationTable(sortedArray)
-}
+//ADD CATEGORY SELECT
 
-const sortBy = () => {
-  let sort = selectSort.value
-  let operations = applyFilters()
-  if (sort === "a-z") {
-    operations = operations.sort((a, b) => {
-      return a.descriptionOperation.localeCompare(b.descriptionOperation)
-    })
-  } else if (sort === "z-a") {
-    operations = operations.sort((a, b) => {
-      return b.descriptionOperation.localeCompare(a.descriptionOperation)
-    })
-  } else if (sort === "mayor-monto") {
-    operations = operations.sort((a, b) => {
-      return b.amountOperation - a.amountOperation
-    })
-  } else if (sort === "menor-monto") {
-    operations = operations.sort((a, b) => {
-      return a.amountOperation - b.amountOperation
-    })
-  } else if (sort === "mas-recientes") {
-    operations = operations.sort((a, b) => {
-      return new Date(b.dateOperation) - new Date(a.dateOperation)
-    })
-  } else if (sort === "menos-recientes") {
-    operations = operations.sort((a, b) => {
-      return new Date(a.dateOperation) - new Date(b.dateOperation)
-    })
+const categorySelect = (inputID) =>{
+  let categories = getDataFromLocalStorage("categories")
+  inputID.innerHTML = ''
+  for (const category of categories){
+     const {id, nombre} = category 
+     inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
   }
-  return operations
 }
 
-// *********************************************************************BALANCE****************************************************
+window.addEventListener("load", () =>{
+  categorySelect($("#filter-categories"))
+  const option = document.createElement("option")
+  const value = document.createTextNode ("Todas")
+  option.appendChild(value)
 
-const gainBalance = $("#gananciasBalance");
-const spendingBalance = $("#gastosBalance")
-let balanceTotal = ("#balance-total");
-
-const generateTableBalance = () => {
-getDataFromLocalStorage("operations");
-let gainBalance  = 0
-let spendingBalance = 0
-
-for (const operation of operations) {
-  if (operation.operationType === "spending"){
-    spendingBalance += operation.amountOperation
-  } else if 
-    (operation.operationType === "gain"){
-      gainBalance += operation.amountOperation
-    }
-  }
-  balanceTotal = gainBalance - spendingBalance
-  $("#balance").innerHTML = `
-  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
-  <div class="grid gap-4 grid-cols-2 m-3 flex">
-      <div>
-          <h3 class="flex mb-5 mt-3 text-[22px]">Ganancias</h3>
-      </div>
-      <div>
-          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[22px]">+${gainBalance}</h3>
-      </div>
-      <div>
-          <h3 id="gastosBalance" class="flex mb-5 text-[22px]">Gastos</h3>
-      </div>
-      <div class="font-bold text-red-700 ml-4 text-[22px]">
-          <p>-${spendingBalance}</p>
-      </div>
-      <div>
-          <h1 class="font-bold text-[25px]">Total</h1>
-      </div> 
-      <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
-	      `
-}
-generateTableBalance();
-
-btnAddOperation.addEventListener("click", () => {
-  generateTableBalance()
+  $("#filter-categories").append(option)
 })
 
-// **************************************************************REPORTS*************************************************************
+window.addEventListener("load", () =>{
+  categorySelect($("#selectCategoryOperation"))
+  const option = document.createElement("option")
+  const value = document.createTextNode ("Todas")
+  option.appendChild(value)
 
-$("#showReports").addEventListener("click", (e) => {
-  e.preventDefault()
-  $("#reportsTableContainer").classList.remove("hidden")
-  $("#container-categories").classList.add("hidden")
-  $(".balance-section").classList.add("hidden")
-  $("#select-box-filtros").classList.add("hidden")
-  $("#operationContainer").classList.add("hidden")
-  $("#newOperationContainer").classList.add("hidden")
-  $("#editOperationContainer").classList.add("hidden")
-  $("operations").classList.add("hidden")
-  $("#reports").classList.remove("hidden")
+  $("#selectCategoryOperation").append(option)
 })
+<<<<<<< HEAD
+=======
 const operations2 = getDataFromLocalStorage("operations")
 
 // SEPARATE BY TYPE OF OPERATION
@@ -748,4 +679,5 @@ if (operations.length > 3) {
 //   generateTableBalance()
 // })
 
+>>>>>>> main
 >>>>>>> main
