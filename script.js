@@ -560,219 +560,219 @@ for (const operation of operations2) {
   }
 }
 
-// // higher gain
-// const arrayOpGain = Math.max(
-//   ...operationsGain.map((operation) => operation.amountOperation)
-// );
-// const arrayOpGain2 = operationsGain.filter(
-//   (operationsGain) => operationsGain.amountOperation === arrayOpGain
-// );
-// const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
+// higher gain
+const arrayOpGain = Math.max(
+  ...operationsGain.map((operation) => operation.amountOperation)
+);
+const arrayOpGain2 = operationsGain.filter(
+  (operationsGain) => operationsGain.amountOperation === arrayOpGain
+);
+const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
 
-// // higher spending
-// const arrayOpSpending = Math.max(
-//   ...operationSpending.map((operation) => operation.amountOperation)
-// );
-// const arrayOpSpending2 = operationSpending.filter(
-//   (operationSpending) => operationSpending.amountOperation === arrayOpSpending
-// );
-// const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1];
+// higher spending
+const arrayOpSpending = Math.max(
+  ...operationSpending.map((operation) => operation.amountOperation)
+);
+const arrayOpSpending2 = operationSpending.filter(
+  (operationSpending) => operationSpending.amountOperation === arrayOpSpending
+);
+const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1];
 
-// // category more spending
-// const nameOpSpending = operationObtainedSpending.selectCategoryOperation;
-// // category more gain
-// const nameOpGain = operationObtainedGain.selectCategoryOperation;
+// category more spending
+const nameOpSpending = operationObtainedSpending.selectCategoryOperation;
+// category more gain
+const nameOpGain = operationObtainedGain.selectCategoryOperation;
 
-// // month more gain
-// const monthGain = formatDate(operationObtainedGain.dateOperation);
+// month more gain
+const monthGain = formatDate(operationObtainedGain.dateOperation);
 
-// // month more spending
-// const monthSpending = formatDate(operationObtainedSpending.dateOperation);
+// month more spending
+const monthSpending = formatDate(operationObtainedSpending.dateOperation);
 
-// // separate by category
-// let categoriesSpending = 0;
-// let categoriesGain = 0;
+// separate by category
+let categoriesSpending = 0;
+let categoriesGain = 0;
 
-// const filterSpendingAndGain = Object.values(
-//   operations2.reduce((acc, operation) => {
-//     acc[operation.selectCategoryOperation] = acc[
-//       operation.selectCategoryOperation
-//     ] || {
-//       category: operation.selectCategoryOperation,
-//       spending: 0,
-//       gain: 0,
-//       balance: 0,
-//       date: formatDate(operation.dateOperation),
-//     };
-//     if (operation.operationType === "spending") {
-//       acc[operation.selectCategoryOperation].spending +=
-//         operation.amountOperation;
-//     } else {
-//       acc[operation.selectCategoryOperation].gain += operation.amountOperation;
-//     }
-//     acc[operation.selectCategoryOperation].balance =
-//       acc[operation.selectCategoryOperation].gain -
-//       acc[operation.selectCategoryOperation].spending;
-//     return acc;
-//   }, {})
-// );
+const filterSpendingAndGain = Object.values(
+  operations2.reduce((acc, operation) => {
+    acc[operation.selectCategoryOperation] = acc[
+      operation.selectCategoryOperation
+    ] || {
+      category: operation.selectCategoryOperation,
+      spending: 0,
+      gain: 0,
+      balance: 0,
+      date: formatDate(operation.dateOperation),
+    };
+    if (operation.operationType === "spending") {
+      acc[operation.selectCategoryOperation].spending +=
+        operation.amountOperation;
+    } else {
+      acc[operation.selectCategoryOperation].gain += operation.amountOperation;
+    }
+    acc[operation.selectCategoryOperation].balance =
+      acc[operation.selectCategoryOperation].gain -
+      acc[operation.selectCategoryOperation].spending;
+    return acc;
+  }, {})
+);
 
-// // total for categories
-// //name
-// let nameOfFilterCategories = "";
-// for (const operation of filterSpendingAndGain) {
-//   nameOfFilterCategories = operation.category;
-// }
+// total for categories
+//name
+let nameOfFilterCategories = "";
+for (const operation of filterSpendingAndGain) {
+  nameOfFilterCategories = operation.category;
+}
 
-// //gain
-// let GainOfFilterCategories = "";
-// for (const operation of filterSpendingAndGain) {
-//   GainOfFilterCategories = operation.gain;
-// }
+//gain
+let GainOfFilterCategories = "";
+for (const operation of filterSpendingAndGain) {
+  GainOfFilterCategories = operation.gain;
+}
 
-// // spend
-// let SpendOfFilterCategories = "";
-// for (const operation of filterSpendingAndGain) {
-//   SpendOfFilterCategories = operation.spending;
-// }
+// spend
+let SpendOfFilterCategories = "";
+for (const operation of filterSpendingAndGain) {
+  SpendOfFilterCategories = operation.spending;
+}
 
-// //more balance
-// const moreBalance = [];
-// const moreBalanceCategory = [];
-// for (const operation of filterSpendingAndGain) {
-//   moreBalance.push(operation.balance);
-// }
-// moreBalanceCategory.push(
-//   filterSpendingAndGain.sort((a, b) => b.balance - a.balance)
-// );
+//more balance
+const moreBalance = [];
+const moreBalanceCategory = [];
+for (const operation of filterSpendingAndGain) {
+  moreBalance.push(operation.balance);
+}
+moreBalanceCategory.push(
+  filterSpendingAndGain.sort((a, b) => b.balance - a.balance)
+);
 
-// const moreBalanceCategoryName = [];
-// for (const operations of moreBalanceCategory) {
-//   for (const operation of operations) {
-//     moreBalanceCategoryName.push(operation.category);
-//   }
-// }
+const moreBalanceCategoryName = [];
+for (const operations of moreBalanceCategory) {
+  for (const operation of operations) {
+    moreBalanceCategoryName.push(operation.category);
+  }
+}
 
-// // total months
+// total months
 
-// for (const item of operations2) {
-//   if (item.dateOperation.includes("2022-01")) {
-//     item.dateOperation = "Enero";
-//   } else if (item.dateOperation.includes("2022-02")) {
-//     item.dateOperation = "Febrero";
-//   } else if (item.dateOperation.includes("2022-03")) {
-//     item.dateOperation = "Marzo";
-//   } else if (item.dateOperation.includes("2022-04")) {
-//     item.dateOperation = "Abril";
-//   } else if (item.dateOperation.includes("2022-05")) {
-//     item.dateOperation = "Mayo";
-//   } else if (item.dateOperation.includes("2022-06")) {
-//     item.dateOperation = "Junio";
-//   } else if (item.dateOperation.includes("2022-07")) {
-//     item.dateOperation = "Julio";
-//   } else if (item.dateOperation.includes("2022-08")) {
-//     item.dateOperation = "Agosto";
-//   } else if (item.dateOperation.includes("2022-09")) {
-//     item.dateOperation = "Septiembre";
-//   } else if (item.dateOperation.includes("2022-10")) {
-//     item.dateOperation = "Octubre";
-//   } else if (item.dateOperation.includes("2022-11")) {
-//     item.dateOperation = "Noviembre";
-//   } else if (item.dateOperation.includes("2022-02")) {
-//     item.dateOperation = "Diciembre";
-//   }
-// }
+for (const item of operations2) {
+  if (item.dateOperation.includes("2022-01")) {
+    item.dateOperation = "Enero";
+  } else if (item.dateOperation.includes("2022-02")) {
+    item.dateOperation = "Febrero";
+  } else if (item.dateOperation.includes("2022-03")) {
+    item.dateOperation = "Marzo";
+  } else if (item.dateOperation.includes("2022-04")) {
+    item.dateOperation = "Abril";
+  } else if (item.dateOperation.includes("2022-05")) {
+    item.dateOperation = "Mayo";
+  } else if (item.dateOperation.includes("2022-06")) {
+    item.dateOperation = "Junio";
+  } else if (item.dateOperation.includes("2022-07")) {
+    item.dateOperation = "Julio";
+  } else if (item.dateOperation.includes("2022-08")) {
+    item.dateOperation = "Agosto";
+  } else if (item.dateOperation.includes("2022-09")) {
+    item.dateOperation = "Septiembre";
+  } else if (item.dateOperation.includes("2022-10")) {
+    item.dateOperation = "Octubre";
+  } else if (item.dateOperation.includes("2022-11")) {
+    item.dateOperation = "Noviembre";
+  } else if (item.dateOperation.includes("2022-02")) {
+    item.dateOperation = "Diciembre";
+  }
+}
 
-// const filterSpendingAndGainMonth = Object.values(
-//   operations2.reduce((acc, operation) => {
-//     acc[operation.dateOperation] = acc[operation.dateOperation] || {
-//       spending: 0,
-//       gain: 0,
-//       balance: 0,
-//       date: operation.dateOperation,
-//     };
-//     if (operation.operationType === "gain") {
-//       acc[operation.dateOperation].gain += operation.amountOperation;
-//     } else {
-//       acc[operation.dateOperation].spending += operation.amountOperation;
-//     }
-//     acc[operation.dateOperation].balance =
-//       acc[operation.dateOperation].gain - acc[operation.dateOperation].spending;
-//     return acc;
-//   }, {})
-// );
+const filterSpendingAndGainMonth = Object.values(
+  operations2.reduce((acc, operation) => {
+    acc[operation.dateOperation] = acc[operation.dateOperation] || {
+      spending: 0,
+      gain: 0,
+      balance: 0,
+      date: operation.dateOperation,
+    };
+    if (operation.operationType === "gain") {
+      acc[operation.dateOperation].gain += operation.amountOperation;
+    } else {
+      acc[operation.dateOperation].spending += operation.amountOperation;
+    }
+    acc[operation.dateOperation].balance =
+      acc[operation.dateOperation].gain - acc[operation.dateOperation].spending;
+    return acc;
+  }, {})
+);
 
-// const generateReportsTable = () => {
-//   $("#reportsTable").innerHTML += `
-//     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
-//       <table class="w-full">
-//               <tr class= "font-bold">
-//                   <td>Categoria con mayor ganancia</td>
-//                   <td>${nameOpGain}</td>
-//                   <td class=" text-green-600">+$${
-//                     operationObtainedGain.amountOperation
-//                   }</td>
-//               </tr>
+const generateReportsTable = () => {
+  $("#reportsTable").innerHTML += `
+    <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
+      <table class="w-full">
+              <tr class= "font-bold">
+                  <td>Categoria con mayor ganancia</td>
+                  <td>${nameOpGain}</td>
+                  <td class=" text-green-600">+$${
+                    operationObtainedGain.amountOperation
+                  }</td>
+              </tr>
             
-//             <tr class="font-bold">
-//               <td>Categoria con mayor gasto</td>
-//               <td>${nameOpSpending}</td>
-//               <td class="text-red-600">-$${
-//                 operationObtainedSpending.amountOperation
-//               }</td>
-//             </tr>
-//             <tr class="font-bold">
-//               <td>Categoria con mayor balance</td>
-//               <td>${moreBalanceCategoryName.slice(0, 1)}</td>
-//               <td class= "${
-//                 moreBalance.balance > 0 ? "text-red-600" : "text-green-600"
-//               }">$${Math.max(...moreBalance)}</td>
-//             </tr>
-//             <tr class="font-bold">
-//               <td>Mes con mayor ganancia</td>
-//               <td>${monthGain}</td>
-//               <td class="text-green-600">+$${
-//                 operationObtainedGain.amountOperation
-//               }</td>
-//             </tr>
-//             <tr class="font-bold">
-//               <td>Mes con mayor gasto</td>
-//               <td>${monthSpending}</td>
-//               <td class="text-red-600">-$${
-//                 operationObtainedSpending.amountOperation
-//               }</td>
-//             </tr>           
-//         </table>
-//   `;
-//   for (const item of filterSpendingAndGain) {
-//     $("#totalCategoriesReports").innerHTML += `
-//                     <tr class="font-bold">
-//                       <td class="text-center  mb-10">${item.category}</td>
-//                       <td class="text-green-600 text-center ml-10">+${
-//                         item.gain
-//                       }</td>
-//                       <td class="text-red-600 text-center">-$${
-//                         item.spending
-//                       }</td>
-//                       <td class="text-center mr-10 ${
-//                         item.balance > 0 ? "text-green-600" : "text-red-600"
-//                       }">$${item.balance}</td>
-//                     </tr>`;
-//   }
+            <tr class="font-bold">
+              <td>Categoria con mayor gasto</td>
+              <td>${nameOpSpending}</td>
+              <td class="text-red-600">-$${
+                operationObtainedSpending.amountOperation
+              }</td>
+            </tr>
+            <tr class="font-bold">
+              <td>Categoria con mayor balance</td>
+              <td>${moreBalanceCategoryName.slice(0, 1)}</td>
+              <td class= "${
+                moreBalance.balance > 0 ? "text-red-600" : "text-green-600"
+              }">$${Math.max(...moreBalance)}</td>
+            </tr>
+            <tr class="font-bold">
+              <td>Mes con mayor ganancia</td>
+              <td>${monthGain}</td>
+              <td class="text-green-600">+$${
+                operationObtainedGain.amountOperation
+              }</td>
+            </tr>
+            <tr class="font-bold">
+              <td>Mes con mayor gasto</td>
+              <td>${monthSpending}</td>
+              <td class="text-red-600">-$${
+                operationObtainedSpending.amountOperation
+              }</td>
+            </tr>           
+        </table>
+  `;
+  for (const item of filterSpendingAndGain) {
+    $("#totalCategoriesReports").innerHTML += `
+                    <tr class="font-bold">
+                      <td class="text-center  mb-10">${item.category}</td>
+                      <td class="text-green-600 text-center ml-10">+${
+                        item.gain
+                      }</td>
+                      <td class="text-red-600 text-center">-$${
+                        item.spending
+                      }</td>
+                      <td class="text-center mr-10 ${
+                        item.balance > 0 ? "text-green-600" : "text-red-600"
+                      }">$${item.balance}</td>
+                    </tr>`;
+  }
 
-//   for (const { date, balance, spending, gain } of filterSpendingAndGainMonth) {
-//     $("#totalMonths").innerHTML += `
-//                     <tr class="font-bold space-y-4">
-//                         <td class="text-center ml-10 mb-10">${formatDate(date)}</td>
-//                         <td class="text-green-600 text-center ml-10">+${gain}</td>
-//                         <td class="text-red-600 text-center">-$${spending}</td>
-//                         <td class="text-center mr-10 ${
-//                           balance > 0 ? "text-green-600" : "text-red-600"
-//                         }">$${balance}</td>
+  for (const { date, balance, spending, gain } of filterSpendingAndGainMonth) {
+    $("#totalMonths").innerHTML += `
+                    <tr class="font-bold space-y-4">
+                        <td class="text-center ml-10 mb-10">${formatDate(date)}</td>
+                        <td class="text-green-600 text-center ml-10">+${gain}</td>
+                        <td class="text-red-600 text-center">-$${spending}</td>
+                        <td class="text-center mr-10 ${
+                          balance > 0 ? "text-green-600" : "text-red-600"
+                        }">$${balance}</td>
    
-//                         </tr>`;
-//   }
-// };
+                        </tr>`;
+  }
+};
 
 // ********* DOM FUNCTIONS **********
 const toggleFilter = $("#toggleFilters");
