@@ -53,12 +53,12 @@ const generateTable = (categories) => {
                         <th class="w-[80%] text-start mb-3">${
                           (category.id, category.nombre)
                         }</th>
-                        <th scope="col"><button class= "mr-3 btn-edit text-green-500" data-id="${
+                        <th scope="col"><button class= "mr-3 btn-edit text-green-500 lg:text-[18px]" data-id="${
                           category.id
                         }" onclick="categoriesEdit(${
       category.id
     })">Editar</button></th>
-                        <th scope="col"> <button class= "btnRemove text-red-500" data-id="${
+                        <th scope="col"> <button class= "btnRemove text-red-500 lg:text-[18px]" data-id="${
                           category.id
                         }">Eliminar</button></th>
             </tr>
@@ -203,19 +203,19 @@ const generateOperationTable = (operations) => {
     $("#tableContainer").innerHTML += `
                 <table class=" w-full">
                 <tr class="w-full font-bold text-center">
-                <td class="w-1/5 font-bold"> ${
+                <td class="w-1/5 font-bold text-[12px] lg:text-[14px]"> ${
                   operation.descriptionOperation
                 }</td>
                 <td class="w-1/5 font-bold hidden"> ${operation.ids}</td>
-                    <td class="w-1/5 mr-3 btn-edit text-green-500">${
+                    <td class="w-1/5 mr-3 btn-edit text-green-500 text-[12px]">${
                       operation.selectCategoryOperation
                     }</td>
-                    <td class="w-1/5">${formatDate(operation.dateOperation)}
+                    <td class="w-1/5 text-[10px]">${formatDate(operation.dateOperation)}
                     </td>
                     <td class="w-1/5  ${
                       operation.operationType === "gain"
-                        ? "text-green-600"
-                        : "text-red-600"
+                        ? "text-green-600 text-[10px]"
+                        : "text-red-600 text-[10px]"
                     }">${operation.operationType === "spending" ? "-" : "+"}$${
       operation.amountOperation
     }</td>
