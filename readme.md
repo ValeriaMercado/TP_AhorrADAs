@@ -52,4 +52,4 @@ git clone <url>
 ***
 <br>
 
-Hecho con 🧡 por Valeria Mercado y Africa Aular
+Hecho con 🧡 por Valeria Mercado y África Aular
