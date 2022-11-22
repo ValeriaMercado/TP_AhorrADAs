@@ -226,7 +226,7 @@ const generateOperationTable = (operations) => {
     })"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${
                       operation.ids
-                    }" onclick="location.load()"><i class="fa-solid fa-trash"></i></button></td>
+                    }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `;
@@ -332,29 +332,6 @@ const editOperations = (ids) => {
   });
 };
 
-$("#btnEditOperation").addEventListener("click", () => {
-  const operationsId = $("#btnEditOperation").getAttribute("data-id");
-  $("#editOperationContainer").classList.add("hidden");
-  $("#tableContainer").innerHTML = "";
-  let operationsEdit = editOperations(parseInt(operationsId));
-  localStorage.setItem("operations", JSON.stringify(operationsEdit));
-  operations = operationsEdit;
-  generateOperationTable(JSON.parse(localStorage.getItem("operations")));
-});
-
-$("#cancelEditOp").addEventListener("click", () => {
-  $("#editOperationContainer").classList.add("hidden");
-  $("#balance").classList.remove("hidden");
-  $("#select-box-filtros").classList.remove("hidden");
-  $("#operationContainer").classList.remove("hidden");
-});
-
-$("#cancelAddOperation").addEventListener("click", () => {
-  $("#newOperationContainer").classList.add("hidden");
-  $("#balance").classList.remove("hidden");
-  $("#select-box-filtros").classList.remove("hidden");
-  $("#operationContainer").classList.remove("hidden");
-});
 
 
 //ADD CATEGORY SELECT
@@ -561,13 +538,12 @@ for (const operation of operations2) {
 }
 
 // higher gain
-const arrayOpGain = Math.max(
-  ...operationsGain.map((operation) => operation.amountOperation)
-);
+
+const arrayOpGain = Math.max(...operationsGain.map((operation) => operation.amountOperation));
 const arrayOpGain2 = operationsGain.filter(
   (operationsGain) => operationsGain.amountOperation === arrayOpGain
-);
-const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
+  );
+  
 
 // higher spending
 const arrayOpSpending = Math.max(
@@ -576,18 +552,45 @@ const arrayOpSpending = Math.max(
 const arrayOpSpending2 = operationSpending.filter(
   (operationSpending) => operationSpending.amountOperation === arrayOpSpending
 );
-const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1];
+
 
 // category more spending
-const nameOpSpending = operationObtainedSpending.selectCategoryOperation;
+
+let nameOpSpending = ''
+let amountOpSpending = ''
+for (const operation of arrayOpSpending2){
+nameOpSpending = operation.selectCategoryOperation;
+amountOpSpending = operation.amountOperation
+}
 // category more gain
-const nameOpGain = operationObtainedGain.selectCategoryOperation;
+
+let nameOpGain = ''
+let amountOpGain = ''
+for (const operation of arrayOpGain2){
+ nameOpGain = operation.selectCategoryOperation;
+ amountOpGain = operation.amountOperation
+
+}
 
 // month more gain
-const monthGain = formatDate(operationObtainedGain.dateOperation);
+
+let monthGain = ''
+let monthGainAmount = ''
+for (const operation of arrayOpGain2){
+monthGain= formatDate(operation.dateOperation)
+monthGainAmount = operation.amountOperation
+  }
+
 
 // month more spending
-const monthSpending = formatDate(operationObtainedSpending.dateOperation);
+
+let monthSpending = ''
+let monthSpendingAmount = ''
+for (const operation of arrayOpSpending2){
+monthSpending= formatDate(operation.dateOperation)
+monthSpendingAmount = operation.amountOperation
+  }
+
 
 // separate by category
 let categoriesSpending = 0;
@@ -707,39 +710,39 @@ const generateReportsTable = () => {
     <h3 class="mt-4 text-xl text-[#79b9b9] font-bold">Resumen</h3>
       <table class="w-full">
               <tr class= "font-bold">
-                  <td>Categoria con mayor ganancia</td>
-                  <td>${nameOpGain}</td>
-                  <td class=" text-green-600">+$${
-                    operationObtainedGain.amountOperation
+                  <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor ganancia</td>
+                  <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpGain}</td>
+                  <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
+                    amountOpGain
                   }</td>
               </tr>
             
             <tr class="font-bold">
-              <td>Categoria con mayor gasto</td>
-              <td>${nameOpSpending}</td>
-              <td class="text-red-600">-$${
-                operationObtainedSpending.amountOperation
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor gasto</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpSpending}</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
+                amountOpSpending
               }</td>
             </tr>
             <tr class="font-bold">
-              <td>Categoria con mayor balance</td>
-              <td>${moreBalanceCategoryName.slice(0, 1)}</td>
-              <td class= "${
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor balance</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">${moreBalanceCategoryName.slice(0, 1)}</td>
+              <td class= "text-[8px] md:text-[12px] lg:text-[20px] ${
                 moreBalance.balance > 0 ? "text-red-600" : "text-green-600"
               }">$${Math.max(...moreBalance)}</td>
             </tr>
             <tr class="font-bold">
-              <td>Mes con mayor ganancia</td>
-              <td>${monthGain}</td>
-              <td class="text-green-600">+$${
-                operationObtainedGain.amountOperation
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor ganancia</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthGain}</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
+                monthGainAmount
               }</td>
             </tr>
             <tr class="font-bold">
-              <td>Mes con mayor gasto</td>
-              <td>${monthSpending}</td>
-              <td class="text-red-600">-$${
-                operationObtainedSpending.amountOperation
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor gasto</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthSpending}</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
+                monthSpendingAmount
               }</td>
             </tr>           
         </table>
@@ -747,14 +750,14 @@ const generateReportsTable = () => {
   for (const item of filterSpendingAndGain) {
     $("#totalCategoriesReports").innerHTML += `
                     <tr class="font-bold">
-                      <td class="text-center  mb-10">${item.category}</td>
-                      <td class="text-green-600 text-center ml-10">+${
+                      <td class="text-center mb-10 text-[8px] md:text-[12px] lg:text-[20px]">${item.category}</td>
+                      <td class="text-green-600 text-center ml-10 text-[8px] md:text-[12px] lg:text-[20px]">+${
                         item.gain
                       }</td>
-                      <td class="text-red-600 text-center">-$${
+                      <td class="text-red-600 text-center text-[8px] md:text-[12px] lg:text-[20px]">-$${
                         item.spending
                       }</td>
-                      <td class="text-center mr-10 ${
+                      <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${
                         item.balance > 0 ? "text-green-600" : "text-red-600"
                       }">$${item.balance}</td>
                     </tr>`;
@@ -763,10 +766,10 @@ const generateReportsTable = () => {
   for (const { date, balance, spending, gain } of filterSpendingAndGainMonth) {
     $("#totalMonths").innerHTML += `
                     <tr class="font-bold space-y-4">
-                        <td class="text-center ml-10 mb-10">${formatDate(date)}</td>
-                        <td class="text-green-600 text-center ml-10">+${gain}</td>
-                        <td class="text-red-600 text-center">-$${spending}</td>
-                        <td class="text-center mr-10 ${
+                        <td class="text-center ml-10 mb-10 text-[8px] md:text-[12px] lg:text-[20px]">${formatDate(date)}</td>
+                        <td class="text-green-600 text-center ml-10 text-[8px] md:text-[12px] lg:text-[20px]">+${gain}</td>
+                        <td class="text-red-600 text-center text-[8px] md:text-[12px] lg:text-[20px]">-$${spending}</td>
+                        <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${
                           balance > 0 ? "text-green-600" : "text-red-600"
                         }">$${balance}</td>
    
@@ -832,6 +835,30 @@ $("#showOperations").addEventListener("click", (e)=>{
   $("#operationContainer").classList.remove("hidden");
 })
 
+$("#btnEditOperation").addEventListener("click", () => {
+  const operationsId = $("#btnEditOperation").getAttribute("data-id");
+  $("#editOperationContainer").classList.add("hidden");
+  $("#tableContainer").innerHTML = "";
+  let operationsEdit = editOperations(parseInt(operationsId));
+  localStorage.setItem("operations", JSON.stringify(operationsEdit));
+  operations = operationsEdit;
+  generateOperationTable(JSON.parse(localStorage.getItem("operations")));
+});
+
+$("#cancelEditOp").addEventListener("click", () => {
+  $("#editOperationContainer").classList.add("hidden");
+  $("#balance").classList.remove("hidden");
+  $("#select-box-filtros").classList.remove("hidden");
+  $("#operationContainer").classList.remove("hidden");
+});
+
+$("#cancelAddOperation").addEventListener("click", () => {
+  $("#newOperationContainer").classList.add("hidden");
+  $("#balance").classList.remove("hidden");
+  $("#select-box-filtros").classList.remove("hidden");
+  $("#operationContainer").classList.remove("hidden");
+});
+
 //CATEGORIES EVENTS
 $("#showCategories").addEventListener("click", (e) => {
   e.preventDefault();
@@ -863,6 +890,9 @@ $("#showReports").addEventListener("click", (e) => {
   $("#operations").classList.add("hidden");
   $("#reportsTable").classList.remove("hidden");
 });
+
+
+
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden");
