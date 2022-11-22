@@ -714,9 +714,6 @@ const generateReportsTable = () => {
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpGain}</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
                     amountOpGain
-=======
-                    operationObtainedGain.amountOperation
->>>>>>> main
                   }</td>
               </tr>
             
