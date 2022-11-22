@@ -6,7 +6,7 @@
 ### Comenza a usarla haciendo click [aquí](agregar link de deploy) 
 ***
 ## Conocé la vista de escritorio 
-//agregar img
+![Image text](https://github.com/ValeriaMercado/TP_AhorrADAs/blob/227c64a68ceeee88f4bae0398d175e1d5851f4e2/images/image%20page.jpg)
 ***
 <br>
 
