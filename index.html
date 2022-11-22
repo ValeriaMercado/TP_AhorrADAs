@@ -1,5 +1,6 @@
+<!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,15 +18,15 @@
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <title>AhorrADAs</title>
 </head>
-
-
+ 
+ 
 <body class="bg-[#f8efc7] font-[Antic]">
     <header class="bg-[#79b9b9] flex flex-wrap items-center shadow-md ">
         <div class="flex-1 flex justify-between items-center">
             <a href=" "><img src="images/logoAhorradas.png" alt="logo AhorrADAs"
                     class="w-[65%] mt-10 ml-10 flex justify-between"></a>
         </div>
-
+ 
         <label for="menu-toggle" class="pointer-cursor md:hidden block">
             <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                 viewBox="0 0 20 20">
@@ -34,7 +35,7 @@
             </svg>
         </label>
         <input class="hidden" type="checkbox" id="menu-toggle" />
-
+ 
         <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
             <nav class="">
                 <ul class="md:flex items-center justify-between text-white text-xl pt-4  mr-10">
@@ -48,7 +49,7 @@
             </nav>
         </div>
     </header>
-
+ 
     <!----------------------------------------------- BALANCE--------------------------------------------------------->
     <div class="flex flex-row mb-20 max-sm:flex-col" id="tablesAndForms">
         <div class="flex flex-col ml-[10%] ">
@@ -76,7 +77,7 @@
                             <div id="balance-total" class="font-bold ml-[48px] text-[25px]">$0</div>
                         </div>
                     </div>
-
+ 
             </section>
             <!----------------------------------------------- FILTROS--------------------------------------------------------->
             <section class="filter-section">
@@ -92,7 +93,7 @@
                                 <label class="label font-bold mt-5 mb-3 text-[17px]" for="type-filter">Tipo</label>
                                 <div class="control">
                                     <div id="select-tipo">
-                                        <select id="type-filter" class="w-[100%] h-[44px] 
+                                        <select id="type-filter" class="w-[100%] h-[44px]
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500">
                                             <option value="todos">Todos</option>
                                             <option value="spending">Gasto</option>
@@ -107,7 +108,7 @@
                                 <div>
                                     <div id="select-categories">
                                         <select id="filter-categories"
-                                            class="w-[100%] h-[44px] 
+                                            class="w-[100%] h-[44px]
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8">
                                             <option value="todas">Todas</option>
                                             <option value="comida">Comida</option>
@@ -120,26 +121,26 @@
                                     </div>
                                 </div>
                             </div>
-
+ 
                             <div class="date">
                                 <label class="label font-bold mt-5 mb-3 text-[17px]" for="date-calendar">Desde</label>
                                 <div>
                                     <div>
                                         <input
-                                            class="input text-center  w-[100%] h-10 flex items-center 
+                                            class="input text-center  w-[100%] h-10 flex items-center
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8"
                                             type="date" id="date-filter">
                                     </div>
                                 </div>
                             </div>
-
+ 
                             <div class="orderFor">
                                 <label class="label font-bold mt-5 mb-3 text-[17px]" for="type-categories">Ordenar
                                     por</label>
                                 <div>
                                     <div id="select-categories">
                                         <select id="order-filter"
-                                            class="w-[100%] h-[44px] 
+                                            class="w-[100%] h-[44px]
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8">
                                             <option value="mas-recientes">Más reciente</option>
                                             <option value="menos-recientes">Menos reciente</option>
@@ -152,11 +153,11 @@
                                 </div>
                             </div>
                         </div>
-
+ 
                     </div>
             </section>
         </div>
-
+ 
         <div id="operationsAndnewOperation" class="w-full">
             <div class="flex flex-col ml-[5%] w-[90%] h-auto mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
                 id="operations">
@@ -171,7 +172,7 @@
                         id="showOperations">VER OPERACIONES</button>
                 </div>
             </div>
-
+ 
             <!------------------------- OPERATIONS ------------------------------->
             <div class="hidden flex flex-col ml-[5%] w-[90%] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
                 id="operationContainer">
@@ -193,16 +194,16 @@
                         </thead>
                     </table>
                     <div id="tableContainer">
-
+ 
                     </div>
                 </div>
-
+ 
             </div>
         </div>
     </div>
-
+ 
     <!------------------------- NEW OPERATION ------------------------------->
-
+ 
     </div>
     <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 hidden"
         id="newOperationContainer">
@@ -297,7 +298,7 @@
         </form>
     </div>
     <!------------------------- CATEGORIES ------------------------------->
-
+ 
     <div class="container mx-auto w-3/4 bg-[#ffffff] hidden rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 mb-10 p-5 w-auto h-auto "
         id="container-categories">
         <h2 class="text-2xl font-bold text-center">Categorías</h2>
@@ -324,7 +325,7 @@
         </div>
     </div>
     </div>
-
+ 
     <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 mb-10 hidden"
         id="container-edit-categories">
         <h2 class="text-2xl font-bold text-center">Editar categoría</h2>
@@ -347,9 +348,9 @@
             </div>
         </div>
     </div>
-
+ 
     <!-- ------------------------------------------REPORTES-------------------------------------------------------------------->
-
+ 
     <div id="reportsTableContainer"
         class=" hidden bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mb-10 m-auto px-10 flex flex-col justify-between w-3/4 mt-10 space-y-10">
         <h2 class="text-3xl text-[#79b9b9] font-bold mt-3 font-sans text-center ">Reportes</h2>
@@ -358,23 +359,23 @@
             <p class="text-center mb-2 text-xl font-semibold">Operaciones insuficientes</p>
             <p class="text-center">Prueba agregando más operaciones</p>
         </section>
-
+ 
         <table id="reportsTable" class="hidden">
-
+ 
         </table>
-
+ 
         <table id="totalCategoriesReports" class="justify-items-center hidden">
             <tr class="text-[12px] md:text-xl lg:text-2xl text-[#79b9b9] font-bold">
                 <td class="">Totales por categorías</td>
             </tr>
-
+ 
             <tr>
                 <th class="text-[10px] md:text-lg lg:text-xl">Categoría</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Ganancias</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Gastos</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Balance</th>
         </table>
-
+ 
         <table id="totalMonths" class="justify-items-center hidden">
             <tr class="text-[12px] md:text-xl lg:text-2xl text-[#79b9b9] font-bold justify-between">
                 <td class="">Totales por mes</td>
@@ -386,8 +387,8 @@
                 <th class="text-[10px] md:text-lg lg:text-xl">Balance</th>
         </table>
     </div>
-
+ 
     <script src="script.js"></script>
 </body>
-
+ 
 </html>

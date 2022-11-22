@@ -3,10 +3,7 @@
 
 ### La aplicación Ahorradas te va a ayudar a llevar un control de tus gastos y ganancias de forma organizada y detallada para que puedas monitorear tus movimientos y sacar conclusiones financieras mes a mes. 
 ***
-### Comenza a usarla haciendo click [aquí](agregar link de deploy) 
-***
-## Conocé la vista de escritorio 
-//agregar img
+### Comenza a usarla haciendo click [aquí](https://valeriamercado.github.io/TP_AhorrADAs/) 🤗✨
 ***
 <br>
 
@@ -54,3 +51,5 @@ git clone <url>
 
 ***
 <br>
+
+Hecho con 🧡 por Valeria Mercado y África Aular
