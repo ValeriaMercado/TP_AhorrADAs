@@ -226,7 +226,7 @@ const generateOperationTable = (operations) => {
     })"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${
                       operation.ids
-                    }" onclick="location.load()"><i class="fa-solid fa-trash"></i></button></td>
+                    }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `;
@@ -538,13 +538,12 @@ for (const operation of operations2) {
 }
 
 // higher gain
-const arrayOpGain = Math.max(
-  ...operationsGain.map((operation) => operation.amountOperation)
-);
+
+const arrayOpGain = Math.max(...operationsGain.map((operation) => operation.amountOperation));
 const arrayOpGain2 = operationsGain.filter(
   (operationsGain) => operationsGain.amountOperation === arrayOpGain
-);
-const operationObtainedGain = arrayOpGain2[arrayOpGain2.length - 1];
+  );
+  
 
 // higher spending
 const arrayOpSpending = Math.max(
@@ -553,18 +552,45 @@ const arrayOpSpending = Math.max(
 const arrayOpSpending2 = operationSpending.filter(
   (operationSpending) => operationSpending.amountOperation === arrayOpSpending
 );
-const operationObtainedSpending = arrayOpSpending2[arrayOpSpending2.length - 1];
+
 
 // category more spending
-const nameOpSpending = operationObtainedSpending.selectCategoryOperation;
+
+let nameOpSpending = ''
+let amountOpSpending = ''
+for (const operation of arrayOpSpending2){
+nameOpSpending = operation.selectCategoryOperation;
+amountOpSpending = operation.amountOperation
+}
 // category more gain
-const nameOpGain = operationObtainedGain.selectCategoryOperation;
+
+let nameOpGain = ''
+let amountOpGain = ''
+for (const operation of arrayOpGain2){
+ nameOpGain = operation.selectCategoryOperation;
+ amountOpGain = operation.amountOperation
+
+}
 
 // month more gain
-const monthGain = formatDate(operationObtainedGain.dateOperation);
+
+let monthGain = ''
+let monthGainAmount = ''
+for (const operation of arrayOpGain2){
+monthGain= formatDate(operation.dateOperation)
+monthGainAmount = operation.amountOperation
+  }
+
 
 // month more spending
-const monthSpending = formatDate(operationObtainedSpending.dateOperation);
+
+let monthSpending = ''
+let monthSpendingAmount = ''
+for (const operation of arrayOpSpending2){
+monthSpending= formatDate(operation.dateOperation)
+monthSpendingAmount = operation.amountOperation
+  }
+
 
 // separate by category
 let categoriesSpending = 0;
@@ -687,7 +713,11 @@ const generateReportsTable = () => {
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor ganancia</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpGain}</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
+<<<<<<< HEAD
+                    amountOpGain
+=======
                     operationObtainedGain.amountOperation
+>>>>>>> main
                   }</td>
               </tr>
             
@@ -695,7 +725,11 @@ const generateReportsTable = () => {
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpSpending}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
+<<<<<<< HEAD
+                amountOpSpending
+=======
                 operationObtainedSpending.amountOperation
+>>>>>>> main
               }</td>
             </tr>
             <tr class="font-bold">
@@ -709,14 +743,22 @@ const generateReportsTable = () => {
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor ganancia</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthGain}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
+<<<<<<< HEAD
+                monthGainAmount
+=======
                 operationObtainedGain.amountOperation
+>>>>>>> main
               }</td>
             </tr>
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthSpending}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
+<<<<<<< HEAD
+                monthSpendingAmount
+=======
                 operationObtainedSpending.amountOperation
+>>>>>>> main
               }</td>
             </tr>           
         </table>
@@ -864,6 +906,9 @@ $("#showReports").addEventListener("click", (e) => {
   $("#operations").classList.add("hidden");
   $("#reportsTable").classList.remove("hidden");
 });
+
+
+
 
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden");
