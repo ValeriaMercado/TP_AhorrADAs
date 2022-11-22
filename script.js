@@ -713,7 +713,6 @@ const generateReportsTable = () => {
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor ganancia</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpGain}</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
-<<<<<<< HEAD
                     amountOpGain
 =======
                     operationObtainedGain.amountOperation
@@ -725,11 +724,7 @@ const generateReportsTable = () => {
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpSpending}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
-<<<<<<< HEAD
                 amountOpSpending
-=======
-                operationObtainedSpending.amountOperation
->>>>>>> main
               }</td>
             </tr>
             <tr class="font-bold">
@@ -743,22 +738,14 @@ const generateReportsTable = () => {
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor ganancia</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthGain}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
-<<<<<<< HEAD
                 monthGainAmount
-=======
-                operationObtainedGain.amountOperation
->>>>>>> main
               }</td>
             </tr>
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthSpending}</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
-<<<<<<< HEAD
                 monthSpendingAmount
-=======
-                operationObtainedSpending.amountOperation
->>>>>>> main
               }</td>
             </tr>           
         </table>
