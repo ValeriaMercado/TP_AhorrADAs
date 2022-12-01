@@ -708,31 +708,8 @@ for (const operations of moreBalanceCategory) {
 // total months
 
 for (const item of operations2) {
-  if (formatDate(item.dateOperation).slice(3,5) === "01"){
-    item.dateOperation = "Enero";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "02"){
-    item.dateOperation = "Febrero";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "03") {
-    item.dateOperation = "Marzo";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "04") {
-    item.dateOperation = "Abril";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "05") {
-    item.dateOperation = "Mayo";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "06") {
-    item.dateOperation = "Junio";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "07"){
-    item.dateOperation = "Julio";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "08") {
-    item.dateOperation = "Agosto";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "09"){
-    item.dateOperation = "Septiembre";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "10"){
-    item.dateOperation = "Octubre";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "11") {
-    item.dateOperation = "Noviembre";
-  } else if (formatDate(item.dateOperation).slice(3,5) === "12") {
-    item.dateOperation = "Diciembre";
-  }
+
+    item.dateOperation = (formatDate(item.dateOperation).slice(3,10))
 }
 
 const filterSpendingAndGainMonth = Object.values(
