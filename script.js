@@ -353,6 +353,7 @@ const categorySelect = (inputID) => {
 }
 
 window.addEventListener("load", () => {
+  setDay()
   categorySelect($("#filter-categories"))
   const option = document.createElement("option")
   const value = document.createTextNode("Todas")
@@ -442,6 +443,17 @@ const newDates = (operations) => {
   }
   return selectedDates;
 };
+
+setDay = () => {
+  const inputDate = $("#date-filter")
+  let newDate = new Date()
+  let month =  newDate.getMonth() + 1
+  let day = 1;
+  let year = newDate.getFullYear();
+  if(day<10){day='0'+day}
+  if(month<10){month='0'+month}
+  inputDate.value= year + "-" + month + "-" + day
+}; 
 
 $("#date-filter").onchange = () => {
   const filterDates = newDates(getDataFromLocalStorage("operations"));
