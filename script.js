@@ -8,12 +8,23 @@ const $tableCategories = $("#table-categories");
 const btnEdit = $$(".btn-edit");
 const btnDelete = $$(".btn-delete");
 
+
+const generateID = () => {
+  let length = 4
+  let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  let idObtained = "";
+  for (let i = 0, n = characters.length; i < length; ++i) {
+    idObtained += characters.charAt(Math.floor(Math.random() * n));
+  }
+  return idObtained;
+}
+
 let defaultCategories = [
-  { id: 1, nombre: "Comida" },
-  { id: 2, nombre: "Servicios" },
-  { id: 3, nombre: "Salidas" },
-  { id: 4, nombre: "Educacion" },
-  { id: 5, nombre: "Trabajo" },
+  { id: generateID(), nombre:"Comida" },
+  { id: generateID(), nombre:"Servicios" },
+  { id: generateID(), nombre:"Salidas" },
+  { id: generateID(), nombre:"Educacion" },
+  { id: generateID(), nombre:"Trabajo" },
 ];
 
 //FUNCTONS LOCALSTORAGE
@@ -50,17 +61,13 @@ const generateTable = (categories) => {
   for (const category of categories) {
     table.innerHTML += `
     <tr class="w-[20%] h-10 mb-5 categoryColumn"  >
-                        <th class="w-[80%] text-start mb-3">${
-                          (category.id, category.nombre)
-                        }</th>
-                        <th scope="col"><button class= "mr-3 btn-edit text-green-500 lg:text-[18px]" data-id="${
-                          category.id
-                        }" onclick="categoriesEdit(${
-      category.id
-    })">Editar</button></th>
-                        <th scope="col"> <button class= "btnRemove text-red-500 lg:text-[18px]" data-id="${
-                          category.id
-                        }">Eliminar</button></th>
+                        <th class="w-[80%] text-start mb-3">${(category.id, category.nombre)
+      }</th>
+                        <th scope="col"><button class= "mr-3 btn-edit text-green-500 lg:text-[18px]" data-id="${category.id
+      }" onclick="categoriesEdit(${category.id
+      })">Editar</button></th>
+                        <th scope="col"> <button class= "btnRemove text-red-500 lg:text-[18px]" data-id="${category.id
+      }">Eliminar</button></th>
             </tr>
                `;
   }
@@ -69,20 +76,26 @@ const generateTable = (categories) => {
   for (const btn of btnRemove) {
     const categoryId = btn.getAttribute("data-id");
     btn.addEventListener("click", () => {
-      deleteCategory(categoryId);
+      $("#container-categories").classList.add("hidden")
+      $("#alertDelete").classList.remove("hidden")
+      $("#submit-delete").setAttribute("data-id", categoryId)
     });
   }
 };
-generateTable(JSON.parse(localStorage.getItem("categories")));
 
+$("#submit-delete").addEventListener("click", () => {
+  $("#container-categories").classList.remove("hidden")
+  $("#alertDelete").classList.add("hidden")
+  const categoryId = $("#submit-delete").getAttribute("data-id")
+  deleteCategory(categoryId)
+})
+
+generateTable(JSON.parse(localStorage.getItem("categories")));
 // ********************************************************GENERATE NEW CATEGORY*************************************************
 
-const random = (start, end) => {
-  return Math.floor(Math.random() * (end - start + 1)) + start;
-};
 const categoryInfo = () => {
   const nombre = $("#addCategory").value;
-  let id = random(6, 999);
+  let id = generateID();
   return {
     id,
     nombre,
@@ -100,6 +113,7 @@ const generateNewCategory = () => {
     generateTable(JSON.parse(localStorage.getItem("categories")));
   }
 };
+
 $btnAdd.addEventListener("click", generateNewCategory);
 
 $("#addCategory").addEventListener("keypress", (e) => {
@@ -114,7 +128,8 @@ const deleteCategory = (categoryId) => {
   table.innerHTML = "";
   let categoriesLocal = JSON.parse(localStorage.getItem("categories"));
   let newCategories = categoriesLocal.filter((category) => {
-    return category.id !== parseInt(categoryId);
+    console.log(categoryId)
+    return category.id !== categoryId;
   });
 
   categories = newCategories;
@@ -167,14 +182,14 @@ $("#btn-editForm").addEventListener("click", () => {
 // ADD NEW CATEGORY TO FILTERS
 const selectCategories = (inputID) => {
   let categories = getDataFromLocalStorage("categories")
-inputID.innerHTML = ''
-  for (const category of categories){
-    for (const {nombre} of category){
+  inputID.innerHTML = ''
+  for (const category of categories) {
+    for (const { nombre } of category) {
       inputID.innerHTML += `  <option value="${nombre}">${nombre}</option>`
     }
   }
 
-  window.addEventListener("load", () =>{
+  window.addEventListener("load", () => {
     selectCategories($("#filter-categories"))
     const option = document.createElement("option")
     const value = document.createTextNode("Todas")
@@ -203,30 +218,23 @@ const generateOperationTable = (operations) => {
     $("#tableContainer").innerHTML += `
                 <table class=" w-full">
                 <tr class="w-full font-bold text-center">
-                <td class="w-1/5 font-bold text-[12px] lg:text-[14px]"> ${
-                  operation.descriptionOperation
-                }</td>
+                <td class="w-1/5 font-bold text-[12px] lg:text-[14px]"> ${operation.descriptionOperation
+      }</td>
                 <td class="w-1/5 font-bold hidden"> ${operation.ids}</td>
-                    <td class="w-1/5 mr-3 btn-edit text-green-500 text-[12px]">${
-                      operation.selectCategoryOperation
-                    }</td>
+                    <td class="w-1/5 mr-3 btn-edit text-green-500 text-[12px]">${operation.selectCategoryOperation
+      }</td>
                     <td class="w-1/5 text-[10px]">${formatDate(operation.dateOperation)}
                     </td>
-                    <td class="w-1/5  ${
-                      operation.operationType === "gain"
-                        ? "text-green-600 text-[10px]"
-                        : "text-red-600 text-[10px]"
-                    }">${operation.operationType === "spending" ? "-" : "+"}$${
-      operation.amountOperation
-    }</td>
-                    <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${
-                      operation.ids
-                    }" onclick="operationsEdit(${
-      operation.ids
-    })"><i class="fa-solid fa-pen-to-square"></i></button>
-                    <button class="btnDeleted text-red-500" data-id="${
-                      operation.ids
-                    }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
+                    <td class="w-1/5  ${operation.operationType === "gain"
+        ? "text-green-600 text-[10px]"
+        : "text-red-600 text-[10px]"
+      }">${operation.operationType === "spending" ? "-" : "+"}$${operation.amountOperation
+      }</td>
+                    <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids
+      }" onclick="operationsEdit(${operation.ids
+      })"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button class="btnDeleted text-red-500" data-id="${operation.ids
+      }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `;
@@ -243,7 +251,7 @@ const generateOperationTable = (operations) => {
 generateOperationTable(JSON.parse(localStorage.getItem("operations")));
 
 const operationInfo = () => {
-  const ids = random(6, 999);
+  const ids = generateID();
   const descriptionOperation = $("#description").value;
   const amountOperation = parseInt($("#amountOperation").value);
   const operationType = $("#operationType").value;
@@ -262,14 +270,15 @@ const operationInfo = () => {
 
 const generateNewOperation = () => {
   if ($("#description").value === "") {
-  return alert("Debe ingresar un nombre para la operación");
-  } else{
-  $("#tableContainer").innerHTML = "";
-  operations.push(operationInfo());
-  $("#description").value = "";
-  localStorage.setItem("operations", JSON.stringify(operations));
-  generateOperationTable(JSON.parse(localStorage.getItem("operations")));
-};}
+    return alert("Debe ingresar un nombre para la operación");
+  } else {
+    $("#tableContainer").innerHTML = "";
+    operations.push(operationInfo());
+    $("#description").value = "";
+    localStorage.setItem("operations", JSON.stringify(operations));
+    generateOperationTable(JSON.parse(localStorage.getItem("operations")));
+  };
+}
 
 $("#btnAddOperation").addEventListener("click", generateNewOperation);
 
@@ -285,7 +294,7 @@ const deleteOperation = (operationId) => {
   $("#tableContainer").innerHTML = "";
   let operationsLocal = JSON.parse(localStorage.getItem("operations"));
   let newOperations = operationsLocal.filter((operation) => {
-    return operation.ids !== parseInt(operationId);
+    return operation.ids !== operationId;
   });
   operations = newOperations;
   localStorage.setItem("operations", JSON.stringify(operations));
@@ -333,30 +342,29 @@ const editOperations = (ids) => {
 };
 
 
-
 //ADD CATEGORY SELECT
-const categorySelect = (inputID) =>{
+const categorySelect = (inputID) => {
   let categories = getDataFromLocalStorage("categories")
   inputID.innerHTML = ''
-  for (const category of categories){
-     const {id, nombre} = category 
-     inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
+  for (const category of categories) {
+    const { id, nombre } = category
+    inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
   }
 }
 
-window.addEventListener("load", () =>{
+window.addEventListener("load", () => {
   categorySelect($("#filter-categories"))
   const option = document.createElement("option")
-  const value = document.createTextNode ("Todas")
+  const value = document.createTextNode("Todas")
   option.appendChild(value)
 
   $("#filter-categories").append(option)
 })
 
-window.addEventListener("load", () =>{
+window.addEventListener("load", () => {
   categorySelect($("#selectCategoryOperation"))
   const option = document.createElement("option")
-  const value = document.createTextNode ("Todas")
+  const value = document.createTextNode("Todas")
   option.appendChild(value)
 
   $("#selectCategoryOperation").append(option)
@@ -365,12 +373,10 @@ window.addEventListener("load", () =>{
 window.addEventListener("load", () => {
   categorySelect($("#selectCategoryOperationEdit"))
   const option = document.createElement("option")
-  const value = document.createTextNode("Todas")
-  option.appendChild(value)
+  option.appendChild(option)
 
   $("#selectCategoryOperationEdit").append(option)
 })
-
 
 // ****FILTERS****
 const filterOperationsType = (array, type) => {
@@ -517,10 +523,9 @@ const generateTableBalance = () => {
           <h1 class="font-bold text-[25px]">Total</h1>
       </div> 
       <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
-	      `;
+        `;
 };
 generateTableBalance();
-
 
 // *****REPORTS******
 
@@ -542,8 +547,7 @@ for (const operation of operations2) {
 const arrayOpGain = Math.max(...operationsGain.map((operation) => operation.amountOperation));
 const arrayOpGain2 = operationsGain.filter(
   (operationsGain) => operationsGain.amountOperation === arrayOpGain
-  );
-  
+);
 
 // higher spending
 const arrayOpSpending = Math.max(
@@ -553,22 +557,21 @@ const arrayOpSpending2 = operationSpending.filter(
   (operationSpending) => operationSpending.amountOperation === arrayOpSpending
 );
 
-
 // category more spending
 
 let nameOpSpending = ''
 let amountOpSpending = ''
-for (const operation of arrayOpSpending2){
-nameOpSpending = operation.selectCategoryOperation;
-amountOpSpending = operation.amountOperation
+for (const operation of arrayOpSpending2) {
+  nameOpSpending = operation.selectCategoryOperation;
+  amountOpSpending = operation.amountOperation
 }
 // category more gain
 
 let nameOpGain = ''
 let amountOpGain = ''
-for (const operation of arrayOpGain2){
- nameOpGain = operation.selectCategoryOperation;
- amountOpGain = operation.amountOperation
+for (const operation of arrayOpGain2) {
+  nameOpGain = operation.selectCategoryOperation;
+  amountOpGain = operation.amountOperation
 
 }
 
@@ -576,21 +579,67 @@ for (const operation of arrayOpGain2){
 
 let monthGain = ''
 let monthGainAmount = ''
-for (const operation of arrayOpGain2){
-monthGain= formatDate(operation.dateOperation)
-monthGainAmount = operation.amountOperation
+for (const operation of arrayOpGain2) {
+  monthGainAmount = operation.amountOperation
+  if (formatDate(operation.dateOperation).slice(3,5) === "01") {
+    monthGain = "Enero";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "02") {
+    monthGain =  "Febrero";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "03") {
+    monthGain = "Marzo";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "04") {
+    monthGain =  "Abril";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "05") {
+    monthGain =  "Mayo";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "06") {
+    monthGain =  "Junio";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "07") {
+    monthGain =  "Julio";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "08")  {
+    monthGain = "Agosto";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "09") {
+    monthGain =  "Septiembre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "10") {
+    monthGain = "Octubre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "11")  {
+    monthGain = "Noviembre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "12") {
+    monthGain = "Diciembre";
   }
-
+}
 
 // month more spending
 
 let monthSpending = ''
 let monthSpendingAmount = ''
-for (const operation of arrayOpSpending2){
-monthSpending= formatDate(operation.dateOperation)
-monthSpendingAmount = operation.amountOperation
+for (const operation of arrayOpSpending2) {
+  monthSpendingAmount = operation.amountOperation
+  if (formatDate(operation.dateOperation).slice(3,5) === "01") {
+    monthSpending = "Enero";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "02") {
+    monthSpending =  "Febrero";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "03") {
+    monthSpending = "Marzo";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "04") {
+    monthSpending =  "Abril";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "05") {
+    monthSpending =  "Mayo";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "06") {
+    monthSpending =  "Junio";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "07") {
+    monthSpending =  "Julio";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "08")  {
+    monthSpending = "Agosto";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "09") {
+    monthSpending =  "Septiembre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "10") {
+    monthSpending = "Octubre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "11")  {
+    monthSpending = "Noviembre";
+  } else if (formatDate(operation.dateOperation).slice(3,5) === "12") {
+    monthSpending = "Diciembre";
   }
-
+}
 
 // separate by category
 let categoriesSpending = 0;
@@ -659,29 +708,29 @@ for (const operations of moreBalanceCategory) {
 // total months
 
 for (const item of operations2) {
-  if (item.dateOperation.includes("2022-01")) {
+  if (formatDate(item.dateOperation).slice(3,5) === "01"){
     item.dateOperation = "Enero";
-  } else if (item.dateOperation.includes("2022-02")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "02"){
     item.dateOperation = "Febrero";
-  } else if (item.dateOperation.includes("2022-03")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "03") {
     item.dateOperation = "Marzo";
-  } else if (item.dateOperation.includes("2022-04")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "04") {
     item.dateOperation = "Abril";
-  } else if (item.dateOperation.includes("2022-05")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "05") {
     item.dateOperation = "Mayo";
-  } else if (item.dateOperation.includes("2022-06")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "06") {
     item.dateOperation = "Junio";
-  } else if (item.dateOperation.includes("2022-07")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "07"){
     item.dateOperation = "Julio";
-  } else if (item.dateOperation.includes("2022-08")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "08") {
     item.dateOperation = "Agosto";
-  } else if (item.dateOperation.includes("2022-09")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "09"){
     item.dateOperation = "Septiembre";
-  } else if (item.dateOperation.includes("2022-10")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "10"){
     item.dateOperation = "Octubre";
-  } else if (item.dateOperation.includes("2022-11")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "11") {
     item.dateOperation = "Noviembre";
-  } else if (item.dateOperation.includes("2022-02")) {
+  } else if (formatDate(item.dateOperation).slice(3,5) === "12") {
     item.dateOperation = "Diciembre";
   }
 }
@@ -712,38 +761,33 @@ const generateReportsTable = () => {
               <tr class= "font-bold">
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor ganancia</td>
                   <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpGain}</td>
-                  <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
-                    amountOpGain
-                  }</td>
+                  <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${amountOpGain
+    }</td>
               </tr>
             
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${nameOpSpending}</td>
-              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
-                amountOpSpending
-              }</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${amountOpSpending
+    }</td>
             </tr>
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Categoria con mayor balance</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${moreBalanceCategoryName.slice(0, 1)}</td>
-              <td class= "text-[8px] md:text-[12px] lg:text-[20px] ${
-                moreBalance.balance > 0 ? "text-red-600" : "text-green-600"
-              }">$${Math.max(...moreBalance)}</td>
+              <td class= "text-[8px] md:text-[12px] lg:text-[20px] ${moreBalance.balance > 0 ? "text-red-600" : "text-green-600"
+    }">$${Math.max(...moreBalance)}</td>
             </tr>
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor ganancia</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthGain}</td>
-              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${
-                monthGainAmount
-              }</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-green-600">+$${monthGainAmount
+    }</td>
             </tr>
             <tr class="font-bold">
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">Mes con mayor gasto</td>
               <td class="text-[8px] md:text-[12px] lg:text-[20px]">${monthSpending}</td>
-              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${
-                monthSpendingAmount
-              }</td>
+              <td class="text-[8px] md:text-[12px] lg:text-[20px] text-red-600">-$${monthSpendingAmount
+    }</td>
             </tr>           
         </table>
   `;
@@ -751,15 +795,12 @@ const generateReportsTable = () => {
     $("#totalCategoriesReports").innerHTML += `
                     <tr class="font-bold">
                       <td class="text-center mb-10 text-[8px] md:text-[12px] lg:text-[20px]">${item.category}</td>
-                      <td class="text-green-600 text-center ml-10 text-[8px] md:text-[12px] lg:text-[20px]">+${
-                        item.gain
-                      }</td>
-                      <td class="text-red-600 text-center text-[8px] md:text-[12px] lg:text-[20px]">-$${
-                        item.spending
-                      }</td>
-                      <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${
-                        item.balance > 0 ? "text-green-600" : "text-red-600"
-                      }">$${item.balance}</td>
+                      <td class="text-green-600 text-center ml-10 text-[8px] md:text-[12px] lg:text-[20px]">+${item.gain
+      }</td>
+                      <td class="text-red-600 text-center text-[8px] md:text-[12px] lg:text-[20px]">-$${item.spending
+      }</td>
+                      <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${item.balance > 0 ? "text-green-600" : "text-red-600"
+      }">$${item.balance}</td>
                     </tr>`;
   }
 
@@ -769,9 +810,8 @@ const generateReportsTable = () => {
                         <td class="text-center ml-10 mb-10 text-[8px] md:text-[12px] lg:text-[20px]">${formatDate(date)}</td>
                         <td class="text-green-600 text-center ml-10 text-[8px] md:text-[12px] lg:text-[20px]">+${gain}</td>
                         <td class="text-red-600 text-center text-[8px] md:text-[12px] lg:text-[20px]">-$${spending}</td>
-                        <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${
-                          balance > 0 ? "text-green-600" : "text-red-600"
-                        }">$${balance}</td>
+                        <td class="text-center mr-10 text-[8px] md:text-[12px] lg:text-[20px] ${balance > 0 ? "text-green-600" : "text-red-600"
+      }">$${balance}</td>
    
                         </tr>`;
   }
@@ -783,7 +823,7 @@ const containerFilter = $("#filterContainer");
 const btnAddOperation = $("#btnAddOperation");
 const toggleOperation = $("#toggleOperation");
 const toggleOperation2 = $("#toggleOperation2");
-const sectionsWithoutOperations = () =>{
+const sectionsWithoutOperations = () => {
   $("#balance").classList.add("hidden");
   $("#select-box-filtros").classList.add("hidden");
   $("#container-categories").classList.add("hidden");
@@ -809,7 +849,6 @@ btnAddOperation.addEventListener("click", (e) => {
   $("#balance").classList.remove("hidden");
   $("#select-box-filtros").classList.remove("hidden");
   $("#operationContainer").classList.remove("hidden");
-  $("#operations").classList.add("hidden");
 });
 
 btnAddOperation.addEventListener("click", () => {
@@ -819,21 +858,9 @@ btnAddOperation.addEventListener("click", () => {
 toggleOperation.addEventListener("click", (e) => {
   e.preventDefault();
   $("#newOperationContainer").classList.remove("hidden");
-  $("#operations").classList.add("hidden");
+  $("#operationContainer").classList.add("hidden");
   sectionsWithoutOperations()
 });
-
-toggleOperation2.addEventListener("click", (e) => {
-  e.preventDefault();
-  $("#newOperationContainer").classList.remove("hidden");
-  sectionsWithoutOperations()
-});
-
-$("#showOperations").addEventListener("click", (e)=>{
-  e.preventDefault();
-  $("#operations").classList.add("hidden");
-  $("#operationContainer").classList.remove("hidden");
-})
 
 $("#btnEditOperation").addEventListener("click", () => {
   const operationsId = $("#btnEditOperation").getAttribute("data-id");
@@ -893,7 +920,6 @@ $("#showReports").addEventListener("click", (e) => {
 
 
 
-
 if (operations.length > 3) {
   $("#ImgReports").classList.add("hidden");
   $("#reportsTable").classList.remove("hidden");
@@ -901,3 +927,11 @@ if (operations.length > 3) {
   $("#totalCategoriesReports").classList.remove("hidden");
   generateReportsTable();
 }
+
+if (operations.length > 0) {
+  $("#imgOperations").classList.add("hidden");
+  $(".tableHeader").classList.remove("hidden")
+}
+
+
+
