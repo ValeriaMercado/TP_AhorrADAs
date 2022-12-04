@@ -94,7 +94,7 @@ $("#submit-delete").addEventListener("click", () => {
   const operations = getDataFromLocalStorage('operations')
   .filter(operation => operation.selectCategoryOperation !== removeCategoryInOperations[0].nombre);
 
-   sendDataFromLocalStorage("operations", operations)
+sendDataFromLocalStorage("operations", operations)
 })
 
 generateTable(JSON.parse(localStorage.getItem("categories")));
@@ -154,7 +154,7 @@ const categoriesEdit = (id) => {
   $("#container-categories").classList.add("hidden");
   $("#container-edit-categories").classList.remove("hidden");
   const selectCategory = findCategory(id);
-  $("#editName").value = `  ${selectCategory.nombre}`;
+  $("#editName").value = `${selectCategory.nombre}`;
   $("#btn-editForm").setAttribute("data-id", id);
   $("#btn-cancel").setAttribute("data-id", id);
 };
@@ -184,8 +184,6 @@ $("#btn-editForm").addEventListener("click", () => {
   localStorage.setItem("categories", JSON.stringify(categoriesEdit));
   categories = categoriesEdit;
   generateTable(JSON.parse(localStorage.getItem("categories")));
-
-  
 });
 
 // *********************************************************OPERATIONS**************************************************************
@@ -276,6 +274,7 @@ const operationInfo = () => {
     ids,
   };
 };
+
 // *********************************************************NEW OPERATION********************************************************
 
 const generateNewOperation = () => {
@@ -514,24 +513,24 @@ const generateTableBalance = () => {
   }
   balanceTotal = gainBalance - spendingBalance;
   $("#balance").innerHTML = `
-  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[27px]">Balance</h2>
+  <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 text-[20px]">Balance</h2>
   <div class="grid gap-4 grid-cols-2 m-3 flex">
       <div>
-          <h3 class="flex mb-5 mt-3 text-[22px]">Ganancias</h3>
+          <h3 class="flex mb-5 mt-3 text-[18px]">Ganancias</h3>
       </div>
       <div>
-          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[22px]">+${gainBalance}</h3>
+          <h3 id="gananciasBalance" class="font-bold text-green-700 ml-4 mt-3 text-[18px]">+${gainBalance}</h3>
       </div>
       <div>
-          <h3 id="gastosBalance" class="flex mb-5 text-[22px]">Gastos</h3>
+          <h3 id="gastosBalance" class="flex mb-5 text-[18px]">Gastos</h3>
       </div>
-      <div class="font-bold text-red-700 ml-4 text-[22px]">
+      <div class="font-bold text-red-700 ml-4 text-[18px]">
           <p>-${spendingBalance}</p>
       </div>
       <div>
-          <h1 class="font-bold text-[25px]">Total</h1>
+          <h1 class="font-bold text-[20px]">Total</h1>
       </div> 
-      <div id="balance-total" class="font-bold text-[25px] ml-4">$${balanceTotal}</div> 
+      <div id="balance-total" class="font-bold text-[18px] ml-4">$${balanceTotal}</div> 
         `;
 };
 generateTableBalance();
