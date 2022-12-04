@@ -94,7 +94,7 @@ $("#submit-delete").addEventListener("click", () => {
   const operations = getDataFromLocalStorage('operations')
   .filter(operation => operation.selectCategoryOperation !== removeCategoryInOperations[0].nombre);
 
-sendDataFromLocalStorage("operations", operations)
+   sendDataFromLocalStorage("operations", operations)
 })
 
 generateTable(JSON.parse(localStorage.getItem("categories")));
@@ -184,26 +184,9 @@ $("#btn-editForm").addEventListener("click", () => {
   localStorage.setItem("categories", JSON.stringify(categoriesEdit));
   categories = categoriesEdit;
   generateTable(JSON.parse(localStorage.getItem("categories")));
+
+  
 });
-
-// // ADD NEW CATEGORY TO FILTERS
-// const selectCategories = (inputID) => {
-//   let categories = getDataFromLocalStorage("categories")
-//   inputID.innerHTML = ''
-//   for (const category of categories) {
-//     for (const { nombre } of category) {
-//       inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
-//     }
-//   }
-
-//   window.addEventListener("load", () => {
-//     selectCategories($("#filter-categories"))
-//     const option = document.createElement("option")
-//     const value = document.getElementById('allCategories')
-//     option.appendChild(value)
-//     $("#filter-categories").append(option)
-//   })
-// }
 
 // *********************************************************OPERATIONS**************************************************************
 
@@ -370,42 +353,27 @@ const editOperations = (ids) => {
 
 
 //ADD CATEGORY SELECT
-const categorySelect = (inputID) => {
-  let categories = getDataFromLocalStorage("categories")
-  inputID.innerHTML = ''
-  for (const category of categories) {
-    const { nombre } = category
-    inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
+
+const categoriesInSelect = () => {
+  const categories = getDataFromLocalStorage("categories");
+
+  $("#filter-categories").innerHTML = `<option value="Todas">Todas</option>`;
+  $("#selectCategoryOperationEdit").innerHTML = ''
+
+  for (const { id, nombre } of categories) {
+    $("#filter-categories").innerHTML += `<option  id='${id}' class="flex flex col">${nombre}</option>`;
+    $("#selectCategoryOperation").innerHTML += `<option  id='${id}' class="flex flex col">${nombre}</option>`;
+    $("#selectCategoryOperationEdit").innerHTML += `<option  id='${id}' class="flex flex col">${nombre}</option>`;
   }
-}
+};
 
 window.addEventListener("load", () => {
   setDay()
-  categorySelect($("#filter-categories"))
-  const option = document.createElement("option")
-  const value = document.getElementById('allCategories')
-  option.append(value)
-
-  $("#filter-categories").append(option)
+  categoriesInSelect($("#filter-categories"))
 })
 
-window.addEventListener("load", () => {
-  categorySelect($("#selectCategoryOperation"))
-  const option = document.createElement("option")
-  const value = document.getElementById('allCategories')
-  option.append(value)
 
-  $("#selectCategoryOperation").append(option)
-})
 
-window.addEventListener("load", () => {
-  categorySelect($("#selectCategoryOperationEdit"))
-  const option = document.createElement("option")
-  const value = document.getElementById('allCategories')
-  option.append(value)
-
-  $("#selectCategoryOperationEdit").append(option)
-})
 
 // ****FILTERS****
 const filterOperationsType = (array, type) => {
