@@ -11,7 +11,7 @@ const btnDelete = $$(".btn-delete");
 
 const generateID = () => {
   let length = 4
-  let characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+  let characters = "0123456789"
   let idObtained = "";
   for (let i = 0, n = characters.length; i < length; ++i) {
     idObtained += characters.charAt(Math.floor(Math.random() * n));
@@ -20,11 +20,11 @@ const generateID = () => {
 }
 
 let defaultCategories = [
-  { id: generateID(), nombre:"Comida" },
-  { id: generateID(), nombre:"Servicios" },
-  { id: generateID(), nombre:"Salidas" },
-  { id: generateID(), nombre:"Educacion" },
-  { id: generateID(), nombre:"Trabajo" },
+  { id: 1, nombre:"Comida" },
+  { id: 2, nombre:"Servicios" },
+  { id: 3, nombre:"Salidas" },
+  { id: 4, nombre:"Educacion" },
+  { id: 5, nombre:"Trabajo" },
 ];
 
 //FUNCTONS LOCALSTORAGE
@@ -95,7 +95,7 @@ generateTable(JSON.parse(localStorage.getItem("categories")));
 
 const categoryInfo = () => {
   const nombre = $("#addCategory").value;
-  let id = generateID();
+  let id = parseInt(generateID());
   return {
     id,
     nombre,
@@ -229,7 +229,7 @@ const generateOperationTable = (operations) => {
         ? "text-green-600 text-[10px]"
         : "text-red-600 text-[10px]"
       }">${operation.operationType === "spending" ? "-" : "+"}$${operation.amountOperation
-      }</td>
+}</td>
                     <td class="w-1/5 space-y-1 flex-row space-x-2 items-center text-blue-700 ml-[40%]"> <button class="editOperation" data-id="${operation.ids
       }" onclick="operationsEdit(${operation.ids
       })"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -251,7 +251,7 @@ const generateOperationTable = (operations) => {
 generateOperationTable(JSON.parse(localStorage.getItem("operations")));
 
 const operationInfo = () => {
-  const ids = generateID();
+  const ids = parseInt(generateID());
   const descriptionOperation = $("#description").value;
   const amountOperation = parseInt($("#amountOperation").value);
   const operationType = $("#operationType").value;
@@ -498,6 +498,7 @@ const sortBy = () => {
   return operations;
 };
 
+
 // ***BALANCE***
 const gainBalance = $("#gananciasBalance");
 const spendingBalance = $("#gastosBalance");
@@ -510,9 +511,9 @@ const generateTableBalance = () => {
 
   for (const operation of operations) {
     if (operation.operationType === "spending") {
-      spendingBalance += operation.amountOperation;
+      spendingBalance += parseInt(operation.amountOperation);
     } else if (operation.operationType === "gain") {
-      gainBalance += operation.amountOperation;
+      gainBalance += parseInt(operation.amountOperation);
     }
   }
   balanceTotal = gainBalance - spendingBalance;
@@ -921,6 +922,3 @@ if (operations.length > 0) {
   $("#imgOperations").classList.add("hidden");
   $(".tableHeader").classList.remove("hidden")
 }
-
-
-

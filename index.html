@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,21 +12,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Antic&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/jpg" href="./images/favicon.ico"/>
+    <link rel="icon" type="image/jpg" href="./images/favicon.ico" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <title>AhorrADAs</title>
 </head>
- 
- 
+
+
 <body class="bg-[#f8efc7] font-[Antic]">
     <header class="bg-[#79b9b9] flex flex-wrap items-center shadow-md ">
         <div class="flex-1 flex justify-between items-center">
             <a href=" "><img src="images/logoAhorradas.png" alt="logo AhorrADAs"
                     class="w-[65%] mt-10 ml-10 flex justify-between"></a>
         </div>
- 
+
         <label for="menu-toggle" class="pointer-cursor md:hidden block">
             <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                 viewBox="0 0 20 20">
@@ -34,21 +35,21 @@
             </svg>
         </label>
         <input class="hidden" type="checkbox" id="menu-toggle" />
- 
+
         <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
             <nav class="">
                 <ul class="md:flex items-center justify-between text-white text-xl pt-4  mr-10">
                     <li><a class="md:p-4 py-3 px-0 block" href=" "><i
-                        class="fas fa-chart-line mr-2 text-white"></i>Balance</a></li>
+                                class="fas fa-chart-line mr-2 text-white"></i>Balance</a></li>
                     <li><a id="showCategories" class="md:p-4 py-3 px-0 block" href=" "><i
-                        class="fa-solid fa-tag mr-2 text-white" ></i>Categorias</a></li>
-                    <li><a id="showReports"  class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href=" " ><i
-                        class="fas fa-chart-pie mr-2 text-white"></i>Reportes</a></li>
-                  </ul>
+                                class="fa-solid fa-tag mr-2 text-white"></i>Categorias</a></li>
+                    <li><a id="showReports" class="md:p-4 py-3 px-0 block md:mb-0 mb-2" href=" "><i
+                                class="fas fa-chart-pie mr-2 text-white"></i>Reportes</a></li>
+                </ul>
             </nav>
         </div>
     </header>
- 
+
     <!----------------------------------------------- BALANCE--------------------------------------------------------->
     <div class="flex flex-row mb-20 max-sm:flex-col" id="tablesAndForms">
         <div class="flex flex-col ml-[10%] ">
@@ -76,7 +77,7 @@
                             <div id="balance-total" class="font-bold ml-[48px] text-[25px]">$0</div>
                         </div>
                     </div>
- 
+
             </section>
             <!----------------------------------------------- FILTROS--------------------------------------------------------->
             <section class="filter-section">
@@ -109,12 +110,12 @@
                                         <select id="filter-categories"
                                             class="w-[100%] h-[44px]
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8">
-                                             <option id="allCategories">Todas</option>
+                                            <option id="allCategories">Todas</option>
                                         </select>
                                     </div>
                                 </div>
                             </div>
- 
+
                             <div class="date">
                                 <label class="label font-bold mt-5 mb-3 text-[17px]" for="date-calendar">Desde</label>
                                 <div>
@@ -126,7 +127,7 @@
                                     </div>
                                 </div>
                             </div>
- 
+
                             <div class="orderFor">
                                 <label class="label font-bold mt-5 mb-3 text-[17px]" for="type-categories">Ordenar
                                     por</label>
@@ -146,24 +147,25 @@
                                 </div>
                             </div>
                         </div>
- 
+
                     </div>
             </section>
         </div>
- 
+
         <!------------------------- OPERATIONS ------------------------------->
         <div id="operationsAndnewOperation" class="w-full">
             <div class="flex flex-col ml-[5%] w-[90%] mt-10 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)]"
                 id="operationContainer">
                 <div class="flex flex-row items-start justify-between">
                     <h2 class="font-bold text-center text-[#79b9b9] p-2 mt-4 ml-4 text-[27px]">Operaciones</h2>
-                    <button class="bg-[#79b9b9] h-10 border black rounded-lg mt-5 mr-3 justify-between text-[10px] md:text-xl text-white"
+                    <button
+                        class="bg-[#79b9b9] h-10 border black rounded-lg mt-5 mr-3 justify-between text-[10px] md:text-xl text-white"
                         id="toggleOperation">+ Nueva operación</button>
                 </div>
                 <div class="flex flex-col text-center font-bold" id="imgOperations">
                     <img src="images/wallet.png" class="w-[60%] h-[50%] mx-auto mt-[10%] md:w-[30%] h-[20%]">
-                     <h1>Sin resultados</h1>
-                     <h2>Cambia los filtros o agrega operaciones</h2>
+                    <h1>Sin resultados</h1>
+                    <h2>Cambia los filtros o agrega operaciones</h2>
                 </div>
                 <div class="">
                     <table class="tableHeader hidden w-full">
@@ -178,16 +180,16 @@
                         </thead>
                     </table>
                     <div id="tableContainer">
- 
+
                     </div>
                 </div>
- 
+
             </div>
         </div>
     </div>
- 
+
     <!------------------------- NEW OPERATION ------------------------------->
- 
+
     </div>
     <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 hidden"
         id="newOperationContainer">
@@ -230,7 +232,7 @@
             <div class="flex flex-row-reverse space-x-4 space-x-reverse">
                 <button type="reset" id="cancelAddOperation">Cancelar</button>
                 <button class="w-28 my-4 h-8 bg-green text-black bg-[#79b9b9] hover:bg-[#ffe1a8] rounded-lg m-auto"
-                    id="btnAddOperation" onclick="location.reload()" >Agregar</button>
+                    id="btnAddOperation" onclick="location.reload()">Agregar</button>
             </div>
         </form>
     </div>
@@ -242,12 +244,12 @@
             <div class="container mx-auto p-2 w-full columns-1">
                 <label class="text-xl">Descripción
                     <input type="text" name="description" id="descriptionEdit" class="border black w-full rounded"
-                        value=></label>
+                        ></label>
             </div>
             <div class="container mx-auto p-2 w-full columns-1">
                 <label class="text-xl grid grid-rows-2">Monto
                     <input type="number" class="border black w-full rounded" name="amount" id="amountOperationEdit"
-                        value=></label>
+                       ></label>
             </div>
             <div class="container mx-auto p-2 w-full columns-1 ">
                 <label class="text-xl grid grid-rows-2">Tipo
@@ -282,7 +284,7 @@
         </form>
     </div>
     <!------------------------- CATEGORIES ------------------------------->
- 
+
     <div class="container mx-auto w-3/4 bg-[#ffffff] hidden rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 mb-10 p-5 w-auto h-auto "
         id="container-categories">
         <h2 class="text-2xl font-bold text-center">Categorías</h2>
@@ -309,7 +311,7 @@
         </div>
     </div>
     </div>
- 
+
     <div class="container mx-auto w-3/4 bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mt-10 p-5 mb-10 hidden"
         id="container-edit-categories">
         <h2 class="text-2xl font-bold text-center">Editar categoría</h2>
@@ -318,7 +320,7 @@
                 <div class="mb-3">
                     <label for="name" id="name" class="font-bold p-2 text-[20px] ml-2">Nombre</label>
                     <input type="text" class="w-[85%] ml-3 h-[40px] rounded border-solid border-2 border-indigo-200"
-                        id="editName" placeholder="" />
+                        id="editName" value=" " placeholder="" />
                 </div>
                 <div class="ml-[25%] mt-5">
                     <button class="w-[120px] border-solid border-2 border-gray-700 h-[40px] rounded ml-[2%]"
@@ -342,7 +344,8 @@
 
                 <div class="ml-3">
                     <h2 class="font-semibold">¡Atención!</h2>
-                    <p class="mt-2 text-sm text-gray-600 leading-relaxed">¿Está seguro/a que desea eliminar ésta categoría?</p>
+                    <p class="mt-2 text-sm text-gray-600 leading-relaxed">¿Está seguro/a que desea eliminar ésta
+                        categoría?</p>
                 </div>
             </div>
 
@@ -359,9 +362,9 @@
             </div>
         </div>
     </div>
- 
+
     <!-- ------------------------------------------REPORTES-------------------------------------------------------------------->
- 
+
     <div id="reportsTableContainer"
         class=" hidden bg-[#ffffff] rounded-[10px] shadow-[0px_0px_8px_rgba(0,0,0,.3)] mb-10 m-auto px-10 flex flex-col justify-between w-3/4 mt-10 space-y-10">
         <h2 class="text-3xl text-[#79b9b9] font-bold mt-3 font-sans text-center ">Reportes</h2>
@@ -370,23 +373,23 @@
             <p class="text-center mb-2 text-xl font-semibold">Operaciones insuficientes</p>
             <p class="text-center">Prueba agregando más operaciones</p>
         </section>
- 
+
         <table id="reportsTable" class="hidden">
- 
+
         </table>
- 
+
         <table id="totalCategoriesReports" class="justify-items-center hidden">
             <tr class="text-[12px] md:text-xl lg:text-2xl text-[#79b9b9] font-bold">
                 <td class="">Totales por categorías</td>
             </tr>
- 
+
             <tr>
                 <th class="text-[10px] md:text-lg lg:text-xl">Categoría</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Ganancias</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Gastos</th>
                 <th class="text-[10px] md:text-lg lg:text-xl">Balance</th>
         </table>
- 
+
         <table id="totalMonths" class="justify-items-center hidden">
             <tr class="text-[12px] md:text-xl lg:text-2xl text-[#79b9b9] font-bold justify-between">
                 <td class="">Totales por mes</td>
@@ -398,12 +401,9 @@
                 <th class="text-[10px] md:text-lg lg:text-xl">Balance</th>
         </table>
     </div>
- 
+
+
     <script src="script.js"></script>
 </body>
- 
+
 </html>
-
-
-
-
