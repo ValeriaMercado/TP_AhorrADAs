@@ -557,17 +557,17 @@ for (const operation of operations2) {
 
 // higher gain
 
-const arrayOpGain = Math.max(...operationsGain.map((operation) => operation.amountOperation));
+const arrayOpGain = Math.max(...operationsGain.map((operation) => parseInt(operation.amountOperation)));
 const arrayOpGain2 = operationsGain.filter(
-  (operationsGain) => operationsGain.amountOperation === arrayOpGain
+  (operationsGain) => parseInt(operationsGain.amountOperation) === arrayOpGain
 );
 
 // higher spending
 const arrayOpSpending = Math.max(
-  ...operationSpending.map((operation) => operation.amountOperation)
+  ...operationSpending.map((operation) => parseInt(operation.amountOperation))
 );
 const arrayOpSpending2 = operationSpending.filter(
-  (operationSpending) => operationSpending.amountOperation === arrayOpSpending
+  (operationSpending) => parseInt(operationSpending.amountOperation) === arrayOpSpending
 );
 
 // category more spending
@@ -584,8 +584,7 @@ let nameOpGain = ''
 let amountOpGain = ''
 for (const operation of arrayOpGain2) {
   nameOpGain = operation.selectCategoryOperation;
-  amountOpGain = operation.amountOperation
-
+  amountOpGain = parseInt(operation.amountOperation)
 }
 
 // month more gain
@@ -671,9 +670,9 @@ const filterSpendingAndGain = Object.values(
     };
     if (operation.operationType === "spending") {
       acc[operation.selectCategoryOperation].spending +=
-        operation.amountOperation;
+      parseInt(operation.amountOperation);
     } else {
-      acc[operation.selectCategoryOperation].gain += operation.amountOperation;
+      acc[operation.selectCategoryOperation].gain += parseInt(operation.amountOperation);
     }
     acc[operation.selectCategoryOperation].balance =
       acc[operation.selectCategoryOperation].gain -
@@ -734,9 +733,9 @@ const filterSpendingAndGainMonth = Object.values(
       date: operation.dateOperation,
     };
     if (operation.operationType === "gain") {
-      acc[operation.dateOperation].gain += operation.amountOperation;
+      acc[operation.dateOperation].gain += parseInt(operation.amountOperation);
     } else {
-      acc[operation.dateOperation].spending += operation.amountOperation;
+      acc[operation.dateOperation].spending += parseInt(operation.amountOperation);
     }
     acc[operation.dateOperation].balance =
       acc[operation.dateOperation].gain - acc[operation.dateOperation].spending;
