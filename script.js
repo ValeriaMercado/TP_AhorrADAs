@@ -186,25 +186,24 @@ $("#btn-editForm").addEventListener("click", () => {
   generateTable(JSON.parse(localStorage.getItem("categories")));
 });
 
-// ADD NEW CATEGORY TO FILTERS
-const selectCategories = (inputID) => {
-  let categories = getDataFromLocalStorage("categories")
-  inputID.innerHTML = ''
-  for (const category of categories) {
-    for (const { nombre } of category) {
-      inputID.innerHTML += `  <option value="${nombre}">${nombre}</option>`
-    }
-  }
+// // ADD NEW CATEGORY TO FILTERS
+// const selectCategories = (inputID) => {
+//   let categories = getDataFromLocalStorage("categories")
+//   inputID.innerHTML = ''
+//   for (const category of categories) {
+//     for (const { nombre } of category) {
+//       inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
+//     }
+//   }
 
-  window.addEventListener("load", () => {
-    selectCategories($("#filter-categories"))
-    const option = document.createElement("option")
-    const value = document.createTextNode("Todas")
-    option.appendChild(value)
-
-    $("#filter-categories").append(option)
-  })
-}
+//   window.addEventListener("load", () => {
+//     selectCategories($("#filter-categories"))
+//     const option = document.createElement("option")
+//     const value = document.getElementById('allCategories')
+//     option.appendChild(value)
+//     $("#filter-categories").append(option)
+//   })
+// }
 
 // *********************************************************OPERATIONS**************************************************************
 
@@ -241,7 +240,7 @@ const generateOperationTable = (operations) => {
       }" onclick="operationsEdit(${operation.ids
       })"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button class="btnDeleted text-red-500" data-id="${operation.ids
-      }" onclick="location.reload()"><i class="fa-solid fa-trash"></i></button></td>
+      }"><i class="fa-solid fa-trash"></i></button></td>
                 </tr>
                 </table>
             `;
@@ -251,10 +250,31 @@ const generateOperationTable = (operations) => {
   for (const btn of btnDeleted) {
     const operationId = btn.getAttribute("data-id");
     btn.addEventListener("click", () => {
-      deleteOperation(operationId);
+      $("#operationsAndnewOperation").classList.add("hidden")
+      $("#tablesAndForms").classList.add("hidden")
+      $("#alertDeleteOp").classList.remove("hidden")
+      $("#submit-deleteOp").setAttribute("data-id", operationId);
     });
   }
 };
+
+
+$("#submit-deleteOp").addEventListener("click", () => {
+  $("#operationsAndnewOperation").classList.remove("hidden")
+  $("#tablesAndForms").classList.remove("hidden")
+  $("#alertDeleteOp").classList.add("hidden")
+  const operationId = $("#submit-deleteOp").getAttribute("data-id")
+  deleteOperation(operationId)
+})
+
+$("#submit-deleteOp").addEventListener("click", () => {
+  $("#operationsAndnewOperation").classList.remove("hidden")
+  $("#tablesAndForms").classList.remove("hidden")
+  $("#alertDeleteOp").classList.add("hidden")
+  const operationId = $("#submit-deleteOp").getAttribute("data-id")
+  deleteOperation(operationId)
+})
+
 generateOperationTable(JSON.parse(localStorage.getItem("operations")));
 
 const operationInfo = () => {
@@ -354,7 +374,7 @@ const categorySelect = (inputID) => {
   let categories = getDataFromLocalStorage("categories")
   inputID.innerHTML = ''
   for (const category of categories) {
-    const { id, nombre } = category
+    const { nombre } = category
     inputID.innerHTML += `<option value="${nombre}">${nombre}</option>`
   }
 }
@@ -363,8 +383,8 @@ window.addEventListener("load", () => {
   setDay()
   categorySelect($("#filter-categories"))
   const option = document.createElement("option")
-  const value = document.createTextNode("Todas")
-  option.appendChild(value)
+  const value = document.getElementById('allCategories')
+  option.append(value)
 
   $("#filter-categories").append(option)
 })
@@ -372,8 +392,8 @@ window.addEventListener("load", () => {
 window.addEventListener("load", () => {
   categorySelect($("#selectCategoryOperation"))
   const option = document.createElement("option")
-  const value = document.createTextNode("Todas")
-  option.appendChild(value)
+  const value = document.getElementById('allCategories')
+  option.append(value)
 
   $("#selectCategoryOperation").append(option)
 })
@@ -381,7 +401,8 @@ window.addEventListener("load", () => {
 window.addEventListener("load", () => {
   categorySelect($("#selectCategoryOperationEdit"))
   const option = document.createElement("option")
-  option.appendChild(option)
+  const value = document.getElementById('allCategories')
+  option.append(value)
 
   $("#selectCategoryOperationEdit").append(option)
 })
@@ -922,6 +943,7 @@ if (operations.length > 3) {
   $("#totalCategoriesReports").classList.remove("hidden");
   generateReportsTable();
 }
+
 
 if (operations.length > 0) {
   $("#imgOperations").classList.add("hidden");
