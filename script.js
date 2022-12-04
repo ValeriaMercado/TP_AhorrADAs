@@ -87,7 +87,14 @@ $("#submit-delete").addEventListener("click", () => {
   $("#container-categories").classList.remove("hidden")
   $("#alertDelete").classList.add("hidden")
   const categoryId = $("#submit-delete").getAttribute("data-id")
+  const removeCategoryInOperations = getDataFromLocalStorage('categories').filter(category => category.id === parseInt(categoryId));
   deleteCategory(categoryId)
+
+  
+  const operations = getDataFromLocalStorage('operations')
+  .filter(operation => operation.selectCategoryOperation !== removeCategoryInOperations[0].nombre);
+
+sendDataFromLocalStorage("operations", operations)
 })
 
 generateTable(JSON.parse(localStorage.getItem("categories")));
@@ -129,7 +136,7 @@ const deleteCategory = (categoryId) => {
   let categoriesLocal = JSON.parse(localStorage.getItem("categories"));
   let newCategories = categoriesLocal.filter((category) => {
     console.log(categoryId)
-    return category.id !== categoryId;
+    return category.id !== parseInt(categoryId);
   });
 
   categories = newCategories;
@@ -294,7 +301,7 @@ const deleteOperation = (operationId) => {
   $("#tableContainer").innerHTML = "";
   let operationsLocal = JSON.parse(localStorage.getItem("operations"));
   let newOperations = operationsLocal.filter((operation) => {
-    return operation.ids !== operationId;
+    return operation.ids !== parseInt(operationId);
   });
   operations = newOperations;
   localStorage.setItem("operations", JSON.stringify(operations));
@@ -885,7 +892,6 @@ $("#showCategories").addEventListener("click", (e) => {
   $("#newOperationContainer").classList.add("hidden");
   $("#editOperationContainer").classList.add("hidden");
   $("#reportsTableContainer").classList.add("hidden");
-  $("#operations").classList.add("hidden");
 });
 
 $("#btn-cancel").addEventListener("click", () => {
