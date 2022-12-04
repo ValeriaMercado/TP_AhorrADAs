@@ -27,7 +27,7 @@
                     class="w-[65%] mt-10 ml-10 flex justify-between"></a>
         </div>
 
-        <label for="menu-toggle" class="pointer-cursor md:hidden block">
+        <label for="menu-toggle" class=" mx-4 pointer-cursor md:hidden block">
             <svg class="fill-current text-gray-900" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                 viewBox="0 0 20 20">
                 <title>menu</title>
@@ -36,7 +36,7 @@
         </label>
         <input class="hidden" type="checkbox" id="menu-toggle" />
 
-        <div class="hidden md:flex md:items-center md:w-auto w-full" id="menu">
+        <div class="hidden mx-4 md:flex md:items-center md:w-auto w-full" id="menu">
             <nav class="">
                 <ul class="md:flex items-center justify-between text-white text-xl pt-4  mr-10">
                     <li><a class="md:p-4 py-3 px-0 block" href=" "><i
@@ -110,7 +110,6 @@
                                         <select id="filter-categories"
                                             class="w-[100%] h-[44px]
                                             rounded border border-blue-300 hover:border-indigo-300 outline-blue-500 mb-8">
-                                            <option id="allCategories">Todas</option>
                                         </select>
                                     </div>
                                 </div>
@@ -215,12 +214,12 @@
             <div class="container mx-auto p-2 w-full columns-1">
                 <label class="text-xl grid grid-rows-2">Categoría
                     <select class="my-1 w-2/2 border black w-full rounded" id="selectCategoryOperation">
-                        <option value="comida">Comida</option>
+                        <!-- <option value="comida">Comida</option>
                         <option value="servicios">Servicios</option>
                         <option value="salidas">Salidas</option>
                         <option value="educación">Educación</option>
                         <option value="transporte">Transporte</option>
-                        <option value="trabajo">Trabajo</option>
+                        <option value="trabajo">Trabajo</option> -->
                     </select>
                 </label>
             </div>
@@ -320,7 +319,7 @@
                 <div class="mb-3">
                     <label for="name" id="name" class="font-bold p-2 text-[20px] ml-2">Nombre</label>
                     <input type="text" class="w-[85%] ml-3 h-[40px] rounded border-solid border-2 border-indigo-200"
-                        id="editName" value=" " placeholder="" />
+                        id="editName" value=" "/>
                 </div>
                 <div class="ml-[25%] mt-5">
                     <button class="w-[120px] border-solid border-2 border-gray-700 h-[40px] rounded ml-[2%]"
